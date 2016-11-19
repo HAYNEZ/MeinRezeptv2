@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manually';
 import { HomePage } from '../home/home';
 
 /*
@@ -18,10 +19,13 @@ export class AddRecipePage {
   constructor(public navCtrl: NavController) {}
 
   ionViewDidLoad() {
-    
+
+  }
+  navigateOptionOne() {
+    this.navCtrl.push(AddRecipeManuallyPage, {});
   }
 
-  navigatePhoto() {
+  navigateOptionTwo() {
     this.navCtrl.push(HomePage, {});
   }
 
