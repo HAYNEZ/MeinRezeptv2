@@ -1,4 +1,0 @@
-#Tue Nov 15 14:04:15 CET 2016
-base.0=/Users/Tet/Documents/HTW/MeinRezeptMaster/OCRtest/platforms/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main
-renamed.0=classes.dex
-file.0=/Users/Tet/Documents/HTW/MeinRezeptMaster/OCRtest/platforms/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
