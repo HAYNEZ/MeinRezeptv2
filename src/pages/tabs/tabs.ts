@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { RecipeBookPage } from '../recipe-book/recipe-book';
 import { AddRecipePage } from '../add-recipe/add-recipe';
 
 // import { HomePage } from '../home/home';
@@ -10,10 +12,11 @@ export class TabsPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
   tab1Root: any;
-  // tab2Root: any;
+  tab2Root: any;
   // tab3Root: any;
 
   constructor() {
-    this.tab1Root = AddRecipePage;
+    this.tab1Root = RecipeBookPage;
+    this.tab2Root = AddRecipePage;
   }
 }
