@@ -5,8 +5,9 @@ import { MyApp } from './app.component';
 import { TabsPage } from '../pages/tabs/tabs';
 import { RecipeBookPage } from '../pages/recipe-book/recipe-book';
 import { AddRecipePage } from '../pages/add-recipe/add-recipe';
-
 import { HomePage } from '../pages/home/home';
+import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
+
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { HomePage } from '../pages/home/home';
     TabsPage,
     RecipeBookPage,
     AddRecipePage,
-    HomePage
+    HomePage,
+    ShoppingListPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -26,7 +28,8 @@ import { HomePage } from '../pages/home/home';
     TabsPage,
     RecipeBookPage,
     AddRecipePage,
-    HomePage
+    HomePage,
+    ShoppingListPage
   ],
   providers: []
 })
