@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { HomePage } from '../home/home';
+import { AddRecipePage } from '../add-recipe/add-recipe';
+
+// import { HomePage } from '../home/home';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -12,6 +14,6 @@ export class TabsPage {
   // tab3Root: any;
 
   constructor() {
-    this.tab1Root = HomePage;
+    this.tab1Root = AddRecipePage;
   }
 }

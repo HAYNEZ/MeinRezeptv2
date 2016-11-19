@@ -3,6 +3,8 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { TabsPage } from '../pages/tabs/tabs';
+import { AddRecipePage } from '../pages/add-recipe/add-recipe';
+
 import { HomePage } from '../pages/home/home';
 
 
@@ -10,6 +12,7 @@ import { HomePage } from '../pages/home/home';
   declarations: [
     MyApp,
     TabsPage,
+    AddRecipePage,
     HomePage
   ],
   imports: [
@@ -19,6 +22,7 @@ import { HomePage } from '../pages/home/home';
   entryComponents: [
     MyApp,
     TabsPage,
+    AddRecipePage,
     HomePage
   ],
   providers: []
