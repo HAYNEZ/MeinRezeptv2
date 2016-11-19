@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/Tet/Documents/HTW/MeinRezeptMaster/OCRtest/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="79d68b70e2f02123c5a1205261f8c9cc038870de">
+        <dex dex="/Users/Tet/Documents/HTW/MeinRezeptMaster/OCRtest/platforms/android/build/intermediates/pre-dexed/debug/CordovaLib-unspecified-debug_4e1c9c7a64e0201755f2bcfc2cfeea493d70dafd.jar" />
+    </item>
+
+</items>
