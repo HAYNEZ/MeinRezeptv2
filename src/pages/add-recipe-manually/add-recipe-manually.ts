@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import {Storage} from '@ionic/storage';
+
+import {Recipe} from '../../models/recipe';
+
 /*
   Generated class for the AddRecipeManually page.
 
@@ -13,7 +17,17 @@ import { NavController } from 'ionic-angular';
 })
 export class AddRecipeManuallyPage {
 
-  constructor(public navCtrl: NavController) {}
+  recipe = new Recipe('');
+  constructor(public navCtrl: NavController, public storage : Storage) {
+
+  }
+
+  saveRecipe() {
+    this.storage.set('recipe1', this.recipe);
+    
+  }
+
+
 
   ionViewDidLoad() {
     console.log('Hello AddRecipeManuallyPage Page');

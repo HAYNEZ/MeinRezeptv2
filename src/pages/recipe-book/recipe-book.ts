@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import {Storage} from '@ionic/storage';
+import {Recipe} from '../../models/recipe';
+
 /*
   Generated class for the RecipeBook page.
 
@@ -13,9 +16,17 @@ import { NavController } from 'ionic-angular';
 })
 export class RecipeBookPage {
 
-  constructor(public navCtrl: NavController) {}
+  //
+  // recipe : any;
+  recipe = new Recipe('');
+  constructor(public navCtrl: NavController,  public storage : Storage) {
+
+  }
 
   ionViewDidLoad() {
+    this.storage.get('recipe1').then((recipe) => {
+      this.recipe = recipe;
+    });
     console.log('Hello RecipeBookPage Page');
   }
 
