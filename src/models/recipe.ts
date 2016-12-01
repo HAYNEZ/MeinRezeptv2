@@ -1,7 +1,3 @@
-export class Recipe {
+export interface Recipe {
   title : string;
-
-  constructor(title:string){
-    this.title = title;
-  }
 }

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import {Storage} from '@ionic/storage';
+// import {Storage} from '@ionic/storage';
+import {RecipeService} from '../../providers/recipe.service';
 
 import {Recipe} from '../../models/recipe';
 
@@ -17,20 +18,24 @@ import {Recipe} from '../../models/recipe';
 })
 export class AddRecipeManuallyPage {
 
-  recipe = new Recipe('');
-  constructor(public navCtrl: NavController, public storage : Storage) {
-
+  public recipe = <Recipe>{};
+  constructor(public navCtrl: NavController, private recipeService: RecipeService) {
+    // public storage : Storage
   }
+
+  // ionViewDidLoad() {
+  //   this.recipe = {};
+  // }
 
   saveRecipe() {
-    this.storage.set('recipe1', this.recipe);
-    
+    // this.storage.set('recipe1', this.recipe);
+    this.recipeService.add(this.recipe);
   }
 
 
 
-  ionViewDidLoad() {
-    console.log('Hello AddRecipeManuallyPage Page');
-  }
+  // ionViewDidLoad() {
+  //   console.log('Hello AddRecipeManuallyPage Page');
+  // }
 
 }

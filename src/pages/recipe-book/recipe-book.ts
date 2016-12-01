@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {Observable} from 'rxjs/rx';
 
-import {Storage} from '@ionic/storage';
+// import {Storage} from '@ionic/storage';
+import {RecipeService} from '../../providers/recipe.service';
 import {Recipe} from '../../models/recipe';
 
 /*
@@ -18,16 +20,21 @@ export class RecipeBookPage {
 
   //
   // recipe : any;
-  recipe = new Recipe('');
-  constructor(public navCtrl: NavController,  public storage : Storage) {
+  public recipes: Observable<Recipe[]>;
 
+  constructor(public navCtrl: NavController, private recipeService: RecipeService) {
+    //  public storage : Storage
   }
 
   ionViewDidLoad() {
-    this.storage.get('recipe1').then((recipe) => {
-      this.recipe = recipe;
-    });
-    console.log('Hello RecipeBookPage Page');
+    this.recipes = this.recipeService.getAll();
   }
+
+  // ionViewDidLoad() {
+  //   this.storage.get('recipe1').then((recipe) => {
+  //     this.recipe = recipe;
+  //   });
+  //   console.log('Hello RecipeBookPage Page');
+  // }
 
 }
