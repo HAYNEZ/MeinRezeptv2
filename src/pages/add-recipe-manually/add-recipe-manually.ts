@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import {Storage} from '@ionic/storage';
+import {RecipeService} from '../../providers/recipe.service';
 
-import {Recipe} from '../../models/recipe';
 
 /*
   Generated class for the AddRecipeManually page.
@@ -16,18 +15,39 @@ import {Recipe} from '../../models/recipe';
   templateUrl: 'add-recipe-manually.html'
 })
 export class AddRecipeManuallyPage {
+  title : any;
+  portions : any;
+  description : any;
 
-  recipe = new Recipe('');
-  constructor(public navCtrl: NavController, public storage : Storage) {
+  constructor(public navCtrl: NavController, public recipeService: RecipeService) {
 
   }
 
   saveRecipe() {
-    this.storage.set('recipe1', this.recipe);
-    
+    let recipe = {
+      title : this.title,
+      portions : this.portions,
+      description : this.description
+    };
+
+    this.recipeService.addRecipe(recipe);
+
+    this.navCtrl.pop();
+    // .then((res) => {
+    //   this.navCtrl.popToRoot();
+    // }, (err) => {
+    //   console.log(err);
+    // })
+
+    //take recipeService and call method addRecipe(recipe)
+    //check if nothing required is missing
+    //Go to details page
+
+    //Catch possible errors
+
+
+
   }
-
-
 
   ionViewDidLoad() {
     console.log('Hello AddRecipeManuallyPage Page');

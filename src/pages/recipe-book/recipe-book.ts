@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 
-import {Storage} from '@ionic/storage';
-import {Recipe} from '../../models/recipe';
+import {RecipeService} from '../../providers/recipe.service';
 
 /*
   Generated class for the RecipeBook page.
@@ -16,18 +15,54 @@ import {Recipe} from '../../models/recipe';
 })
 export class RecipeBookPage {
 
-  //
-  // recipe : any;
-  recipe = new Recipe('');
-  constructor(public navCtrl: NavController,  public storage : Storage) {
+  recipes: any;
 
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController, public recipeService: RecipeService) {
+    console.log("recipe book : constructor");
+
+    this.recipeService.getAllRecipes().then((res) => {
+      this.recipes = res;
+    });
+
+    console.log("recipe book : constructor - RECIPES");
+    console.log(typeof(this.recipes));
+
+    // this.recipeService.getAllRecipes().then((res) => {
+    //
+    //   console.log(res);
+    // });
+    // this.recipeService.getAllRecipes().then((data) => {
+    //   // if(typeof(data[0]) === "undefined"){
+    //   //   let alert = this.alertCtrl.create({
+    //   //     title: 'Oops!',
+    //   //     subTitle : 'Sorry, there was an error',
+    //   //     buttons: ['Ok']
+    //   //   });
+    //   //   alert.present();
+    //   // }else{
+    //     console.log("recipe-book : constructor");
+    //     console.log(data);
+    //     this.recipes =  data;
+    //   // }
+    // }, (err) => {
+    //   console.log(err);
+    // }
+    // )
+  }
+
+  ionViewDidEnter() {
+    console.log("Has entered - recipe book")
+    this.recipeService.getAllRecipes().then((res) => {
+      this.recipes = res;
+    });
   }
 
   ionViewDidLoad() {
-    this.storage.get('recipe1').then((recipe) => {
-      this.recipe = recipe;
-    });
-    console.log('Hello RecipeBookPage Page');
+
+    console.log('Hello AddRecipeManuallyPage Page');
   }
+
+
+
 
 }

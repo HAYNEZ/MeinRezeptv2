@@ -18,7 +18,7 @@
   <!-- Titel -->
   <ion-item>
     <ion-label floating>Titel</ion-label>
-    <ion-input type="text"  [(ngModel)]='recipe.title' name ='title'> </ion-input>
+    <ion-input type="text"  [(ngModel)]='title' name ='title'> </ion-input>
   </ion-item>
 
   <!-- Foto -->
@@ -34,13 +34,13 @@
   <!-- Portionen -->
   <ion-item>
     <ion-label>Portionen</ion-label>
-    <ion-input type="number"> </ion-input>
+    <ion-input type="number" [(ngModel)]="portions"> </ion-input>
   </ion-item>
 
   <!-- Beschreibung -->
   <ion-item>
     <ion-label>Beschreibung</ion-label>
-    <ion-textarea type="text"> </ion-textarea>
+    <ion-textarea type="text" [(ngModel)]="description"> </ion-textarea>
   </ion-item>
 
   <!-- Zeit -->
