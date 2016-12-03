@@ -18,7 +18,7 @@ import {Recipe} from '../../models/recipe';
 })
 export class AddRecipeManuallyPage {
 
-  public recipe = <Recipe>{};
+  title : any;
   constructor(public navCtrl: NavController, private recipeService: RecipeService) {
     // public storage : Storage
   }
@@ -28,8 +28,11 @@ export class AddRecipeManuallyPage {
   // }
 
   saveRecipe() {
+    let recipe = {
+      "title" : this.title
+    }
     // this.storage.set('recipe1', this.recipe);
-    this.recipeService.add(this.recipe);
+    this.recipeService.add(recipe);
   }
 
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import {Storage} from '@ionic/storage';
+// import {Storage} from '@ionic/storage';
 import {RecipeService} from '../providers/recipe.service';
 
 
@@ -38,8 +38,9 @@ import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
     ShoppingListPage
   ],
   providers: [
-    RecipeService,
-    Storage
+    RecipeService
+    // ,
+    // Storage
   ]
 })
 export class AppModule {}

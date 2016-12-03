@@ -18,23 +18,29 @@ export class RecipeService {
     })
   }
 
-  add(recipe: Recipe) : Promise<any>{
-    return this.db.put(recipe);
+  add(recipe) : Promise<any>{
+    return this.db.post(recipe);
   }
 
-  update(recipe: Recipe) : Promise<any> {
-        return this.db.put(recipe);
-    }
+  // update(recipe: Recipe) : Promise<any> {
+  //       return this.db.put(recipe);
+  //   }
 
-  getAll() : Observable<any>{
-    return Observable.fromPromise(
-      this.initDB().then(() => {
+  getAll() : Promise<any>{
+    return this.initDB().then(() => {
         return this.db.allDocs({include_docs: true});
       }).then(docs => {
         return docs.rows.map(row => {
+          // console.log("Service, get all ");
+          // console.log(row.doc);
           return row.doc;
         })
-      }));
+      }).then((res) => {
+        console.log(res);
+        return res.json();
+      });
+    // );
+      // Observable.fromPromise(
 
     //   this.db.allDocs({
     //   include_doc: true,

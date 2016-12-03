@@ -20,14 +20,19 @@ export class RecipeBookPage {
 
   //
   // recipe : any;
-  public recipes: Observable<Recipe[]>;
+  public recipes: any;
 
   constructor(public navCtrl: NavController, private recipeService: RecipeService) {
     //  public storage : Storage
+    this.recipeService.getAll().then((res)  => {
+      this.recipes = res;
+    });
   }
 
   ionViewDidLoad() {
-    this.recipes = this.recipeService.getAll();
+    this.recipeService.getAll().then((res)  => {
+      this.recipes = res;
+    });
   }
 
   // ionViewDidLoad() {
