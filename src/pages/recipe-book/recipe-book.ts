@@ -27,27 +27,6 @@ export class RecipeBookPage {
     console.log("recipe book : constructor - RECIPES");
     console.log(typeof(this.recipes));
 
-    // this.recipeService.getAllRecipes().then((res) => {
-    //
-    //   console.log(res);
-    // });
-    // this.recipeService.getAllRecipes().then((data) => {
-    //   // if(typeof(data[0]) === "undefined"){
-    //   //   let alert = this.alertCtrl.create({
-    //   //     title: 'Oops!',
-    //   //     subTitle : 'Sorry, there was an error',
-    //   //     buttons: ['Ok']
-    //   //   });
-    //   //   alert.present();
-    //   // }else{
-    //     console.log("recipe-book : constructor");
-    //     console.log(data);
-    //     this.recipes =  data;
-    //   // }
-    // }, (err) => {
-    //   console.log(err);
-    // }
-    // )
   }
 
   ionViewDidEnter() {
