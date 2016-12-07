@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ViewController } from 'ionic-angular';
 import { RecipeService } from '../../providers/recipe.service';
 /*
   Generated class for the AddRecipeManually page.
@@ -16,7 +16,7 @@ export class AddRecipeManuallyPage {
     title: any;
   //  public recipes: any;
 
-    constructor(public navCtrl: NavController, private recipeService: RecipeService) {
+    constructor(public navCtrl: NavController, private recipeService: RecipeService, private viewCtrl: ViewController) {
 
       /*  this.recipeService.getAll().then((res) => {
             this.recipes = res;
@@ -35,7 +35,12 @@ export class AddRecipeManuallyPage {
       }
       // this.storage.set('recipe1', this.recipe);
       this.recipeService.add(recipe);
+      this.dismiss(recipe);
   }
+
+  dismiss(recipe) {
+        this.viewCtrl.dismiss(recipe);
+    }
 
 
 
