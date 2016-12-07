@@ -14,5 +14,10 @@
 
 
 <ion-content padding>
+    <ion-list inset>
+        <ion-item *ngFor="let recipe of recipes">
+            <div item-left>{{recipe.title}}</div>
 
+        </ion-item>
+    </ion-list>
 </ion-content>
