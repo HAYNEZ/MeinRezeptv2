@@ -16,6 +16,9 @@ export class RecipeService {
         return this._db.post(recipe);
     }
 
+    delete(recipe) {
+        return this._db.remove(recipe);
+    }
 
     getAll() {
 
@@ -29,7 +32,7 @@ export class RecipeService {
 
                     this.recipes = docs.rows.map(row => {
                         // Dates are not automatically converted from a string.
-                        row.doc.Date = new Date(row.doc.Date);
+                      
                         return row.doc;
                     });
 
@@ -55,7 +58,7 @@ export class RecipeService {
                 this.recipes.splice(index, 1); // delete
             }
         } else {
-            change.doc.Date = new Date(change.doc.Date);
+           
             if (recipe && recipe._id === change.id) {
                 this.recipes[index] = change.doc; // update
             } else {

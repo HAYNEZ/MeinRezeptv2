@@ -33,6 +33,10 @@ export class RecipeBookPage {
 
     }
 
+    delete(recipe) {
+        this.recipeService.delete(recipe);
+    }
+
   ionViewLoaded() {
       
   }

@@ -17,6 +17,7 @@
     <ion-list inset>
         <ion-item *ngFor="let recipe of recipes">
             <div item-left>{{recipe.title}}</div>
+            <div item-right><button ion-button full (click)='delete(recipe)'>delete</button></div>
 
         </ion-item>
     </ion-list>
