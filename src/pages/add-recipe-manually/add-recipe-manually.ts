@@ -14,26 +14,15 @@ import { RecipeService } from '../../providers/recipe.service';
 export class AddRecipeManuallyPage {
 
     title: any;
-  //  public recipes: any;
 
-    constructor(public navCtrl: NavController, private recipeService: RecipeService, private viewCtrl: ViewController) {
-
-      /*  this.recipeService.getAll().then((res) => {
-            this.recipes = res;
-        });*/
-    }
-
- /* ionViewDidLoad() {
-      this.recipeService.getAll().then((res) => {
-          this.recipes = res;
-      });
-  }*/
+    constructor(public navCtrl: NavController,
+                private recipeService: RecipeService,
+                private viewCtrl: ViewController){}
 
   saveRecipe() {
       let recipe = {
           "title": this.title
       }
-      // this.storage.set('recipe1', this.recipe);
       this.recipeService.add(recipe);
       this.dismiss(recipe);
   }
@@ -41,7 +30,4 @@ export class AddRecipeManuallyPage {
   dismiss(recipe) {
         this.viewCtrl.dismiss(recipe);
     }
-
-
-
 }
