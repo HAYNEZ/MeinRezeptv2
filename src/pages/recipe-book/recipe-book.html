@@ -15,10 +15,9 @@
 
 <ion-content padding>
     <ion-list inset>
-        <ion-item *ngFor="let recipe of recipes">
-            <div item-left>{{recipe.title}}</div>
+        <ion-item *ngFor="let recipe of recipes" >
+            <div (click)="showDetails(recipe)">{{recipe.title}}</div>
             <div item-right><button ion-button full (click)='delete(recipe)'>delete</button></div>
-
         </ion-item>
     </ion-list>
 </ion-content>
