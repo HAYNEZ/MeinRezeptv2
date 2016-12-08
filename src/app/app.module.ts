@@ -10,6 +10,7 @@ import { AddRecipePage } from '../pages/add-recipe/add-recipe';
 import { AddRecipeManuallyPage } from '../pages/add-recipe-manually/add-recipe-manually';
 import { HomePage } from '../pages/home/home';
 import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
+import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
     MyApp,
     TabsPage,
     RecipeBookPage,
+    RecipeDetailsPage,
     AddRecipePage,
     AddRecipeManuallyPage,
     HomePage,
@@ -30,6 +32,7 @@ import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
     MyApp,
     TabsPage,
     RecipeBookPage,
+    RecipeDetailsPage,
     AddRecipePage,
     AddRecipeManuallyPage,
     HomePage,

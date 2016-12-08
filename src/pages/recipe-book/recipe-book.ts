@@ -1,6 +1,7 @@
 import { Component, NgZone} from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { RecipeService } from '../../providers/recipe.service';
+import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 
 /*
   Generated class for the RecipeBook page.
@@ -16,7 +17,7 @@ export class RecipeBookPage {
 
     public recipes = [];
 
-    constructor(public navCtrl: NavController, private recipeService: RecipeService, private nav: NavController,
+    constructor(public navCtrl: NavController, private recipeService: RecipeService,
         private platform: Platform,
         private zone: NgZone) {
         this.platform.ready().then(() => {
@@ -33,12 +34,11 @@ export class RecipeBookPage {
 
     }
 
+    showDetails(recipe) {
+      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
+    }
+
     delete(recipe) {
         this.recipeService.delete(recipe);
     }
-
-  ionViewLoaded() {
-      
-  }
-
 }
