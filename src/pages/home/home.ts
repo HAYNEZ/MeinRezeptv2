@@ -76,7 +76,6 @@ export class HomePage {
   }
 
   formatText(input){
-  //  var text = input;
     var lines = input.split("\n");
     var ing = "";
     var prep = "";
@@ -88,14 +87,11 @@ export class HomePage {
     for(k; k<lines.length; k++){
       prep += lines[k] + "\n";
     }
-  
-    var ingredients = this.formatIngredientsBlock(ing);
-    var preparation = this.formatPreparation(prep);
-    var formatted = new Array;
-    formatted[0]= ingredients;
-    formatted[1]= preparation;
-    //alert(formatted);
-    this.navCtrl.push(AddRecipeManuallyPage, {firstPassed: formatted});
+    var formattedText = new Array;
+    formattedText[0] = this.formatIngredientsBlock(ing);
+    formattedText[1] = this.formatPreparation(prep);
+
+    this.navCtrl.push(AddRecipeManuallyPage, {firstPassed: formattedText});
 }
 
 formatIngredientsBlock(text){
@@ -166,6 +162,7 @@ splitIngredient(ingredient){
 }
 
 formatPreparation(text){
+  //ueberfluessige Zeilenumbrüche entfernen, nur Absätze als Zeilenumbruch interpretieren
   var array = text.split("\n");
 
   var result = "";
