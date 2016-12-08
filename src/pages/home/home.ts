@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NavController, ActionSheetController, LoadingController } from 'ionic-angular';
+import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manually';
 import { Camera } from 'ionic-native';
 
 @Component({
@@ -75,10 +76,8 @@ export class HomePage {
   }
 
   formatText(input){
-    var text = input;
-
-    var lines = text.split("\n");
-
+  //  var text = input;
+    var lines = input.split("\n");
     var ing = "";
     var prep = "";
     var k = 0;
@@ -89,12 +88,14 @@ export class HomePage {
     for(k; k<lines.length; k++){
       prep += lines[k] + "\n";
     }
-
-    // alert(ing);
-    // alert(prep);
   
-    this.formatIngredientsBlock(ing);
-    this.formatPreparation(prep);
+    var ingredients = this.formatIngredientsBlock(ing);
+    var preparation = this.formatPreparation(prep);
+    var formatted = new Array;
+    formatted[0]= ingredients;
+    formatted[1]= preparation;
+    //alert(formatted);
+    this.navCtrl.push(AddRecipeManuallyPage, {firstPassed: formatted});
 }
 
 formatIngredientsBlock(text){
@@ -121,6 +122,7 @@ formatIngredientsBlock(text){
       while(nextIsNan){
         i++;
         ingredients[arrayCount] += " " + array[i];
+        
         if(i<array.length-1){
           nextIsNan = isNaN(array[(i+1)].charAt(0));
         }else{
@@ -130,12 +132,37 @@ formatIngredientsBlock(text){
       arrayCount += 1;
     }
   }
-  var result = "";
+  var result = new Array;
   for(var j = 0; j<ingredients.length; j++){
-    result += ingredients[j] + "<br>";
+
+    result[j] = this.splitIngredient(ingredients[j]);
   }
-  //document.getElementById("ingredients").innerHTML = result;
-  alert(result);
+  return result;
+}
+
+splitIngredient(ingredient){
+  var pieces = ingredient.split(" ");
+  var amount = "";
+  var i = 0;
+  while((!(isNaN(pieces[i]))) && i < pieces.length){
+    amount += pieces[i];
+    i++;
+  }
+  var unit = "";
+  if(isNaN(pieces[i-1].charAt(pieces[i-1].length))){
+    //
+  }else{
+    unit = pieces[i];
+    i++;
+  }
+
+  var thing = "";
+  while(i < pieces.length){
+    thing += pieces[i];
+    i++;
+  }
+  var result = [amount, unit, thing]
+  return result;
 }
 
 formatPreparation(text){
@@ -144,13 +171,13 @@ formatPreparation(text){
   var result = "";
   for(var j = 0; j<array.length; j++){
     if(array[j].length == 0){
-      result += "<br>";
+      result += "\n";
     }else{
       result += array[j];
     }
   }
   //document.getElementById("preparation").innerHTML = result;
-  alert(result);
+  return result;
 }
 
   restart() {

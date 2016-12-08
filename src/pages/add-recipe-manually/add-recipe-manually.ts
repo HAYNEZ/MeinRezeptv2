@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,NavParams } from 'ionic-angular';
 
 /*
   Generated class for the AddRecipeManually page.
@@ -12,8 +12,21 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'add-recipe-manually.html'
 })
 export class AddRecipeManuallyPage {
+	 public ingredients:any;
+	 public preparation:any;
+	 public input:any;
 
-  constructor(public navCtrl: NavController) {}
+
+  constructor(public navCtrl: NavController, public params: NavParams) {
+     this.input = params.get("firstPassed");
+
+  	 this.ingredients = this.input[0];
+
+  	 this.preparation = this.input[1];
+     
+  }
+
+
 
   ionViewDidLoad() {
     console.log('Hello AddRecipeManuallyPage Page');
