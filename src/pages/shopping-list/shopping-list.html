@@ -1,18 +1,67 @@
-<!--
-  Generated template for the ShoppingList page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>shoppingList</ion-title>
+    <ion-title>Einkaufsliste</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-fab top right edge>
+     <button ion-fab mini (click)="add()" color="secondary"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+  <ion-fab top left edge>
+     <button ion-fab mini (click)="deleteAll()" color="dark"><ion-icon name="remove-circle"></ion-icon></button>
+  </ion-fab>
+
+
+  <ion-list #product>
+
+    <ion-item class="header-row">
+    <ion-label>Erledigt</ion-label>
+      <ion-label>Artikel</ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let product of productList">
+      <ion-label>
+        {{product.value}}
+        {{product.name}}
+        <button ion-button (click)="delete(product)" color="dark" clear icon-only>
+          <ion-icon name='trash' is-active="true"></ion-icon>
+        </button>
+      </ion-label>
+      <ion-checkbox></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+<!--
+<ion-list>
+
+  <ion-item class="header-row">
+    <ion-label>Menge</ion-label>
+    <ion-label>Artikel</ion-label>
+    <ion-label>Erledigt</ion-label>
+  </ion-item>
+
+  <ion-item class="item-row">
+    <ion-input type = "number" placeholder="Menge" floating> HMH</ion-input>
+    <ion-input type = "text"  placeholder="Artikel" floating> </ion-input>
+    <ion-checkbox></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-checkbox></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-buttons end>
+            <button (click)="  showAlert()"><ion-icon name="test"></ion-icon></button>
+    </ion-buttons>
+  </ion-item>
+
+</ion-list>
+-->
 
 </ion-content>
