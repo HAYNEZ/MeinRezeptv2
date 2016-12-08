@@ -5,8 +5,6 @@ import { AddRecipePage } from '../add-recipe/add-recipe';
 import { ShoppingListPage} from '../shopping-list/shopping-list';
 
 
-// import { HomePage } from '../home/home';
-
 @Component({
   templateUrl: 'tabs.html'
 })

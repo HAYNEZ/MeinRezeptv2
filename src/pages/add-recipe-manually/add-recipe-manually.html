@@ -18,7 +18,7 @@
   <!-- Titel -->
   <ion-item>
     <ion-label floating>Titel</ion-label>
-    <ion-input type="text"> </ion-input>
+    <ion-input type="text" [(ngModel)]='title' name ='title' > </ion-input>
   </ion-item>
 
   <!-- Foto -->
@@ -63,5 +63,9 @@
   </ion-item>
 
 </ion-list>
+
+
+
+    <button ion-button full (click)='saveRecipe()'> SAVE</button>
 
 </ion-content>

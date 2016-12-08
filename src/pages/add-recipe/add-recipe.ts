@@ -22,7 +22,7 @@ export class AddRecipePage {
 
   }
   navigateOptionOne() {
-    this.navCtrl.push(AddRecipeManuallyPage, {});
+    this.navCtrl.push(AddRecipeManuallyPage, {firstPassed: ["",""]});
   }
 
   navigateOptionTwo() {
