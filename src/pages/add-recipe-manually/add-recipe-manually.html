@@ -34,32 +34,32 @@
   <!-- Portionen -->
   <ion-item>
     <ion-label>Portionen</ion-label>
-    <ion-input type="number"> </ion-input>
+    <ion-input type="number" [(ngModel)]='portions' name ='portions'> </ion-input>
   </ion-item>
 
   <!-- Beschreibung -->
   <ion-item>
     <ion-label>Beschreibung</ion-label>
-    <ion-textarea type="text"> </ion-textarea>
+    <ion-textarea type="text" [(ngModel)]='description' name ='description'> </ion-textarea>
   </ion-item>
 
   <!-- Zeit -->
   <ion-item>
     <ion-label>Zeit</ion-label>
-    <ion-input type="number"> </ion-input>
+    <ion-input type="number" [(ngModel)]='time' name ='time'> </ion-input>
     <ion-label>min</ion-label>
   </ion-item>
 
   <!-- Tags -->
   <ion-item>
     <ion-label>Tags</ion-label>
-    <ion-input type="text"> </ion-input>
+    <ion-input type="text" [(ngModel)]='tags' name ='tags'> </ion-input>
   </ion-item>
 
   <!-- Bewertung -->
   <ion-item>
     <ion-label>Bewertung</ion-label>
-    <ion-input type="number"> </ion-input>
+    <ion-input type="number" [(ngModel)]='rating' name ='rating'> </ion-input>
   </ion-item>
 
 </ion-list>

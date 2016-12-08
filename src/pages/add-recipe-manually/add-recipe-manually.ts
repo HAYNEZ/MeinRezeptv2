@@ -19,7 +19,12 @@ export class AddRecipeManuallyPage {
 	 public ingredients:any;
 	 public preparation:any;
 	 public input:any;
-   title: any;
+     title: any;
+     portions: any;
+     description: any;
+     time: any;
+     tags: any;
+     rating: any;
 
   constructor(public navCtrl: NavController, public params: NavParams,private recipeService: RecipeService,
                 private viewCtrl: ViewController) {
@@ -33,8 +38,13 @@ export class AddRecipeManuallyPage {
 
   saveRecipe() {
       let recipe = {
-          "title": this.title
-      }
+          "title": this.title,
+          "portions": this.portions,
+          "description": this.description,
+          "time": this.time,
+          "tags": this.tags,
+          "rating": this.rating
+      };
       this.recipeService.add(recipe);
       this.dismiss(recipe);
   }
