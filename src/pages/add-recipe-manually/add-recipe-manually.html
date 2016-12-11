@@ -23,10 +23,14 @@
 
   <!-- Foto -->
   <ion-item>
-    <ion-label>Foto</ion-label>
-    <ion-thumbnail>
+
+      <img src="{{ base64Image }}"/>
+   <br />
+       <button ion-button (click)="takePicture()">Take a Picture</button>
+      <button ion-button (click)="accessGallery()">Access Gallery</button>
+       
       <!-- <img src=""/> -->
-    </ion-thumbnail>
+      
   </ion-item>
 
   <!-- Zutaten -->

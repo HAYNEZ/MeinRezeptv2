@@ -29,6 +29,9 @@ plugins/ios.json
 www/
 $RECYCLE.BIN/
 
+*.map
+*.js
+
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate

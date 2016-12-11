@@ -1,3 +1,34 @@
 page-recipe-book {
 
+       .recipe{
+      width:50%;
+        float:left;
+
+       }
+
+    .recipe .recipeTitle {
+        position:absolute;
+        background-color:#ffffff;
+        opacity:0.5;
+        top:50%;
+        left:50%;
+        font-size:40px;
+        text-align:center;
+        
+      
+    }
+
+    .recipe .recipeImage .img{
+ 
+         width:100%;
+      
+    }
+
+    .deleteButton{
+
+
+    }
+
 }
+
+
