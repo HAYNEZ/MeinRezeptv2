@@ -37,13 +37,13 @@ export class AddRecipeManuallyPage {
   	 this.ingredients = this.input[0];
 
          this.preparation = this.input[1];
-         this.base64Image = "assets/img/pizza.jpg";
+         this.base64Image = "assets/img/pizza2.jpg";
          this.zone = zone;
          this.platform = platform;
          this.image = null;
   }
 
-  takePicture() {
+  takePicture(): void {
       Camera.getPicture({
           quality: 75,
           destinationType: Camera.DestinationType.DATA_URL,
@@ -52,7 +52,7 @@ export class AddRecipeManuallyPage {
           encodingType: Camera.EncodingType.JPEG,
           targetWidth: 500,
           targetHeight: 500,
-          saveToPhotoAlbum: false
+          saveToPhotoAlbum: true
       }).then(imageData => {
           this.base64Image = "data:image/jpeg;base64," + imageData;
 
@@ -65,7 +65,7 @@ export class AddRecipeManuallyPage {
 
 
 
-  accessGallery() {
+ /* accessGallery() {
       Camera.getPicture({
           sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
           destinationType: Camera.DestinationType.DATA_URL
@@ -74,7 +74,32 @@ export class AddRecipeManuallyPage {
       }, (err) => {
           console.log(err);
       });
+  }*/
+
+
+
+
+   accessGallery(): void {
+      let cameraOptions = {
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+          destinationType: Camera.DestinationType.FILE_URI,
+          quality: 100,
+          allowEdit: true,
+          targetWidth: 500,
+          targetHeight: 500,
+          encodingType: Camera.EncodingType.JPEG,
+          correctOrientation: true
+      }
+
+      Camera.getPicture(cameraOptions)
+          .then(file_uri => this.base64Image = file_uri,
+          err => console.log(err));
   }
+
+
+
+
+
 
 
   saveRecipe() {
@@ -91,16 +116,18 @@ export class AddRecipeManuallyPage {
       };
       this.recipeService.add(recipe);
       this.dismiss(recipe);
-      this.getBackgroundImage();
+      this.getBackgroundImage(recipe);
   }
 
   dismiss(recipe) {
         this.viewCtrl.dismiss(recipe);
   }
 
-  getBackgroundImage() {
+  getBackgroundImage(recipe) {
 
-      var x = document.getElementsByClassName("recipeImage");
-      alert("HIII");
+
+    /* var urlString = 'url(assets/' + this.base64Image + '.jpg)';
+      document.getElementsByClassName("recipeP").style.backgroundImage = urlString;
+      alert("HIII");*/
   }
 }

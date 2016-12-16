@@ -24,10 +24,13 @@
   <!-- Foto -->
   <ion-item>
 
-      <img src="{{ base64Image }}"/>
+      <img [src]="base64Image" *ngIf="base64Image" />
+
+       <!--  <img src="{{base64Image}}" />   -->
+      <!--  <img src="{{ base64Image }}"/> -->
    <br />
-       <button ion-button (click)="takePicture()">Take a Picture</button>
-      <button ion-button (click)="accessGallery()">Access Gallery</button>
+       <button ion-button (click)="takePicture()">Take a Picture</button> 
+      <button ion-button (click)="accessGallery()">Access Gallery lol</button>
        
       <!-- <img src=""/> -->
       

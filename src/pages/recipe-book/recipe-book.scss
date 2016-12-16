@@ -1,33 +1,90 @@
 page-recipe-book {
 
+#recipeContent{
+
+
+}
+
+
        .recipe{
-      width:50%;
+   
+        width:50%;
         float:left;
+        padding:0.5%;
+ 
+    
+       }
+
+       /*  .recipe #raute{
+       position:absolute;
+       top:40%;
+        left:0%;
+        transform:scale(1.3);
+ 
+      }*/  
+
+
+
+
+
+     #recipeTitle {
+  
+    position:absolute;
+    //background-color:#00ffff;
+       opacity:1;
+       width:43.5%;
+       height:18%;
+       left:3%;
+       top:1.5%;
+       font-size:30px;
+       text-align:center;
+      
+        
+    }
+
+      .recipe #raute {
+         
+         position:absolute;
+         top:12%;
+         left:14.5%;
+         width: 70%;
+         height: auto;
+     }
+
+     .recipe .recipeImage {
+      
+         width: 100%;
+         height: auto;
+     }
+
+
+    @media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {       
+        
+         .recipeP{
+        width:50%;
+        float:left;
+
+      
 
        }
 
-    .recipe .recipeTitle {
-        position:absolute;
-        background-color:#ffffff;
-        opacity:0.5;
-        top:50%;
-        left:50%;
-        font-size:40px;
-        text-align:center;
+        .recipe .recipeTitle {
+
+  
+        font-size:22px;
+
         
       
     }
 
-    .recipe .recipeImage .img{
- 
-         width:100%;
-      
-    }
 
-    .deleteButton{
+
 
 
     }
+
 
 }
 
