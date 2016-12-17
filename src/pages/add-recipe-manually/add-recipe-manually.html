@@ -1,8 +1,8 @@
 <!--
-  Generated template for the AddRecipeManually page.
+Generated template for the AddRecipeManually page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
+See http://ionicframework.com/docs/v2/components/#navigation for more info on
+Ionic pages and navigation.
 -->
 <ion-header>
 
@@ -14,62 +14,61 @@
 
 
 <ion-content padding>
-<ion-list>
-  <!-- Titel -->
-  <ion-item>
-    <ion-label floating>Titel</ion-label>
-    <ion-input type="text" [(ngModel)]='title' name ='title' > </ion-input>
-  </ion-item>
+  <ion-list>
+    <!-- Titel -->
+    <ion-item>
+      <ion-label floating>Titel</ion-label>
+      <ion-input type="text" [(ngModel)]='title' name ='title' > </ion-input>
+    </ion-item>
 
-  <!-- Foto -->
-  <ion-item>
+    <!-- Foto -->
+    <ion-item>
 
       <img src="{{ base64Image }}"/>
-   <br />
-       <button ion-button (click)="takePicture()">Take a Picture</button>
+      <br />
+      <button ion-button (click)="takePicture()">Take a Picture</button>
       <button ion-button (click)="accessGallery()">Access Gallery</button>
-       
+
       <!-- <img src=""/> -->
-      
-  </ion-item>
 
-  <!-- Zutaten -->
+    </ion-item>
 
-  <!-- Portionen -->
-  <ion-item>
-    <ion-label>Portionen</ion-label>
-    <ion-input type="number" [(ngModel)]='portions' name ='portions'> </ion-input>
-  </ion-item>
+    <!-- Zutaten -->
+    <!--TODO:Add ingredients -->
+    
+    <!-- Portionen -->
+    <ion-item>
+      <ion-label>Portionen</ion-label>
+      <ion-input type="number" [(ngModel)]='portions' name ='portions'> </ion-input>
+    </ion-item>
 
-  <!-- Beschreibung -->
-  <ion-item>
-    <ion-label>Beschreibung</ion-label>
-    <ion-textarea type="text" [(ngModel)]='description' name ='description'> </ion-textarea>
-  </ion-item>
+    <!-- Beschreibung -->
+    <ion-item>
+      <ion-label>Beschreibung</ion-label>
+      <ion-textarea type="text" [(ngModel)]='description' name ='description'> </ion-textarea>
+    </ion-item>
 
-  <!-- Zeit -->
-  <ion-item>
-    <ion-label>Zeit</ion-label>
-    <ion-input type="number" [(ngModel)]='time' name ='time'> </ion-input>
-    <ion-label>min</ion-label>
-  </ion-item>
+    <!-- Zeit -->
+    <ion-item>
+      <ion-label>Zeit</ion-label>
+      <ion-input type="number" [(ngModel)]='time' name ='time'> </ion-input>
+      <ion-label>min</ion-label>
+    </ion-item>
 
-  <!-- Tags -->
-  <ion-item>
-    <ion-label>Tags</ion-label>
-    <ion-input type="text" [(ngModel)]='tags' name ='tags'> </ion-input>
-  </ion-item>
+    <!-- Tags -->
+    <ion-item>
+      <ion-label>Tags</ion-label>
+      <ion-input type="text" [(ngModel)]='tags' name ='tags'> </ion-input>
+    </ion-item>
 
-  <!-- Bewertung -->
-  <ion-item>
-    <ion-label>Bewertung</ion-label>
-    <ion-input type="number" [(ngModel)]='rating' name ='rating'> </ion-input>
-  </ion-item>
+    <!-- Bewertung -->
+    <ion-item>
+      <ion-label>Bewertung</ion-label>
+      <ion-input type="number" [(ngModel)]='rating' name ='rating'> </ion-input>
+    </ion-item>
 
-</ion-list>
+  </ion-list>
 
-
-
-    <button ion-button full (click)='saveRecipe()'> SAVE</button>
+  <button ion-button full (click)='saveRecipe()'>SAVE</button>
 
 </ion-content>

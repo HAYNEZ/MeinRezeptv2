@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 
-import { NavController, NavParams, ViewController, Platform} from 'ionic-angular';
+import { NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 
 import { RecipeService } from '../../providers/recipe.service';
@@ -15,8 +15,8 @@ import { RecipeService } from '../../providers/recipe.service';
   selector: 'page-add-recipe-manually',
   templateUrl: 'add-recipe-manually.html'
 })
-export class AddRecipeManuallyPage {
 
+export class AddRecipeManuallyPage {
     _zone: any;
     public base64Image: string;
 	 public ingredients:any;
@@ -59,11 +59,8 @@ export class AddRecipeManuallyPage {
       }, error => {
           console.log("ERROR -> " + JSON.stringify(error));
       });
-  
+
   }
-
-
-
 
   accessGallery() {
       Camera.getPicture({
@@ -79,8 +76,6 @@ export class AddRecipeManuallyPage {
 
   saveRecipe() {
       let recipe = {
-
-
           "title": this.title,
           "portions": this.portions,
           "description": this.description,
@@ -91,16 +86,15 @@ export class AddRecipeManuallyPage {
       };
       this.recipeService.add(recipe);
       this.dismiss(recipe);
-      this.getBackgroundImage();
+      // this.getBackgroundImage();
   }
 
   dismiss(recipe) {
         this.viewCtrl.dismiss(recipe);
   }
 
-  getBackgroundImage() {
-
-      var x = document.getElementsByClassName("recipeImage");
-      alert("HIII");
-  }
+  // getBackgroundImage() {
+  //     var x = document.getElementsByClassName("recipeImage");
+  //     alert("HIII");
+  // }
 }
