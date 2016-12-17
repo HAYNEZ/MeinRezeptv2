@@ -9,6 +9,15 @@ export class RecipeService {
 
     initDB() {
         this._db = new PouchDB('recipe');
+        let recipe = {
+            "title": "Auflauf",
+            "portions": "4",
+            "description": "test",
+            "time": "40",
+            "tags": "vegetarisch",
+            "rating": "4"
+        };
+        this._db.post(recipe);
     }
 
 
@@ -26,13 +35,13 @@ export class RecipeService {
             return this._db.allDocs({ include_docs: true })
                 .then(docs => {
 
-                    // Each row has a .doc object and we just want to send an 
+                    // Each row has a .doc object and we just want to send an
                     // array of birthday objects back to the calling controller,
                     // so let's map the array to contain just the .doc objects.
 
                     this.recipes = docs.rows.map(row => {
                         // Dates are not automatically converted from a string.
-                      
+
                         return row.doc;
                     });
 
@@ -58,7 +67,7 @@ export class RecipeService {
                 this.recipes.splice(index, 1); // delete
             }
         } else {
-           
+
             if (recipe && recipe._id === change.id) {
                 this.recipes[index] = change.doc; // update
             } else {
