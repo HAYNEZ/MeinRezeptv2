@@ -14,10 +14,36 @@
 
 
 <ion-content padding>
-<div>Portionen: {{recipe.portions}}</div>
-<div>Beschreibung: {{recipe.description}}</div>
-<div>Zeit: {{recipe.time}}</div>
+<div><img src="assets/img/default.png" alt="Default Bild"></div>
+
+<div id="titelHead">
+  <button id="titel">Herz</button>
+  <h1 id="titel"> {{recipe.title}} </h1>
+  <button id="titel">Ändern</button>
+</div>
+
+<div id="switch">
+  <button id="titelSwitch" type="button" (click)="switchIngredients()">Zutaten</button>
+  <button id="titelSwitch" type="button" (click)="switchSteps()" >Zubereitung</button>
+</div>
+
+<div id="infos">
+  <ul>
+    <li>{{recipe.time}} Minuten</li>
+    <li>{{recipe.portions}} Portionen</li>
+    <li>Zur Einkausliste hinzufügen</li>
+  </ul>
+</div>
+
+<div id="content">
+  <h2>Beschreibung:</h2>
+  <p id="demo">{{recipe.description}}</p>
+</div>
+
 <div>Tags: {{recipe.tags}}</div>
 <div>Bewertung: {{recipe.rating}}</div>
+<div class="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>
 
 </ion-content>

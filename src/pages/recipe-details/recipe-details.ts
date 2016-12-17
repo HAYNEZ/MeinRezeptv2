@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { AddRecipePage } from '../add-recipe/add-recipe';
 
 /*
   Generated class for the RecipeDetails page.
@@ -21,6 +22,14 @@ export class RecipeDetailsPage {
 
   ionViewDidLoad() {
     console.log('Hello RecipeDetailsPage Page');
+  }
+
+  switchIngredients() {
+  document.getElementById('demo').innerHTML = recipe.time;
+  }
+
+  switchSteps() {
+  document.getElementById('demo').innerHTML = 'Steps'
   }
 
 }
