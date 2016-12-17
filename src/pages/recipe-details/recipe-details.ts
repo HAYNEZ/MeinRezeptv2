@@ -18,18 +18,32 @@ export class RecipeDetailsPage {
   constructor(public navCtrl: NavController,
               public params: NavParams) {
     this.recipe = params.get("recipe");
+
   }
 
   ionViewDidLoad() {
+  this.paintStars();
     console.log('Hello RecipeDetailsPage Page');
   }
 
   switchIngredients() {
-  document.getElementById('demo').innerHTML = recipe.time;
+  document.getElementById('demo').innerHTML = this.recipe.time;
   }
 
   switchSteps() {
   document.getElementById('demo').innerHTML = 'Steps'
+  }
+
+  paintStars() {
+  let rating = document.getElementById('rating');
+  console.log("Rating" + rating);
+  for(var i=0; i<this.recipe.rating ; i++){
+    var node = document.createElement("SPAN");
+    var symbol = document.createTextNode("☆");
+    node.appendChild(symbol);
+    rating.appendChild(node);
+  }
+
   }
 
 }
