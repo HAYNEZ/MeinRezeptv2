@@ -91,6 +91,7 @@ export class HomePage {
     formattedText[0] = this.formatIngredientsBlock(ing);
     formattedText[1] = this.formatPreparation(prep);
 
+    console.log("Formated");
     this.navCtrl.push(AddRecipeManuallyPage, {firstPassed: formattedText});
 }
 
@@ -109,16 +110,16 @@ formatIngredientsBlock(text){
     if(!isNaN(first)){
       //Zahl in Array eintragen
       ingredients[arrayCount] = array[i];
-      var nextIsNan; 
+      var nextIsNan;
       if((i + 1)<array.length)
         nextIsNan = isNaN(array[(i+1)].charAt(0));
-      else 
+      else
         nextIsNan = false;
-      
+
       while(nextIsNan){
         i++;
         ingredients[arrayCount] += " " + array[i];
-        
+
         if(i<array.length-1){
           nextIsNan = isNaN(array[(i+1)].charAt(0));
         }else{

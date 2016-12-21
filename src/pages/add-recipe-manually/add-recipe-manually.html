@@ -14,57 +14,147 @@ Ionic pages and navigation.
 
 
 <ion-content padding>
-  <ion-list>
+  <ion-list no-lines>
     <!-- Titel -->
+    <ion-item-divider>Titel</ion-item-divider>
     <ion-item>
-      <ion-label floating>Titel</ion-label>
+      <!-- <ion-label floating>Titel</ion-label> -->
       <ion-input type="text" [(ngModel)]='title' name ='title' > </ion-input>
     </ion-item>
 
     <!-- Foto -->
+    <ion-item-divider>Foto</ion-item-divider>
     <ion-item>
-
-      <img src="{{ base64Image }}"/>
+      <img [src]="base64Image" *ngIf="base64Image" />
       <br />
       <button ion-button (click)="takePicture()">Take a Picture</button>
       <button ion-button (click)="accessGallery()">Access Gallery</button>
-
-      <!-- <img src=""/> -->
 
     </ion-item>
 
     <!-- Zutaten -->
     <!--TODO:Add ingredients -->
-    
+    <ion-list no-lines style="position:relative;">
+
+      <ion-list-header style="">Zutaten</ion-list-header>
+      <button ion-button (click)="addIngredient()" style ="position: absolute; top: 0; right: 0; ">Weitere Zutat</button>
+
+      <!-- One Ingredient -->
+      <ion-item-sliding #item *ngFor="let ingredient of ingredients; let index = index; trackBy:trackByIndex;" style="height: auto;">
+        <span ion-item [(ngModel)]='ingredient[0]' style="display: inline-block; width: 20%;">
+          <ion-label floating>{{index+1}} Menge</ion-label>
+          <ion-input type="number"></ion-input>
+           <!-- [(ngModel)]='ingredient[0]' -->
+        </span>
+        <span ion-item [(ngModel)]='ingredient[1]' style="display: inline-block; width: 20%;">
+          <ion-label floating>Einheit</ion-label>
+          <ion-input type="text" ></ion-input>
+          <!-- [(ngModel)]='ingredient[1]' -->
+        </span>
+        <span ion-item [(ngModel)]='ingredient[2]' style="display: inline-block; width: 48%;">
+          <ion-label floating>Zutat</ion-label>
+          <ion-input type="text" ></ion-input>
+          <!-- [(ngModel)]='ingredient[2]' -->
+        </span>
+        <ion-item-options>
+        <button ion-button icon-only style="" (click)="removeIngredient(ingredient)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-item-options>
+      </ion-item-sliding>
+      <!-- <div  *ngFor="let ingredient of ingredients">
+        <span ion-item style="display: inline-block">
+          <ion-label fixed>Menge</ion-label>
+          <ion-input type="text" value={{ingredient[0]}}></ion-input>
+        </span>
+        <span ion-item>
+          <ion-label fixed>Einheit</ion-label>
+          <ion-input type="text" value={{ingredient[1]}}></ion-input>
+        </span>
+        <span ion-item>
+          <ion-label>Zutat</ion-label>
+          <ion-input type="text" value={{ingredient[2]}}></ion-input><
+        </span>
+      </div>
+      <div *ngIf="ingredients == any">
+        <span ion-item style="display: inline-block">
+          <ion-label fixed>Menge</ion-label>
+          <ion-input type="text"></ion-input>
+        </span>
+        <span ion-item>
+          <ion-label fixed>Einheit</ion-label>
+          <ion-input type="text"></ion-input>
+        </span>
+        <span ion-item>
+          <ion-label>Zutat</ion-label>
+          <ion-input type="text"></ion-input><
+        </span>
+      </div> -->
+    </ion-list>
+
+
     <!-- Portionen -->
+    <ion-item-divider>
+Portionen
+</ion-item-divider>
     <ion-item>
-      <ion-label>Portionen</ion-label>
+      <!-- <ion-label floating>Portionen</ion-label> -->
       <ion-input type="number" [(ngModel)]='portions' name ='portions'> </ion-input>
     </ion-item>
 
     <!-- Beschreibung -->
-    <ion-item>
+    <ion-list no-lines style="position:relative;">
+      <ion-list-header style="">Zubereitung</ion-list-header>
+      <button ion-button (click)="addStep()" style ="position: absolute; top: 0; right: 0; ">Weiterer Schritt</button>
+      <ion-item-sliding  *ngFor="let step of steps; let index = index; trackBy:trackByIndex;" style="height: auto;">
+         <!-- let i = index; -->
+        <!-- *ngFor="let step of steps; let i = index;" -->
+        <ion-item>
+        <ion-label>{{index+1}}. Schritt: </ion-label>
+        <ion-textarea id="step{{index}}" [(ngModel)]="steps[index]" type="text" value="" name='step'></ion-textarea>
+         <!-- [(ngModel)]="steps[i].value" -->
+
+</ion-item>
+        <ion-item-options>
+        <button ion-button icon-only style="" (click)="removeStep(step)">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    </ion-list>
+    <!-- <ion-item>
       <ion-label>Beschreibung</ion-label>
       <ion-textarea type="text" [(ngModel)]='description' name ='description'> </ion-textarea>
-    </ion-item>
+    </ion-item> -->
+
 
     <!-- Zeit -->
+    <ion-item-divider>
+Zeit
+</ion-item-divider>
     <ion-item>
-      <ion-label>Zeit</ion-label>
-      <ion-input type="number" [(ngModel)]='time' name ='time'> </ion-input>
-      <ion-label>min</ion-label>
+      <!-- <ion-label floating>Zeit in Minuten</ion-label> -->
+      <ion-input placeholder="Zeit in Minuten" type="number" [(ngModel)]='time' name ='time'> </ion-input>
+      <!-- <ion-label>min</ion-label> -->
     </ion-item>
 
     <!-- Tags -->
+    <ion-item-divider>
+Tags
+</ion-item-divider>
     <ion-item>
-      <ion-label>Tags</ion-label>
-      <ion-input type="text" [(ngModel)]='tags' name ='tags'> </ion-input>
+      <!-- <ion-label floating>Einzelne Tags durch Komma trennen</ion-label> -->
+      <ion-input placeholder="Einzelne Tags durch Komma trennen" type="text" [(ngModel)]='tags' name ='tags'> </ion-input>
     </ion-item>
 
     <!-- Bewertung -->
+    <ion-item-divider>
+Bewertung
+</ion-item-divider>
     <ion-item>
-      <ion-label>Bewertung</ion-label>
-      <ion-input type="number" [(ngModel)]='rating' name ='rating'> </ion-input>
+      <!-- <ion-label floating>Bewertung von 1 - 5</ion-label> -->
+      <ion-input placeholder="Bewertung von 1 - 5" type="number" [(ngModel)]='rating' name ='rating'> </ion-input>
     </ion-item>
 
   </ion-list>

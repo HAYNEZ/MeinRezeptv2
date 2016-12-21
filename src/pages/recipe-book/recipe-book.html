@@ -14,6 +14,7 @@
 
 
 <ion-content >
+<!-- <<<<<<< HEAD
     <ion-list inset>
         <ion-item class="recipe" *ngFor="let recipe of recipes" >
             <div (click)="showDetails(recipe)">
@@ -27,4 +28,19 @@
             </div>
         </ion-item>
     </ion-list>
+======= -->
+
+        <div class="recipe" *ngFor="let recipe of recipes">
+            <div (click)="showDetails(recipe)">
+
+                <img class="recipeImage" src="{{ recipe.base64Image }}" />
+                 <!--  <img id="raute" class="recipeImage" src="assets/img/Raute.png" />-->
+                <div id="recipeTitle">{{recipe.title}}</div>
+                </div>
+
+            <!-- <div (click)="showDetails(recipe)"><div class="recipeTitle">{{recipe.title}}</div>,<br /> {{recipe.portions}},<br /> {{recipe.description}}, <br />{{recipe.time}}, <br />{{recipe.tags}},<br /> {{recipe.rating}},<br /> <img src="{{ recipe.base64Image }}" /></div> -->
+            <div item class="deleteButton"><button ion-button full (click)='delete(recipe)'>delete</button></div>
+        </div>
+
+<!-- >>>>>>> 137bb7edc06e2573a13a65f7c16bd374360af32b -->
 </ion-content>
