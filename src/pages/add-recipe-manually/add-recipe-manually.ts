@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 
 import { NavController, NavParams, ViewController, Platform } from 'ionic-angular';
 import { Camera } from 'ionic-native';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { RecipeService } from '../../providers/recipe.service';
 
 /*
@@ -17,6 +17,9 @@ import { RecipeService } from '../../providers/recipe.service';
 })
 
 export class AddRecipeManuallyPage {
+
+    photoTaken: boolean;
+    photoSelected: boolean;
     _zone: any;
     public base64Image: string;
 	 public preparation:any;
@@ -36,7 +39,8 @@ export class AddRecipeManuallyPage {
      image: any;
 
   constructor(public navCtrl: NavController, public params: NavParams,private recipeService: RecipeService,
-      private viewCtrl: ViewController,  private zone: NgZone, private platform: Platform) {
+      private viewCtrl: ViewController, private zone: NgZone, private platform: Platform, private _DomSanitizationService: DomSanitizer) {
+      this.photoTaken = false;
      this.input = params.get("firstPassed");
      console.log(this.input);
      console.log("In manually");
@@ -77,6 +81,7 @@ export class AddRecipeManuallyPage {
          this.image = null;
   }
 
+/*
   takePicture():void {
     let cameraOptions = {
       sourceType: Camera.PictureSourceType.CAMERA,
@@ -94,7 +99,31 @@ export class AddRecipeManuallyPage {
           console.log("ERROR -> " + JSON.stringify(error));
       });
 
+  }*/
+
+
+
+  takePicture(): void {
+      let options = {
+          sourceType: Camera.PictureSourceType.CAMERA,
+          destinationType: Camera.DestinationType.DATA_URL,
+          quality: 100,
+          allowEdit: true,
+          targetWidth: 500,
+          targetHeight: 500,
+          encodingType: Camera.EncodingType.JPEG,
+          correctOrientation: true,
+          saveToPhotoAlbum: true
+      }
+      Camera.getPicture(options).then((imageData) => {
+          this.base64Image = 'data:image/jpeg;base64,' + imageData;
+          this.photoTaken = true;
+          this.photoSelected = false;
+      }, (err) => {
+          // Handle error
+      });
   }
+
 
   accessGallery(): void {
      let cameraOptions = {

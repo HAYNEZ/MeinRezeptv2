@@ -25,7 +25,8 @@ Ionic pages and navigation.
     <!-- Foto -->
     <ion-item-divider>Foto</ion-item-divider>
     <ion-item>
-      <img [src]="base64Image" *ngIf="base64Image" />
+        <!--<img [src]="_DomSanitizationService.bypassSecurityTrustUrl(base64Image)" *ngIf="base64Image">-->
+      <img [src]="base64Image" *ngIf="base64Image" /> 
       <br />
       <button ion-button (click)="takePicture()">Take a Picture</button>
       <button ion-button (click)="accessGallery()">Access Gallery</button>
