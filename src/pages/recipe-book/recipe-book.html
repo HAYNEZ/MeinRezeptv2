@@ -6,41 +6,27 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>recipe-book</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title></ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
-<ion-content >
-<!-- <<<<<<< HEAD
-    <ion-list inset>
-        <ion-item class="recipe" *ngFor="let recipe of recipes" >
-            <div (click)="showDetails(recipe)">
-              <div class="recipeTitle">{{recipe.title}}</div>
-              <div class="recipeImage">
-                <img src="{{ recipe.base64Image }}" />
-              </div>
-            </div>
-            <div item class="deleteButton">
-              <button ion-button full (click)='delete(recipe)'>delete</button>
-            </div>
-        </ion-item>
-    </ion-list>
-======= -->
+<ion-content>
+    <h1>Meine Rezepte</h1>
+   <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button>
 
-        <div class="recipe" *ngFor="let recipe of recipes">
-            <div (click)="showDetails(recipe)">
+    <div class="recipe" *ngFor="let recipe of recipes">
+        <!--   <div (click)="showDetails(recipe)"> -->
+       
+         <!-- <img class="recipeImage" src="_DomSanitizationService.bypassSecurityTrustUrl({{ recipe.base64Image }})" *ngIf="base64Image">-->
+         <img class="recipeImage" src="{{ recipe.base64Image }}"/>
+        <div id="blackOverlayWrapper"><img id="blackOverlay" src="assets/img/blackOverlay.jpg" /></div>
+        <div id="recipeTitle">{{recipe.title}}</div>
 
-                <img class="recipeImage" src="{{ recipe.base64Image }}" />
-                 <!--  <img id="raute" class="recipeImage" src="assets/img/Raute.png" />-->
-                <div id="recipeTitle">{{recipe.title}}</div>
-                </div>
+        <!-- <div (click)="showDetails(recipe)"><div class="recipeTitle">{{recipe.title}}</div>,<br /> {{recipe.portions}},<br /> {{recipe.description}}, <br />{{recipe.time}}, <br />{{recipe.tags}},<br /> {{recipe.rating}},<br /> <img src="{{ recipe.base64Image }}" /></div> -->
+        <div item class="deleteButton"><button ion-button full (click)='delete(recipe)'>delete</button></div>
+    </div>
 
-            <!-- <div (click)="showDetails(recipe)"><div class="recipeTitle">{{recipe.title}}</div>,<br /> {{recipe.portions}},<br /> {{recipe.description}}, <br />{{recipe.time}}, <br />{{recipe.tags}},<br /> {{recipe.rating}},<br /> <img src="{{ recipe.base64Image }}" /></div> -->
-            <div item class="deleteButton"><button ion-button full (click)='delete(recipe)'>delete</button></div>
-        </div>
-
-<!-- >>>>>>> 137bb7edc06e2573a13a65f7c16bd374360af32b -->
 </ion-content>
