@@ -13,13 +13,20 @@
 </ion-header>
 
 
-<ion-content padding>
-    <ion-list inset>
+<ion-content>
+    <h1>Meine Rezepte</h1>
+   <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button>
 
-        <ion-item *ngFor="let recipe of recipes" >
-            <div (click)="showDetails(recipe)">{{recipe.title}}, {{recipe.portions}}, {{recipe.description}}, {{recipe.time}}, {{recipe.tags}}, {{recipe.rating}}</div>
+    <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
+        <!--   <div (click)="showDetails(recipe)"> -->
 
-            <div item-right><button ion-button full (click)='delete(recipe)'>delete</button></div>
-        </ion-item>
-    </ion-list>
+         <!-- <img class="recipeImage" src="_DomSanitizationService.bypassSecurityTrustUrl({{ recipe.base64Image }})" *ngIf="base64Image">-->
+        <img class="recipeImage" src="{{ recipe.base64Image }}"/>
+        <div id="blackOverlayWrapper"><img id="blackOverlay" src="assets/img/blackOverlay.jpg" /></div>
+        <div id="recipeTitle">{{recipe.title}}</div>
+
+        <!-- <div (click)="showDetails(recipe)"><div class="recipeTitle">{{recipe.title}}</div>,<br /> {{recipe.portions}},<br /> {{recipe.description}}, <br />{{recipe.time}}, <br />{{recipe.tags}},<br /> {{recipe.rating}},<br /> <img src="{{ recipe.base64Image }}" /></div> -->
+        <div item class="deleteButton"><button ion-button full (click)='delete(recipe)'>delete</button></div>
+    </div>
+
 </ion-content>
