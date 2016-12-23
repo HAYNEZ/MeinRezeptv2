@@ -17,8 +17,6 @@ export class RecipeBookPage {
 
     public recipes = [];
 
-
-
     constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, private recipeService: RecipeService,
         private platform: Platform,
         private zone: NgZone) {
@@ -51,22 +49,22 @@ export class RecipeBookPage {
                     text: 'Alphabetisch',
                     handler: () => {
                        this.sortAlphabetically();
-                      
+
                     }
                 }, {
                     text: 'Erstellungsdatum',
                     handler: () => {
-                  
+
                     }
                 }, {
                     text: 'Favoriten',
                     handler: () => {
-                       
+
                     }
                 }, {
-                    text: 'Kochhaeufigkeit',
+                    text: 'Kochhäufigkeit',
                     handler: () => {
-                   
+
                     }
                 }, {
                     text: 'Preis',
@@ -98,7 +96,7 @@ export class RecipeBookPage {
                 };
 
                 currentContacts = newGroup.contacts;
-               
+
 
             }
 

@@ -28,9 +28,7 @@ export class AddRecipeManuallyPage {
      nIngredients: number = 0;
      ingredients: any;
      steps: any;
-    //  step: String;
      testText: any;
-    //  ingredient: any;
      portions: any;
      description: any;
      time: any;
@@ -192,11 +190,6 @@ addStep(){
       };
       this.recipeService.add(recipe);
       this.dismiss(recipe);
-// <<<<<<< HEAD
-      // this.getBackgroundImage();
-// =======
-//       this.getBackgroundImage(recipe);
-// >>>>>>> 137bb7edc06e2573a13a65f7c16bd374360af32b
   }
 
   dismiss(recipe) {
@@ -207,18 +200,4 @@ addStep(){
     return index;
   }
 
-// <<<<<<< HEAD
-//   // getBackgroundImage() {
-//   //     var x = document.getElementsByClassName("recipeImage");
-//   //     alert("HIII");
-//   // }
-// =======
-//   getBackgroundImage(recipe) {
-//
-//
-//     /* var urlString = 'url(assets/' + this.base64Image + '.jpg)';
-//       document.getElementsByClassName("recipeP").style.backgroundImage = urlString;
-//       alert("HIII");*/
-//   }
-// >>>>>>> 137bb7edc06e2573a13a65f7c16bd374360af32b
 }
