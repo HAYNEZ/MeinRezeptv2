@@ -9,40 +9,78 @@
   <ion-navbar>
     <ion-title>{{recipe.title}}</ion-title>
   </ion-navbar>
+  <!-- <ion-tabs tabbarPlacement="top">
+    <ion-tab [root]="tab1Recipe" tabTitle="Allgemein"></ion-tab>
+    <ion-tab [root]="tab2Recipe" tabTitle="Zutaten"></ion-tab>
+    <ion-tab [root]="tab3Recipe" tabTitle="Zubereitung"></ion-tab>
+  </ion-tabs> -->
 
 </ion-header>
 
 
 <ion-content padding>
 
-<div><img src="assets/img/default.png" alt="Default Bild"></div>
+  <div padding>
+    <ion-segment [(ngModel)]="section">
+      <ion-segment-button value="general">
+        Allgemein
+      </ion-segment-button>
+      <ion-segment-button value="ingredients">
+        Zutaten
+      </ion-segment-button>
+      <ion-segment-button value="steps">
+        Zubereitung
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
-<div id="titelHead">
+  <div [ngSwitch]="section">
+  <div *ngSwitchCase="'general'">
+    <img src={{recipe.base64Image}} alt="Default Bild">
+    <!-- <div id="infos">
+      <ul>
+        <li>{{recipe.time}} Minuten</li>
+        <! <li>{{recipe.portions}} Portionen</li> -->
+      <!-- </ul>
+    </div> -->
+    <div>Zeit: {{recipe.time}} Minuten</div>
+    <div>Tags: {{recipe.tags}}</div>
+    <div>Bewertung:</div>
+    <div>
+        <span *ngFor="let star of range(1, recipe.rating)">☆</span>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="'ingredients'">
+    <p>{{recipe.portions}} Portionen</p>
+    <ion-list no-lines>
+      <ion-item *ngFor="let ingredient of recipe.ingredients">
+        {{ingredient[0]}} {{ingredient[1]}} {{ingredient[2]}}
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-list no-lines *ngSwitchCase="'steps'">
+    <div class="item item-text-wrap" *ngFor="let step of recipe.preparation; let index = index;">
+      {{index+1}}. {{step}}
+    </div>
+  </ion-list>
+</div>
+
+<!-- <div id="titelHead">
   <h1 id="titel"> {{recipe.title}} </h1>
-</div>
+</div> -->
 
-<div id="infos">
-  <ul>
-    <li>{{recipe.time}} Minuten</li>
-    <li>{{recipe.portions}} Portionen</li>
-  </ul>
-</div>
 
-<div id="switch">
-  <button id="ingredients" type="button" (click)="switchIngredients()">Zutaten</button>
-  <button id="steps" type="button" (click)="switchSteps()" >Zubereitung</button>
-</div>
 
-<div id="content">
+<!-- <div id="content">
   <h2>Beschreibung:</h2>
   <p id="demo">{{recipe.description}}</p>
 </div>
 
 
 <div>Tags: {{recipe.tags}}</div>
-<div>Bewertung:</div>
-<div id="rating">
+<div>Bewertung:</div> -->
 
-</div>
 
 </ion-content>

@@ -14,36 +14,33 @@ import { AddRecipePage } from '../add-recipe/add-recipe';
 })
 export class RecipeDetailsPage {
 
+  section:any;
   recipe: any;
   constructor(public navCtrl: NavController,
               public params: NavParams) {
     this.recipe = params.get("recipe");
-
+    this.section = "general";
   }
 
-  ionViewDidLoad() {
-  this.paintStars();
-    console.log('Hello RecipeDetailsPage Page');
+  switchGeneral() {
+    document.getElementById('demo').innerHTML = this.recipe.time;
   }
 
   switchIngredients() {
-  document.getElementById('demo').innerHTML = this.recipe.time;
+    document.getElementById('demo').innerHTML = this.recipe.time;
   }
 
   switchSteps() {
-  document.getElementById('demo').innerHTML = 'Steps'
+    document.getElementById('demo').innerHTML = 'Steps';
   }
 
-  paintStars() {
-  let rating = document.getElementById('rating');
-  console.log("Rating" + rating);
-  for(var i=0; i<this.recipe.rating ; i++){
-    var node = document.createElement("SPAN");
-    var symbol = document.createTextNode("☆");
-    node.appendChild(symbol);
-    rating.appendChild(node);
-  }
 
+  range(min, max ){
+    let input = [];
+    for( let i = min; i<=max; i++){
+      input.push(i);
+    }
+    console.log(input);
+    return input;
   }
-
 }

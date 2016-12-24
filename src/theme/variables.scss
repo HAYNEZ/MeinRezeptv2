@@ -13,6 +13,12 @@
 $text-color:        #000;
 $background-color:  #fff;
 
+.item{
+  overflow: inherit ;
+  text-overflow: inherit ;
+  white-space: wrap ;
+}
+
 
 // Named Color Variables
 // --------------------------------------------------
