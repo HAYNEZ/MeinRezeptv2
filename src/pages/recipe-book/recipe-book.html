@@ -14,8 +14,13 @@
 
 
 <ion-content padding>
-    <ion-list inset>
+    
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+<button ion-button >
+  <ion-icon name="">Detailsuche</ion-icon>
+</button>
 
+    <ion-list inset>
         <ion-item *ngFor="let recipe of recipes" >
             <div (click)="showDetails(recipe)">{{recipe.title}}, {{recipe.portions}}, {{recipe.description}}, {{recipe.time}}, {{recipe.tags}}, {{recipe.rating}}</div>
 
