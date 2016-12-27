@@ -1,7 +1,13 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, Platform, ActionSheetController} from 'ionic-angular';
 import { RecipeService } from '../../providers/recipe.service';
-import { RecipeDetailsPage } from '../recipe-details/recipe-details';
+// <<<<<<< HEAD
+// import { RecipeDetailsPage } from '../recipe-details/recipe-details';
+// =======
+import {RecipeDetailsPage} from '../recipe-details/recipe-details';
+import { PopoverController } from 'ionic-angular';
+import { MyPopOverPage } from './detailsuche';
+// >>>>>>> 6ec91ef34feb7c2feedebc98687dffc92b276e7b
 
 /*
   Generated class for the RecipeBook page.
@@ -15,9 +21,14 @@ import { RecipeDetailsPage } from '../recipe-details/recipe-details';
 })
 export class RecipeBookPage {
 
+    searchTerm: string = '';
     public recipes = [];
 
-    constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, private recipeService: RecipeService,
+// <<<<<<< HEAD
+//     constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, private recipeService: RecipeService,
+// =======
+    constructor(public navCtrl: NavController,public popoverCtrl: PopoverController, private recipeService: RecipeService,
+// >>>>>>> 6ec91ef34feb7c2feedebc98687dffc92b276e7b
         private platform: Platform,
         private zone: NgZone) {
         this.platform.ready().then(() => {
@@ -42,68 +53,88 @@ export class RecipeBookPage {
         this.recipeService.delete(recipe);
     }
 
-    presentActionSheet() {
-        const actionSheet = this.actionSheetCtrl.create({
-            buttons: [
-                {
-                    text: 'Alphabetisch',
-                    handler: () => {
-                       this.sortAlphabetically();
+// <<<<<<< HEAD
+//     presentActionSheet() {
+//         const actionSheet = this.actionSheetCtrl.create({
+//             buttons: [
+//                 {
+//                     text: 'Alphabetisch',
+//                     handler: () => {
+//                        this.sortAlphabetically();
+//
+//                     }
+//                 }, {
+//                     text: 'Erstellungsdatum',
+//                     handler: () => {
+//
+//                     }
+//                 }, {
+//                     text: 'Favoriten',
+//                     handler: () => {
+//
+//                     }
+//                 }, {
+//                     text: 'Kochhäufigkeit',
+//                     handler: () => {
+//
+//                     }
+//                 }, {
+//                     text: 'Preis',
+//                     handler: () => {
+//
+//                     }
+//                 }
+//             ]
+//         });
+//         actionSheet.present();
+//     }
+//
+//
+//     sortAlphabetically() {
+//
+//         let sortedContacts = this.recipes.sort();
+//         let currentLetter = false;
+//         let currentContacts = [];
+//
+//         sortedContacts.forEach((value, index) => {
+//
+//             if (value.charAt(0) != currentLetter) {
+//
+//                 currentLetter = value.charAt(0);
+//
+//                 let newGroup = {
+//                     letter: currentLetter,
+//                     contacts: []
+//                 };
+//
+//                 currentContacts = newGroup.contacts;
+//
+//
+//             }
+//
+//             currentContacts.push(value);
+//
+//         });
+//
+//     }
+// =======
+    ionViewDidLoad() {
 
-                    }
-                }, {
-                    text: 'Erstellungsdatum',
-                    handler: () => {
+        this.setFilteredItems();
 
-                    }
-                }, {
-                    text: 'Favoriten',
-                    handler: () => {
-
-                    }
-                }, {
-                    text: 'Kochhäufigkeit',
-                    handler: () => {
-
-                    }
-                }, {
-                    text: 'Preis',
-                    handler: () => {
-
-                    }
-                }
-            ]
-        });
-        actionSheet.present();
     }
 
+    setFilteredItems() {
 
-    sortAlphabetically() {
-
-        let sortedContacts = this.recipes.sort();
-        let currentLetter = false;
-        let currentContacts = [];
-
-        sortedContacts.forEach((value, index) => {
-
-            if (value.charAt(0) != currentLetter) {
-
-                currentLetter = value.charAt(0);
-
-                let newGroup = {
-                    letter: currentLetter,
-                    contacts: []
-                };
-
-                currentContacts = newGroup.contacts;
-
-
-            }
-
-            currentContacts.push(value);
-
-        });
+        this.recipes = this.recipeService.filterItems(this.searchTerm);
 
     }
+
+  presentPopover() {
+  }
+
+
+
+// >>>>>>> 6ec91ef34feb7c2feedebc98687dffc92b276e7b
 
 }

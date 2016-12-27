@@ -86,4 +86,12 @@ export class RecipeService {
         return low;
     }
 
+     filterItems(searchTerm){
+
+        return this.recipes.filter((recipe) => {
+            return recipe.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+        });
+
+    }
+
 }
