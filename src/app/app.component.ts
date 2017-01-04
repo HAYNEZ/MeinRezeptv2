@@ -18,6 +18,15 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+        // this.hideSplashScreen();
     });
+  }
+
+  hideSplashScreen(){
+    if(Splashscreen) {
+      setTimeout(() => {
+        Splashscreen.hide();
+      }, 100);
+    }
   }
 }

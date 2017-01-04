@@ -126,7 +126,7 @@ export class RecipeBookPage {
 
     setFilteredItems() {
 
-        this.recipes = this.recipeService.filterItems(this.searchTerm);
+        // this.recipes = this.recipeService.filterItems(this.searchTerm);
 
     }
 

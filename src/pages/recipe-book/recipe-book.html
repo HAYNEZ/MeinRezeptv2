@@ -19,19 +19,19 @@
    <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button>
 
     <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
-        <!--   <div (click)="showDetails(recipe)"> -->
+         <div (click)="showDetails(recipe)">
 
-         <!-- <img class="recipeImage" src="_DomSanitizationService.bypassSecurityTrustUrl({{ recipe.base64Image }})" *ngIf="base64Image">-->
-        <!-- <img class="recipeImage" src="{{ recipe.base64Image }}"/>
+          <img class="recipeImage" src="_DomSanitizationService.bypassSecurityTrustUrl({{ recipe.base64Image }})" *ngIf="base64Image">
+         <img class="recipeImage" src="{{ recipe.base64Image }}"/>
         <div id="blackOverlayWrapper"><img id="blackOverlay" src="assets/img/blackOverlay.jpg" /></div>
         <div id="recipeTitle">{{recipe.title}}</div>
 
-        <!-- <div (click)="showDetails(recipe)"><div class="recipeTitle">{{recipe.title}}</div>,<br /> {{recipe.portions}},<br /> {{recipe.description}}, <br />{{recipe.time}}, <br />{{recipe.tags}},<br /> {{recipe.rating}},<br /> <img src="{{ recipe.base64Image }}" /></div> -->
-        <!-- <div class="deleteButton"><button ion-button full (click)='delete(recipe)'>delete</button></div>
+       <div (click)="showDetails(recipe)"><div class="recipeTitle">{{recipe.title}}</div>,<br /> {{recipe.portions}},<br /> {{recipe.description}}, <br />{{recipe.time}}, <br />{{recipe.tags}},<br /> {{recipe.rating}},<br /> <img src="{{ recipe.base64Image }}" /></div>
+         <div class="deleteButton"><button ion-button full (click)='delete(recipe)'>delete</button></div>
     </div>
 ======= -->
 <ion-content padding>
-    
+
   <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
 <button ion-button >
   <ion-icon name="">Detailsuche</ion-icon>
@@ -39,7 +39,8 @@
 
     <ion-list inset>
         <ion-item *ngFor="let recipe of recipes" >
-            <div (click)="showDetails(recipe)">{{recipe.title}}, {{recipe.portions}}, {{recipe.description}}, {{recipe.time}}, {{recipe.tags}}, {{recipe.rating}}</div>
-<!-- >>>>>>> 6ec91ef34feb7c2feedebc98687dffc92b276e7b -->
+            <div (click)="showDetails(recipe)">{{recipe.title}}</div>
+          </ion-item>
+        </ion-list>
 
 </ion-content>
