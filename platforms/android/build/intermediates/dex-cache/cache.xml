@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/Users/Tet/Documents/HTW/MeinRezept/MeinRezeptv2/platforms/android/build/intermediates/exploded-aar/android/CordovaLib/unspecified/debug/jars/classes.jar"
+        jar="C:\Users\Veronika\Desktop\Studium\Projekt\MeinRezeptv2\platforms\android\build\intermediates\exploded-aar\android\CordovaLib\unspecified\debug\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
-        sha1="79d68b70e2f02123c5a1205261f8c9cc038870de">
-        <dex dex="/Users/Tet/Documents/HTW/MeinRezept/MeinRezeptv2/platforms/android/build/intermediates/pre-dexed/debug/CordovaLib-unspecified-debug_bfc591cccbc50470ef56b67012de05dea23fcf33.jar" />
+        sha1="873daaba9b25e7f07376989b900fc46e99a9271c">
+        <dex dex="C:\Users\Veronika\Desktop\Studium\Projekt\MeinRezeptv2\platforms\android\build\intermediates\pre-dexed\debug\CordovaLib-unspecified-debug_1def35aac3236448c342c965f1cb5bfa1e57598d.jar" />
     </item>
 
 </items>
