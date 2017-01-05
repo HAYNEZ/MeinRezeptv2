@@ -2,7 +2,10 @@
 # http://git-scm.com/docs/gitignore
 
 *~
+*.keystore
 *.sw[mnpcod]
+*.sln
+*.jsproj
 *.log
 *.tmp
 *.tmp.*
@@ -13,17 +16,16 @@ log.txt
 npm-debug.log*
 
 .idea/
+.vscode/
 .sass-cache/
-.vs/
 .versions/
-coverage
-dist
-node_modules
-tmp
-temp
-hooks
-platforms
-plugins
+coverage/
+dist/
+node_modules/
+tmp/
+temp/
+platforms/
+plugins/
 $RECYCLE.BIN/
 
 
