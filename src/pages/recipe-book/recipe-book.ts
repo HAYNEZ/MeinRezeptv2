@@ -1,8 +1,7 @@
 import { Component, NgZone} from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController, PopoverController } from 'ionic-angular';
 import { RecipeService } from '../../providers/recipe.service';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
-import { PopoverController } from 'ionic-angular';
 import { MyPopOverPage } from './detailsuche';
 
 /*
@@ -20,7 +19,10 @@ export class RecipeBookPage {
     searchTerm: string = '';
     public recipes = [];
 
-    constructor(public navCtrl: NavController,public popoverCtrl: PopoverController, private recipeService: RecipeService,
+    constructor(public navCtrl: NavController,
+      public actionSheetCtrl: ActionSheetController,
+      public popoverCtrl: PopoverController,
+      private recipeService: RecipeService,
         private platform: Platform,
         private zone: NgZone) {
         this.platform.ready().then(() => {
@@ -45,16 +47,79 @@ export class RecipeBookPage {
         this.recipeService.delete(recipe);
     }
 
-    ionViewDidLoad() {
- 
-        this.setFilteredItems();
- 
+    presentActionSheet() {
+       const actionSheet = this.actionSheetCtrl.create({
+           buttons: [
+               {
+                   text: 'Alphabetisch',
+                   handler: () => {
+                      this.sortAlphabetically();
+
+                   }
+               }, {
+                   text: 'Erstellungsdatum',
+                   handler: () => {
+
+                   }
+               }, {
+                   text: 'Favoriten',
+                   handler: () => {
+
+                   }
+               }, {
+                   text: 'Kochhäufigkeit',
+                   handler: () => {
+
+                   }
+               }, {
+                   text: 'Preis',
+                   handler: () => {
+
+                   }
+               }
+           ]
+       });
+       actionSheet.present();
+   }
+   sortAlphabetically() {
+
+        let sortedContacts = this.recipes.sort();
+        let currentLetter = false;
+        let currentContacts = [];
+
+        sortedContacts.forEach((value, index) => {
+
+            if (value.charAt(0) != currentLetter) {
+
+                currentLetter = value.charAt(0);
+
+                let newGroup = {
+                    letter: currentLetter,
+                    contacts: []
+                };
+
+                currentContacts = newGroup.contacts;
+
+
+            }
+
+            currentContacts.push(value);
+
+        });
+
     }
- 
+
+
+    ionViewDidLoad() {
+
+        this.setFilteredItems();
+
+    }
+
     setFilteredItems() {
- 
+
         this.recipes = this.recipeService.filterItems(this.searchTerm);
- 
+
     }
 
   presentPopover() {
