@@ -12,12 +12,46 @@
 
 </ion-header>
 
-
 <ion-content padding>
-<div>Portionen: {{recipe.portions}}</div>
-<div>Beschreibung: {{recipe.description}}</div>
-<div>Zeit: {{recipe.time}}</div>
-<div>Tags: {{recipe.tags}}</div>
-<div>Bewertung: {{recipe.rating}}</div>
+  <div padding>
+    <ion-segment [(ngModel)]="section">
+      <ion-segment-button value="general">
+        Allgemein
+      </ion-segment-button>
+      <ion-segment-button value="ingredients">
+        Zutaten
+      </ion-segment-button>
+      <ion-segment-button value="steps">
+        Zubereitung
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="section">
+    <div *ngSwitchCase="'general'">
+      <img src={{recipe.base64Image}} alt="Default Bild">
+      <div>Zeit: {{recipe.time}} Minuten</div>
+      <div>Tags: {{recipe.tags}}</div>
+      <div>Bewertung:</div>
+      <div>
+        <span *ngFor="let star of range(1, recipe.rating)">☆</span>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'ingredients'">
+      <p>{{recipe.portions}} Portionen</p>
+      <ion-list no-lines>
+        <ion-item *ngFor="let ingredient of recipe.ingredients">
+          {{ingredient[0]}} {{ingredient[1]}} {{ingredient[2]}}
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <ion-list no-lines *ngSwitchCase="'steps'">
+      <div class="item item-text-wrap" *ngFor="let step of recipe.preparation; let index = index;">
+        {{index+1}}. {{step}}
+      </div>
+    </ion-list>
+  </div>
 
 </ion-content>
