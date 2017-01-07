@@ -18,8 +18,9 @@
     <!-- Titel -->
     <ion-item-divider>Titel</ion-item-divider>
     <ion-item>
-      <ion-input type="text" [(ngModel)]='title' name ='title' > </ion-input>
+      <ion-input placeholder="Titel eingeben" type="text" [(ngModel)]='title' name ='title' > </ion-input>
     </ion-item>
+
 
     <!-- Foto -->
     <ion-item-divider>Foto</ion-item-divider>
@@ -68,7 +69,7 @@
       Portionen
     </ion-item-divider>
     <ion-item>
-      <ion-input type="number" [(ngModel)]='portions' name ='portions'> </ion-input>
+      <ion-input placeholder="Anzahl eingeben" type="number" min="0" [(ngModel)]='portions' name ='portions'> </ion-input>
     </ion-item>
 
     <!-- Beschreibung -->
