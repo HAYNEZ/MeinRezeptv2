@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ListService } from '../../providers/list.service';
 
 /*
   Generated class for the RecipeDetails page.
@@ -17,7 +18,7 @@ export class RecipeDetailsPage {
   section:any;
   recipe: any;
   constructor(public navCtrl: NavController,
-              public params: NavParams) {
+              public params: NavParams, private listService: ListService) {
     this.recipe = params.get("recipe");
     this.section = "general";
   }
@@ -42,6 +43,17 @@ export class RecipeDetailsPage {
     }
     console.log(input);
     return input;
+  }
+
+  addToList(){
+    for( let item of this.recipe.ingredients){
+    console.log(item);
+        this.listService.add({
+        value: item[0],
+        unit: item[1],
+        product: item[2]
+      });
+    }
   }
 
 }
