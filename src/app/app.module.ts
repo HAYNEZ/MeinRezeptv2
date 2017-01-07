@@ -3,6 +3,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { RecipeService } from '../providers/recipe.service';
+import {  ListService } from '../providers/list.service';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { RecipeBookPage } from '../pages/recipe-book/recipe-book';
@@ -38,6 +39,6 @@ import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
     HomePage,
     ShoppingListPage
   ],
-  providers: [RecipeService]
+  providers: [RecipeService, ListService]
 })
 export class AppModule {}

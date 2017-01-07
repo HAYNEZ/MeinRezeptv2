@@ -1,6 +1,7 @@
 import { Component, NgZone} from '@angular/core';
 import { NavController, Platform, ActionSheetController, PopoverController } from 'ionic-angular';
 import { RecipeService } from '../../providers/recipe.service';
+import { ListService } from '../../providers/list.service';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 import { MyPopOverPage } from './detailsuche';
 
@@ -24,9 +25,10 @@ export class RecipeBookPage {
       public popoverCtrl: PopoverController,
       private recipeService: RecipeService,
         private platform: Platform,
-        private zone: NgZone) {
+        private zone: NgZone, private listService : ListService) {
         this.platform.ready().then(() => {
             this.recipeService.initDB();
+            this.listService.initDB();
 
             this.recipeService.getAll()
                 .then(data => {
