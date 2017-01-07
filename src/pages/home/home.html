@@ -1,14 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>OCR Example</ion-title>
+    <ion-title>Hinzufügen</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <button class="select-image" ion-button block *ngIf="!srcImage" (click)="presentActionSheet()" color="light">
-    <ion-icon name="camera"></ion-icon>
-  </button>
+<button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionOne()" color="light">
+Manuell hinzufügen</button>
+    <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(0)" color="green">
+    Fotogalerie</button>
+  <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(1)" color="green">
+    Foto machen</button>
+  <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(2)" color="green">
+    Demo Foto</button>
 
   <div *ngIf="srcImage" class="image-wrapper">
     <img id="image" [src]="srcImage" />
