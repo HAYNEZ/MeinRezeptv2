@@ -27,7 +27,8 @@
     <ion-item *ngFor="let product of productList">
       <ion-label>
         {{product.value}}
-        {{product.name}}
+        {{product.unit}}
+        {{product.product}}
         <button ion-button (click)="delete(product)" color="dark" clear icon-only>
           <ion-icon name='trash' is-active="true"></ion-icon>
         </button>

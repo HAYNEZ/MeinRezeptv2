@@ -32,6 +32,10 @@ export class ShoppingListPage {
                     placeholder: "Anzahl"
                 },
                 {
+                    name: "unit",
+                    placeholder: "Einheit"
+                },
+                {
                     name: "product",
                     placeholder: "Artikel"
                 }
@@ -45,7 +49,8 @@ export class ShoppingListPage {
                     handler: data => {
                         this.listService.add({
                             value: data.value,
-                            name: data.product,
+                            unit: data.unit,
+                            product: data.product,
                         });
                     }
                 }
