@@ -33,6 +33,7 @@ export class AddRecipeManuallyPage {
     tags: any;
     rating: any;
     image: any;
+    date: any;
 
  constructor(public navCtrl: NavController,
     public params: NavParams,
@@ -187,11 +188,12 @@ removeStep(step){
          "time": this.time,
          "tags": this.tags,
          "rating": this.rating,
-         "base64Image": this.base64Image
+         "base64Image": this.base64Image,
+         "date" : new Date()
      };
      this.recipeService.add(recipe);
      this.dismiss(recipe);
-
+  
  }
 
  dismiss(recipe) {
