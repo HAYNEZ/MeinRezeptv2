@@ -75,7 +75,7 @@ export class AddRecipeManuallyPage {
  // 	 this.ingredients = this.input[0];
  //       // this.ingredient = [200, 'ml', 'Milch'];
  //        this.preparation = this.input[1];
-        this.base64Image = "assets/img/pizza2.jpg";
+        this.base64Image = "assets/img/demo.jpg";
         this.zone = zone;
         this.platform = platform;
         this.image = null;
