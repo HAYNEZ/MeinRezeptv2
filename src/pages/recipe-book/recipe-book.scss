@@ -1,4 +1,12 @@
 page-recipe-book {
+
+#headerTitle{
+
+  text-align:center;
+}
+
+
+
   h1{
         text-align:center;
         font-size:25px;
@@ -88,8 +96,8 @@ and (max-device-width : 568px) {
         #recipeTitle {
 
 
-        font-size:25px;
-
+        font-size:18px;
+        line-height: 1.25;
 
 
     }

@@ -43,6 +43,7 @@ export class AddRecipeManuallyPage {
     //  ,
     //  private _DomSanitizationService: DomSanitizer
    ) {
+     this.platform = platform;
      this.photoTaken = false;
     this.input = params.get("firstPassed");
     console.log(this.input);
@@ -190,6 +191,7 @@ removeStep(step){
      };
      this.recipeService.add(recipe);
      this.dismiss(recipe);
+
  }
 
  dismiss(recipe) {
@@ -199,4 +201,23 @@ removeStep(step){
  trackByIndex(index: number, obj: any): any {
    return index;
  }
+
+
+//Funktioniert nicht, später hilfreich?
+checkif(){
+
+var title =document.getElementById("recipeTitle");
+var titlelength = this.title.length;
+
+
+
+if(titlelength>11){
+  alert(titlelength);
+ title.style.fontSize="20px";
+}
+
+}
+
+
+
 }

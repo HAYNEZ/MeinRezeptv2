@@ -21151,6 +21151,10 @@ page-home .image-wrapper {
   width: 100%;
 }
 
+page-recipe-book #headerTitle {
+  text-align: center;
+}
+
 page-recipe-book h1 {
   text-align: center;
   font-size: 25px;
@@ -21216,7 +21220,8 @@ page-recipe-book .recipe .recipeImage {
     font-size: 20px;
   }
   page-recipe-book #recipeTitle {
-    font-size: 25px;
+    font-size: 18px;
+    line-height: 1.25;
   }
 }
 
