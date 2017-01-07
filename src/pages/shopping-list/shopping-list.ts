@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, AlertController} from 'ionic-angular';
+import { ListService } from '../../providers/list.service';
 
 @Component({
   selector: 'page-shopping-list',
@@ -8,10 +9,17 @@ import { NavController, AlertController} from 'ionic-angular';
 
 export class ShoppingListPage {
 
-  public productList: Array<Object>;
+  public productList= [];
 
-  constructor(public navCtrl: NavController, private alertController: AlertController) {
+  constructor(public navCtrl: NavController, private alertController: AlertController,
+    private zone: NgZone, private listService: ListService) {
     this.productList = [];
+
+    this.listService.getAll().then(data => {
+            this.zone.run(() => {
+                this.productList = data;
+            });
+    }).catch(console.error.bind(console));
   }
 
   public add() {
@@ -35,7 +43,7 @@ export class ShoppingListPage {
                 {
                     text: "Hinzufühgen",
                     handler: data => {
-                        this.productList.push({
+                        this.listService.add({
                             value: data.value,
                             name: data.product,
                         });
@@ -58,6 +66,15 @@ export class ShoppingListPage {
 
 
   ionViewDidLoad() {
-    console.log('Hello ShoppingListPage Page');
+    this.listService.getAll().then(data => {
+          this.zone.run(() => {
+              this.productList = data;
+          });
+    }).catch(console.error.bind(console));
   }
+
+
+
+
+
 }
