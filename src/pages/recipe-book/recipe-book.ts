@@ -27,7 +27,7 @@ export class RecipeBookPage {
     ) {
         this.platform.ready().then(() => {
             this.recipeService.initDB();
-            // this.listService.initDB();
+            this.listService.initDB();
 
             this.recipeService.getAll()
                 .then(data => {
