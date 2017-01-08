@@ -6,19 +6,26 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>BOIL</ion-title>
-    <ion-buttons end>
-      <button ion-button>
-        <ion-icon name="ion-navicon-round"></ion-icon>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only>
+        <ion-icon name="information-circle"></ion-icon>
       </button>
     </ion-buttons>
 
-  </ion-navbar>
+    <ion-title id="headerTitle">BOIL</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <h1>Meine Rezepte</h1>
   <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
   <button ion-button full> Detailsuche
