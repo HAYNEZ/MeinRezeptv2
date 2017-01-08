@@ -43,6 +43,7 @@ export class AddRecipeManuallyPage {
     //  ,
     //  private _DomSanitizationService: DomSanitizer
    ) {
+     this.platform = platform;
      this.photoTaken = false;
     this.input = params.get("firstPassed");
     console.log(this.input);
@@ -74,7 +75,7 @@ export class AddRecipeManuallyPage {
  // 	 this.ingredients = this.input[0];
  //       // this.ingredient = [200, 'ml', 'Milch'];
  //        this.preparation = this.input[1];
-        this.base64Image = "assets/img/pizza2.jpg";
+        this.base64Image = "assets/img/demo.jpg";
         this.zone = zone;
         this.platform = platform;
         this.image = null;
@@ -190,6 +191,7 @@ removeStep(step){
      };
      this.recipeService.add(recipe);
      this.dismiss(recipe);
+
  }
 
  dismiss(recipe) {
@@ -199,4 +201,23 @@ removeStep(step){
  trackByIndex(index: number, obj: any): any {
    return index;
  }
+
+
+//Funktioniert nicht, später hilfreich?
+checkif(){
+
+var title =document.getElementById("recipeTitle");
+var titlelength = this.title.length;
+
+
+
+if(titlelength>11){
+  alert(titlelength);
+ title.style.fontSize="20px";
+}
+
+}
+
+
+
 }
