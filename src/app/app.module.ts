@@ -39,6 +39,9 @@ import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
     HomePage,
     ShoppingListPage
   ],
-  providers: [RecipeService, ListService]
+  providers: [
+    RecipeService,
+    ListService
+  ]
 })
 export class AppModule {}
