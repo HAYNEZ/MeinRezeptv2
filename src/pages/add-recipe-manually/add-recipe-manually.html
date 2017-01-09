@@ -28,8 +28,8 @@
         <!--<img [src]="_DomSanitizationService.bypassSecurityTrustUrl(base64Image)" *ngIf="base64Image">-->
       <img [src]="base64Image" *ngIf="base64Image" />
       <br />
-      <button ion-button (click)="takePicture()">Take a Picture</button>
-      <button ion-button (click)="accessGallery()">Access Gallery</button>
+      <button ion-button (click)="takePicture()">Foto aufnehmen</button>
+      <button ion-button (click)="accessGallery()">Foto aus Galerie</button>
 
     </ion-item>
 
@@ -117,6 +117,6 @@
 
   </ion-list>
 
-  <button ion-button full (click)='saveRecipe()'>SAVE</button>
+  <button ion-button full (click)='saveRecipe()'>Speichern</button>
 
 </ion-content>
