@@ -42,6 +42,9 @@ import { TextRecognitionPage } from '../pages/text-recognition/text-recognition'
     ShoppingListPage,
     TextRecognitionPage
   ],
-  providers: [RecipeService, ListService]
+  providers: [
+    RecipeService,
+    ListService
+  ]
 })
 export class AppModule {}

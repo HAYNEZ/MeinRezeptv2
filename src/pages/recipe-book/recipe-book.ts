@@ -5,28 +5,26 @@ import { ListService } from '../../providers/list.service';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 import { MyPopOverPage } from './detailsuche';
 
-/*
-  Generated class for the RecipeBook page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-recipe-book',
   templateUrl: 'recipe-book.html'
 })
+
 export class RecipeBookPage {
 
     searchTerm: string = '';
     public recipes = [];
 
-    constructor(public navCtrl: NavController,
+    constructor(
+      public navCtrl: NavController,
       public actionSheetCtrl: ActionSheetController,
       public popoverCtrl: PopoverController,
       private recipeService: RecipeService,
-        private addRecipeManually: RecipeService,
-        private platform: Platform,
-        private zone: NgZone, private listService : ListService) {
+      private addRecipeManually: RecipeService,
+      private platform: Platform,
+      private zone: NgZone,
+      private listService : ListService
+    ) {
         this.platform.ready().then(() => {
             this.recipeService.initDB();
             this.listService.initDB();
@@ -78,9 +76,6 @@ export class RecipeBookPage {
        actionSheet.present();
    }
 
-
-
-
    sortAlphabetically() {
 
     this.recipes.sort(function(a, b){
@@ -101,7 +96,6 @@ export class RecipeBookPage {
       this.recipes.reverse();
      }
 
-
 sortDate(){
 this.recipes.sort(function(a,b) {
     return new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -110,21 +104,11 @@ this.recipes.sort(function(a,b) {
 }
 
     ionViewDidLoad() {
-
         this.setFilteredItems();
-
     }
 
     setFilteredItems() {
-
         this.recipes = this.recipeService.filterItems(this.searchTerm);
-
     }
-
-  presentPopover() {
-  }
-
-
-
 
 }
