@@ -5,15 +5,21 @@
 </ion-header>
 
 <ion-content padding>
+  <div class="manuell">
+<ion-title class="sectionTitel">Rezept eingeben</ion-title>
+  <button class="select-image" ion-button icon-left block (click)="navigateOptionOne()" color="light"><ion-icon name="create"></ion-icon>
+  Manuell hinzufügen</button>
+</div>
 
-<button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionOne()" color="light">
-Manuell hinzufügen</button>
-    <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(0)" color="green">
-    Fotogalerie</button>
-  <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(1)" color="green">
+<div class="scann">
+<ion-title class="sectionTitel">Rezept Scannen</ion-title>
+    <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(0)" color="green"><ion-icon name="images"></ion-icon>
+     Fotogalerie</button>
+  <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(1)" color="green"><ion-icon name="camera"></ion-icon>
     Foto machen</button>
-  <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(2)" color="green">
+  <button class="select-image" ion-button block *ngIf="!srcImage" (click)="navigateOptionTwo(2)" color="green"><ion-icon name="qr-scanner"></ion-icon>
     Demo Foto</button>
+  </div>
 
   <div *ngIf="srcImage" class="image-wrapper">
     <img id="image" [src]="srcImage" />
