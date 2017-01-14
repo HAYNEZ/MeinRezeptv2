@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ListService } from '../../providers/list.service';
+import { RecipeService } from '../../providers/recipe.service';
 
 @Component({
   selector: 'page-recipe-details',
@@ -14,10 +15,29 @@ export class RecipeDetailsPage {
 
   constructor(public navCtrl: NavController,
               public params: NavParams,
-              private listService: ListService) {
+              private listService: ListService,
+              private recipeService: RecipeService,
+             private viewCtrl: ViewController) {
     this.recipe = params.get("recipe");
     this.section = "general";
   }
+
+  delete(recipe) {
+      this.recipeService.delete(this.recipe);
+         this.dismiss(this.recipe);
+  }
+
+  update(){
+
+
+  }
+
+
+
+  dismiss(recipe) {
+        this.viewCtrl.dismiss(recipe);
+  }
+
 
   switchGeneral() {
     document.getElementById('demo').innerHTML = this.recipe.time;
