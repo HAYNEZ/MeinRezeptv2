@@ -14,6 +14,7 @@ import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
 import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
 import { PopoverPagePage } from '../pages/popover-page/popover-page';
 import { TextRecognitionPage } from '../pages/text-recognition/text-recognition';
+import {InformationPage} from '../pages/information/information';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TextRecognitionPage } from '../pages/text-recognition/text-recognition'
     HomePage,
     ShoppingListPage,
     PopoverPagePage,
-    TextRecognitionPage
+    TextRecognitionPage,
+    InformationPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -43,7 +45,8 @@ import { TextRecognitionPage } from '../pages/text-recognition/text-recognition'
     HomePage,
     ShoppingListPage,
     PopoverPagePage,
-    TextRecognitionPage
+    TextRecognitionPage,
+    InformationPage
   ],
   providers: [
     RecipeService,

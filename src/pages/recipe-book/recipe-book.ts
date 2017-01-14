@@ -3,6 +3,7 @@ import { NavController, Platform, ActionSheetController, PopoverController } fro
 import { RecipeService } from '../../providers/recipe.service';
 import { ListService } from '../../providers/list.service';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
+import { InformationPage} from '../information/information';
 import { MyPopOverPage } from './detailsuche';
 
 @Component({
@@ -44,6 +45,10 @@ export class RecipeBookPage {
       this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
     }
 
+    showInformation() {
+      this.navCtrl.push(InformationPage);
+    }
+
     delete(recipe) {
         this.recipeService.delete(recipe);
     }
@@ -68,7 +73,7 @@ export class RecipeBookPage {
                   this.sortDate();
                    }
                },{
-                 text: 'Cancel',
+                 text: 'Abbruch',
                  role: 'cancel'
                }
            ]
