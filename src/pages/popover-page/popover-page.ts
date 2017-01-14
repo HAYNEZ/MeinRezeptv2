@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, AlertController, NavController } from 'ionic-angular';
+import { ViewController, AlertController, NavController, NavParams } from 'ionic-angular';
 import { ShoppingListPage } from '../shopping-list/shopping-list';
 import { ListService } from '../../providers/list.service';
 
@@ -15,56 +15,64 @@ import { ListService } from '../../providers/list.service';
 })
 export class PopoverPagePage {
 
-  constructor(public viewCtrl: ViewController, private listService: ListService, private alertController: AlertController, public navCtrl: NavController) {}
+  actions: any;
+  constructor(public viewCtrl: ViewController,
+              private listService: ListService,
+              private alertController: AlertController,
+              public navCtrl: NavController,
+              private params: NavParams ) {
+                this.actions = this.params.get('actions');
+              }
 
-  ionViewDidLoad() {
-    console.log('Hello PopoverPagePage Page');
-  }
-
-  public deleteAll(){
-    this.listService.deleteDB();
-    this.listService.initDB();
+  performAction(action){
+    action.callback();
     this.close();
-    /*location.reload();*/
   }
 
-  public add() {
-        let alert = this.alertController.create({
-            title: "Artikel hinzufügen",
-            // message: "Füge einen Artikel hinzu!",
-            inputs: [
-                {
-                    name: "value",
-                    placeholder: "Anzahl"
-                },
-                {
-                    name: "unit",
-                    placeholder: "Einheit"
-                },
-                {
-                    name: "product",
-                    placeholder: "Artikel"
-                }
-            ],
-            buttons: [
-                {
-                    text: "Abbrechen"
-                },
-                {
-                    text: "Hinzufügen",
-                    handler: data => {
-                      this.listService.add({
-                        value: data.value,
-                        unit: data.unit,
-                        product: data.product,
-                      });
-                      this.viewCtrl.dismiss();
-                    }
-                }
-            ]
-        });
-        alert.present();
-    }
+  // public deleteAll(){
+  //   this.listService.deleteDB();
+  //   this.listService.initDB();
+  //   this.close();
+  //   /*location.reload();*/
+  // }
+
+  // public add() {
+  //       let alert = this.alertController.create({
+  //           title: "Artikel hinzufügen",
+  //           // message: "Füge einen Artikel hinzu!",
+  //           inputs: [
+  //               {
+  //                   name: "value",
+  //                   placeholder: "Anzahl"
+  //               },
+  //               {
+  //                   name: "unit",
+  //                   placeholder: "Einheit"
+  //               },
+  //               {
+  //                   name: "product",
+  //                   placeholder: "Artikel"
+  //               }
+  //           ],
+  //           buttons: [
+  //               {
+  //                   text: "Abbrechen"
+  //               },
+  //               {
+  //                   text: "Hinzufügen",
+  //                   handler: data => {
+  //                     this.listService.add({
+  //                       value: data.value,
+  //                       unit: data.unit,
+  //                       product: data.product,
+  //                     });
+  //                     this.viewCtrl.dismiss();
+  //                   }
+  //               }
+  //           ]
+  //       });
+  //       alert.present();
+  //   }
   close() {
     this.viewCtrl.dismiss();
   }

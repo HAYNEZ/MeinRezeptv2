@@ -25,7 +25,18 @@ export class ShoppingListPage {
   }
 
   presentPopover(event) {
-      let popover = this.popoverCtrl.create(PopoverPagePage);
+      let popover = this.popoverCtrl.create(PopoverPagePage, {
+        actions : [
+          {
+            title: 'Hinzufügen',
+            callback: () => { this.add(); }
+          },
+          {
+            title: 'Online einkaufen',
+            callback: () => { this.shopOnline();}
+          }
+        ]
+      });
       popover.present({ ev: event });
   }
 
@@ -63,6 +74,18 @@ export class ShoppingListPage {
             ]
         });
         alert.present();
+    }
+
+    shopOnline(){
+      let alert = this.alertController.create({
+          title: "Bald verfügbar",
+          buttons: [
+              {
+                  text: "Abbrechen"
+              }
+            ]
+      })
+      alert.present();
     }
 
     public delete(key){
