@@ -30,7 +30,7 @@ export class AddRecipeManuallyPage {
     portions: any;
     description: any;
     time: any;
-    tagString : string;
+    tagString : string ="";
     tags: string[];
     rating: any;
     image: any;
@@ -182,7 +182,10 @@ removeStep(step){
 
 parseTags(){
   console.log(this.tagString)
-  this.tags = this.tagString.split('#');
+  if(this.tagString != ""){
+    this.tags = this.tagString.split('#');
+  }
+
   console.log(this.tags);
 }
 
