@@ -127,7 +127,4 @@ export class RecipeBookPage {
   presentPopover() {
   }
 
-
-
-
 }

@@ -12,6 +12,7 @@ import { AddRecipeManuallyPage } from '../pages/add-recipe-manually/add-recipe-m
 import { HomePage } from '../pages/home/home';
 import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
 import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
+import { PopoverPagePage } from '../pages/popover-page/popover-page';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
     AddRecipePage,
     AddRecipeManuallyPage,
     HomePage,
-    ShoppingListPage
+    ShoppingListPage,
+    PopoverPagePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -37,7 +39,8 @@ import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
     AddRecipePage,
     AddRecipeManuallyPage,
     HomePage,
-    ShoppingListPage
+    ShoppingListPage,
+    PopoverPagePage
   ],
   providers: [RecipeService, ListService]
 })

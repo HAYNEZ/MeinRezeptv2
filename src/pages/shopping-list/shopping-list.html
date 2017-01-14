@@ -1,22 +1,21 @@
 
+
 <ion-header>
   <ion-navbar>
+
     <ion-title>Einkaufsliste</ion-title>
+
+    <ion-buttons (click)="presentPopover($event)" end>
+      <button ion-button>
+        <ion-icon name="menu" ></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-
-  <ion-fab top right edge>
-     <button ion-fab mini (click)="add()" color="secondary"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
-
-  <ion-fab top left edge>
-     <button ion-fab mini (click)="deleteAll()" color="dark"><ion-icon name="remove-circle"></ion-icon></button>
-  </ion-fab>
-
-
   <ion-list #product>
 
     <ion-item class="header-row">

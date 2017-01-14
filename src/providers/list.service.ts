@@ -20,6 +20,12 @@ export class ListService {
         return this._db.remove(item);
     }
 
+    deleteDB(){
+      this._db.destroy(function (err, response) {
+        if (err) {} else {}
+      });
+    }
+
     getAll() {
 
         if (!this.items) {
@@ -66,7 +72,7 @@ export class ListService {
             }
         }
     }
-    
+
     // Binary search, the array is by default sorted by _id.
     private findIndex(array, id) {
         var low = 0, high = array.length, mid;

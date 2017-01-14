@@ -1,6 +1,7 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, AlertController} from 'ionic-angular';
+import { NavController, AlertController, PopoverController} from 'ionic-angular';
 import { ListService } from '../../providers/list.service';
+import { PopoverPagePage } from '../popover-page/popover-page';
 
 @Component({
   selector: 'page-shopping-list',
@@ -12,7 +13,7 @@ export class ShoppingListPage {
   public productList= [];
 
   constructor(public navCtrl: NavController, private alertController: AlertController,
-    private zone: NgZone, private listService: ListService) {
+    private zone: NgZone, private listService: ListService, public popoverCtrl: PopoverController ) {
     this.productList = [];
 
     this.listService.getAll().then(data => {
@@ -20,6 +21,11 @@ export class ShoppingListPage {
                 this.productList = data;
             });
     }).catch(console.error.bind(console));
+  }
+
+  presentPopover(event) {
+      let popover = this.popoverCtrl.create(PopoverPagePage);
+      popover.present({ ev: event });
   }
 
   public add() {
@@ -60,15 +66,9 @@ export class ShoppingListPage {
     }
 
     public delete(key){
-      var index = this.productList.indexOf(key, 0);
-      this.productList.splice(index,1);
+      this.listService.delete(key);
+      this.productList = [];
     }
-
-    public deleteAll(){
-      var all = this.productList.length;
-      this.productList.splice(0,all);
-    }
-
 
   ionViewDidLoad() {
     this.listService.getAll().then(data => {
@@ -77,9 +77,5 @@ export class ShoppingListPage {
           });
     }).catch(console.error.bind(console));
   }
-
-
-
-
 
 }
