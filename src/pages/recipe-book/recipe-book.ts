@@ -111,6 +111,4 @@ this.recipes.sort(function(a,b) {
         this.recipes = this.recipeService.filterItems(this.searchTerm);
     }
 
-  presentPopover() {
-  }
 }
