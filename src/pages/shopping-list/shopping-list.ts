@@ -15,8 +15,8 @@ export class ShoppingListPage {
 
   constructor(public navCtrl: NavController, private alertController: AlertController,
     private zone: NgZone, private listService: ListService, public popoverCtrl: PopoverController ) {
-
-    this.productList = [];
+      // this.listService.initDB();
+    // this.productList = [];
     this.listService.getAll().then(data => {
             this.zone.run(() => {
                 this.productList = data;
@@ -31,8 +31,7 @@ export class ShoppingListPage {
 
   public add() {
         let alert = this.alertController.create({
-            title: "Add Item",
-            message: "Füge eine Artikel hinzu!",
+            title: "Artikel hinzufügen",
             inputs: [
                 {
                     name: "value",
@@ -52,7 +51,7 @@ export class ShoppingListPage {
                     text: "Abbrechen"
                 },
                 {
-                    text: "Hinzufühgen",
+                    text: "Hinzufügen",
                     handler: data => {
                         this.listService.add({
                             value: data.value,
@@ -68,14 +67,14 @@ export class ShoppingListPage {
 
     public delete(key){
       this.listService.delete(key);
-      this.productList = [];
     }
 
   ionViewDidLoad() {
-    this.listService.getAll().then(data => {
-          this.zone.run(() => {
-              this.productList = data;
-          });
-    }).catch(console.error.bind(console));
+    this.productList = this.listService.getItems();
+    // this.listService.getAll().then(data => {
+    //       this.zone.run(() => {
+    //           this.productList = data;
+    //       });
+    // }).catch(console.error.bind(console));
   }
 }

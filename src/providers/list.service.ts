@@ -17,6 +17,7 @@ export class ListService {
     }
 
     delete(item) {
+      console.log("Delete list item");
         return this._db.remove(item);
     }
 
@@ -81,6 +82,10 @@ export class ListService {
             array[mid]._id < id ? low = mid + 1 : high = mid
         }
         return low;
+    }
+
+    public getItems(){
+      return this.items;
     }
 
 
