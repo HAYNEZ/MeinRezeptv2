@@ -31,7 +31,7 @@ export class AddRecipeManuallyPage {
     description: any;
     time: any;
     tagString : string ="";
-    tags: string[];
+    tags: any;
     rating: any;
     image: any;
     date: any;
