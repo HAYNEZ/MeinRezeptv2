@@ -13,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { ShoppingListPage} from '../pages/shopping-list/shopping-list';
 import { RecipeDetailsPage } from '../pages/recipe-details/recipe-details';
 import { PopoverPagePage } from '../pages/popover-page/popover-page';
+import { TextRecognitionPage } from '../pages/text-recognition/text-recognition';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { PopoverPagePage } from '../pages/popover-page/popover-page';
     AddRecipeManuallyPage,
     HomePage,
     ShoppingListPage,
-    PopoverPagePage
+    PopoverPagePage,
+    TextRecognitionPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -40,8 +42,12 @@ import { PopoverPagePage } from '../pages/popover-page/popover-page';
     AddRecipeManuallyPage,
     HomePage,
     ShoppingListPage,
-    PopoverPagePage
+    PopoverPagePage,
+    TextRecognitionPage
   ],
-  providers: [RecipeService, ListService]
+  providers: [
+    RecipeService,
+    ListService
+  ]
 })
 export class AppModule {}

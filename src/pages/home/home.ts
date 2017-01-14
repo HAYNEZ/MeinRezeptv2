@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import { NavController, ActionSheetController, LoadingController } from 'ionic-angular';
+import { NavController, ActionSheetController, LoadingController, NavParams } from 'ionic-angular';
 import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manually';
+import { TextRecognitionPage } from '../text-recognition/text-recognition';
 import { Camera } from 'ionic-native';
 
 @Component({
@@ -11,13 +12,37 @@ import { Camera } from 'ionic-native';
 export class HomePage {
   srcImage: string;
   OCRAD: any;
+  textrecognitionOption: Number = 0;
 
   constructor(
     public navCtrl: NavController,
+    public params: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public loadingCtrl: LoadingController
   ) {}
 
+  navigateOptionOne() {
+    this.navCtrl.push(AddRecipeManuallyPage, {firstPassed: ["",""]});
+  }
+
+  navigateOptionTwo(option: Number){
+    this.navCtrl.push(TextRecognitionPage, {option: option});
+  }
+
+  choosePhoto() {
+          this.getPicture(0); // 0 == Library
+        }
+
+  takePhoto() {
+          this.getPicture(1); // 1 == Camera
+        }
+
+  demoPhoto() {
+          this.srcImage = 'assets/img/testRezept2.png';
+        }
+
+//method to make a pullover button menu with the above methods
+//redundant - can be deleted
   presentActionSheet() {
     const actionSheet = this.actionSheetCtrl.create({
       buttons: [
@@ -109,16 +134,16 @@ formatIngredientsBlock(text){
     if(!isNaN(first)){
       //Zahl in Array eintragen
       ingredients[arrayCount] = array[i];
-      var nextIsNan; 
+      var nextIsNan;
       if((i + 1)<array.length)
         nextIsNan = isNaN(array[(i+1)].charAt(0));
-      else 
+      else
         nextIsNan = false;
-      
+
       while(nextIsNan){
         i++;
         ingredients[arrayCount] += " " + array[i];
-        
+
         if(i<array.length-1){
           nextIsNan = isNaN(array[(i+1)].charAt(0));
         }else{

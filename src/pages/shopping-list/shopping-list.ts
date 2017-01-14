@@ -1,5 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, AlertController, PopoverController} from 'ionic-angular';
+
 import { ListService } from '../../providers/list.service';
 import { PopoverPagePage } from '../popover-page/popover-page';
 
@@ -14,8 +15,8 @@ export class ShoppingListPage {
 
   constructor(public navCtrl: NavController, private alertController: AlertController,
     private zone: NgZone, private listService: ListService, public popoverCtrl: PopoverController ) {
-    this.productList = [];
 
+    this.productList = [];
     this.listService.getAll().then(data => {
             this.zone.run(() => {
                 this.productList = data;
@@ -77,5 +78,4 @@ export class ShoppingListPage {
           });
     }).catch(console.error.bind(console));
   }
-
 }

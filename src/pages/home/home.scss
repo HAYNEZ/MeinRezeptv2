@@ -1,22 +1,20 @@
 page-home {
-  .scroll-content {
-    display: flex;
+  .manuell {
+      margin-top: 5px;
   }
-  .select-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 250px;
-    height: 100%;
-    max-height: 250px;
-    font-size: 4em;
-    border-style: solid;
-    border-radius: 15px;
-    margin: auto;
-    cursor: pointer;
+
+  .scann {
+      margin-top: 30px;
   }
-  .image-wrapper {
-    width: 100%;
+
+  .sectionTitel {
+    text-align:center;
+    height: 50px;
+    border: 0.5px;
+    //border-style: dashed;
+  }
+
+  .select-image{
+    height: 60px;
   }
 }

@@ -1,32 +1,29 @@
-<!--
-  Generated template for the RecipeBook page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>BOIL</ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button ion-button icon-only>
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title id="headerTitle">BOIL</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <h1>Meine Rezepte</h1>
   <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
-  <button ion-button full> Detailsuche
-    <!-- <ion-icon name="">Detailsuche</ion-icon> -->
-  </button>
   <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button>
 
-  <!-- <ion-list inset>
-        <ion-item *ngFor="let recipe of recipes" >
-            <div (click)="showDetails(recipe)">{{recipe.title}}, {{recipe.portions}}, {{recipe.description}}, {{recipe.time}}, {{recipe.tags}}, {{recipe.rating}}</div>
-
-            <div item-right><button ion-button full (click)='delete(recipe)'>delete</button></div>
-        </ion-item>
-  </ion-list> -->
   <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
         <!--   <div (click)="showDetails(recipe)"> -->
 
@@ -34,8 +31,9 @@
         <img class="recipeImage" src="{{ recipe.base64Image }}"/>
         <div id="blackOverlayWrapper"><img id="blackOverlay" src="assets/img/blackOverlay.jpg" /></div>
         <div id="recipeTitle">{{recipe.title}}</div>
+        <div class="deleteButton">
+          <button ion-button full (click)='delete(recipe)'>delete</button>
+        </div>
 
-        <!-- <div (click)="showDetails(recipe)"><div class="recipeTitle">{{recipe.title}}</div>,<br /> {{recipe.portions}},<br /> {{recipe.description}}, <br />{{recipe.time}}, <br />{{recipe.tags}},<br /> {{recipe.rating}},<br /> <img src="{{ recipe.base64Image }}" /></div> -->
-        <div class="deleteButton"><button ion-button full (click)='delete(recipe)'>delete</button></div>
   </div>
 </ion-content>

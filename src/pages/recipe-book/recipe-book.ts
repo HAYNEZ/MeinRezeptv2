@@ -5,27 +5,26 @@ import { ListService } from '../../providers/list.service';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 import { MyPopOverPage } from './detailsuche';
 
-/*
-  Generated class for the RecipeBook page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-recipe-book',
   templateUrl: 'recipe-book.html'
 })
+
 export class RecipeBookPage {
 
     searchTerm: string = '';
     public recipes = [];
 
-    constructor(public navCtrl: NavController,
+    constructor(
+      public navCtrl: NavController,
       public actionSheetCtrl: ActionSheetController,
       public popoverCtrl: PopoverController,
       private recipeService: RecipeService,
-        private platform: Platform,
-        private zone: NgZone, private listService : ListService) {
+      private addRecipeManually: RecipeService,
+      private platform: Platform,
+      private zone: NgZone,
+      private listService : ListService
+    ) {
         this.platform.ready().then(() => {
             this.recipeService.initDB();
             this.listService.initDB();
@@ -58,73 +57,60 @@ export class RecipeBookPage {
                       this.sortAlphabetically();
 
                    }
-               }, {
-                   text: 'Erstellungsdatum',
+               },  {
+                   text: 'Bewertung',
                    handler: () => {
-
+                  this.sortRating();
                    }
-               }, {
-                   text: 'Favoriten',
+               },  {
+                   text: 'Datum',
                    handler: () => {
-
+                  this.sortDate();
                    }
-               }, {
-                   text: 'Kochhäufigkeit',
-                   handler: () => {
-
-                   }
-               }, {
-                   text: 'Preis',
-                   handler: () => {
-
-                   }
+               },{
+                 text: 'Cancel',
+                 role: 'cancel'
                }
            ]
        });
        actionSheet.present();
    }
+
    sortAlphabetically() {
 
-        let sortedContacts = this.recipes.sort();
-        let currentLetter = false;
-        let currentContacts = [];
-
-        sortedContacts.forEach((value, index) => {
-
-            if (value.charAt(0) != currentLetter) {
-
-                currentLetter = value.charAt(0);
-
-                let newGroup = {
-                    letter: currentLetter,
-                    contacts: []
-                };
-
-                currentContacts = newGroup.contacts;
-
-
-            }
-
-            currentContacts.push(value);
-
-        });
-
+    this.recipes.sort(function(a, b){
+         var titleA=a.title.toLowerCase(), titleB=b.title.toLowerCase()
+         if (titleA < titleB) //sort string ascending
+             return -1
+         if (titleA > titleB)
+             return 1
+         return 0 //default return value (no sorting)
+     })
     }
 
+    sortRating() {
+      this.recipes.sort(function(a, b){
+          return a.rating-b.rating
+      })
+
+      this.recipes.reverse();
+     }
+
+sortDate(){
+this.recipes.sort(function(a,b) {
+    return new Date(a.date).getTime() - new Date(b.date).getTime()
+});
+
+}
 
     ionViewDidLoad() {
-
         this.setFilteredItems();
-
     }
 
     setFilteredItems() {
-
         this.recipes = this.recipeService.filterItems(this.searchTerm);
-
     }
 
   presentPopover() {
   }
-
 }
