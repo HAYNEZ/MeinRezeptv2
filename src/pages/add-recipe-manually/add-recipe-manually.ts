@@ -33,7 +33,6 @@ export class AddRecipeManuallyPage {
     tagString : string ="";
     tags: any;
     rating: any;
-    image: any;
     date: any;
 
  constructor(public navCtrl: NavController,
@@ -45,42 +44,65 @@ export class AddRecipeManuallyPage {
     //  ,
     //  private _DomSanitizationService: DomSanitizer
    ) {
-     this.platform = platform;
+    //  this.platform = platform;
+    this.zone = zone;
      this.photoTaken = false;
-    this.input = params.get("firstPassed");
-    console.log(this.input);
-    console.log("In manually");
-    if(this.input[0]!="") {
-      console.log("OCR inputs received.");
-      this.ingredients = this.input[0];
-      console.log(this.ingredients);
 
+    this.input = params.get("recipe");
+
+    if(this.input){
+      this.readInputs();
     }else{
-      console.log("OCR inputs not received.");
-
       this.ingredients = new Array();
       let ingredient = new Array(3);
       this.ingredients.push(ingredient);
-      console.log(this.ingredients.length);
-    }
 
-    this.steps = new Array();
-    if(this.input[1]!=""){
-      let step = "" + this.input[1];
-      this.steps.push(step);
-    }else{
-      console.log(this.steps);
+      this.steps = new Array();
       let step = "";
       this.steps.push(step);
-      console.log("Steps length:" + this.steps.length);
     }
+
  // 	 this.ingredients = this.input[0];
  //       // this.ingredient = [200, 'ml', 'Milch'];
  //        this.preparation = this.input[1];
-        this.base64Image = "assets/img/demo.jpg";
-        this.zone = zone;
-        this.platform = platform;
-        this.image = null;
+        if(!this.base64Image){
+          this.base64Image = "assets/img/demo.jpg";
+        }
+
+        // this.platform = platform;
+ }
+
+ readInputs() {
+   this.title = this.input.title;
+   this.base64Image = this.input.base64Image;
+   this.portions = this.input.portions;
+   this.rating = this.input.rating;
+   this.time = this.input.time;
+
+
+   if(this.input.ingredients) {
+     this.ingredients = this.input.ingredients;
+   }else{
+     this.ingredients = new Array();
+     let ingredient = new Array(3);
+     this.ingredients.push(ingredient);
+   }
+
+
+   if(this.input.preparation){
+    //  let step = "" + this.input.preparation;
+    //  this.steps.push(step);
+    this.steps = this.input.preparation;
+   }else{
+     this.steps = new Array();
+     let step = "";
+     this.steps.push(step);
+   }
+
+   if(this.input.tags){
+     console.log(this.input.tags);
+     this.tagString = this.input.tags.join();
+   }
  }
 
 /*
@@ -101,6 +123,8 @@ export class AddRecipeManuallyPage {
          console.log("ERROR -> " + JSON.stringify(error));
      });
  }*/
+
+
 
 
 
@@ -181,12 +205,9 @@ removeStep(step){
 }
 
 parseTags(){
-  console.log(this.tagString)
   if(this.tagString != ""){
-    this.tags = this.tagString.split('#');
+    this.tags = this.tagString.split(',');
   }
-
-  console.log(this.tags);
 }
 
  saveRecipe() {

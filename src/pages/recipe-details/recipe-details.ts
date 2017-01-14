@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { ListService } from '../../providers/list.service';
 import { RecipeService } from '../../providers/recipe.service';
+import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manually';
 
 @Component({
   selector: 'page-recipe-details',
@@ -25,6 +26,10 @@ export class RecipeDetailsPage {
   delete(recipe) {
       this.recipeService.delete(this.recipe);
          this.dismiss(this.recipe);
+  }
+
+  edit(recipe) {
+    this.navCtrl.push(AddRecipeManuallyPage, {recipe: recipe});
   }
 
   update(){

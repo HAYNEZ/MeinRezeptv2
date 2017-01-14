@@ -85,11 +85,18 @@ export class TextRecognitionPage {
           for(k; k<lines.length; k++){
             prep += lines[k] + "\n";
           }
-          var formattedText = new Array;
-          formattedText[0] = this.formatIngredientsBlock(ing);
-          formattedText[1] = this.formatPreparation(prep);
+          let recipe = {
+            "title" : "",
+            "ingredients" :  this.formatIngredientsBlock(ing),
+            "portions": "",
+            "preparation" : this.formatPreparation(prep),
+            "time": "",
+            "tags": "",
+            "rating": "",
+            "base64Image": ""
+          }
 
-          this.navCtrl.push(AddRecipeManuallyPage, {firstPassed: formattedText});
+          this.navCtrl.push(AddRecipeManuallyPage, {recipe: recipe});
       }
 
       formatIngredientsBlock(text){
@@ -175,6 +182,6 @@ export class TextRecognitionPage {
         return result;
       }
 
-      
+
 
 }
