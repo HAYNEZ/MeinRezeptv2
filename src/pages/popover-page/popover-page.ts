@@ -30,8 +30,8 @@ export class PopoverPagePage {
 
   public add() {
         let alert = this.alertController.create({
-            title: "Add Item",
-            message: "Füge eine Artikel hinzu!",
+            title: "Artikel hinzufügen",
+            // message: "Füge einen Artikel hinzu!",
             inputs: [
                 {
                     name: "value",
@@ -51,7 +51,7 @@ export class PopoverPagePage {
                     text: "Abbrechen"
                 },
                 {
-                    text: "Hinzufühgen",
+                    text: "Hinzufügen",
                     handler: data => {
                       this.listService.add({
                         value: data.value,
