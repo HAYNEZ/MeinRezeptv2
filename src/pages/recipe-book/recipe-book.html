@@ -9,8 +9,8 @@
 
     <ion-title id="headerTitle">BOIL</ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only>
+    <ion-buttons  (click)="presentPopover($event)" end>
+      <button ion-button icon-only >
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
@@ -22,7 +22,7 @@
 <ion-content>
   <h1>Meine Rezepte</h1>
   <ion-searchbar placeholder="Suche" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
-  <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button>
+  <!-- <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button> -->
 
   <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
         <!--   <div (click)="showDetails(recipe)"> -->

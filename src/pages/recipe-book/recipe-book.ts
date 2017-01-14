@@ -4,7 +4,9 @@ import { RecipeService } from '../../providers/recipe.service';
 import { ListService } from '../../providers/list.service';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 import { InformationPage} from '../information/information';
-import { MyPopOverPage } from './detailsuche';
+// import { MyPopOverPage } from './detailsuche';
+import { PopoverPagePage } from '../popover-page/popover-page';
+
 
 @Component({
   selector: 'page-recipe-book',
@@ -38,22 +40,33 @@ export class RecipeBookPage {
                 })
                 .catch(console.error.bind(console));
         });
-
-    }
-
-    showDetails(recipe) {
-      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
     }
 
     showInformation() {
       this.navCtrl.push(InformationPage);
     }
 
+    presentPopover(event) {
+        let popover = this.popoverCtrl.create(PopoverPagePage, {
+          actions : [
+            {
+              title: 'Sortieren ...',
+              callback: () => { this.presentSortOptions(); }
+            }
+          ]
+        });
+        popover.present({ev:event});
+    }
+
+    showDetails(recipe) {
+      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
+    }
+
     delete(recipe) {
         this.recipeService.delete(recipe);
     }
 
-    presentActionSheet() {
+    presentSortOptions() {
        const actionSheet = this.actionSheetCtrl.create({
            buttons: [
                {
