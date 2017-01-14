@@ -21,7 +21,7 @@
 
 <ion-content>
   <h1>Meine Rezepte</h1>
-  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+  <ion-searchbar placeholder="Suche" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
   <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button>
 
   <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
