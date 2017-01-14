@@ -68,7 +68,7 @@ export class RecipeBookPage {
                   this.sortDate();
                    }
                },{
-                 text: 'Cancel',
+                 text: 'Abbruch',
                  role: 'cancel'
                }
            ]
