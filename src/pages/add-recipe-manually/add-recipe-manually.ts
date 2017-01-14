@@ -1,6 +1,7 @@
 import { Component, NgZone  } from '@angular/core';
 import { NavController,NavParams, ViewController, Platform } from 'ionic-angular';
 import { Camera } from 'ionic-native';
+import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 // import { DomSanitizer } from '@angular/platform-browser';
 
 import { RecipeService } from '../../providers/recipe.service';
@@ -81,6 +82,7 @@ export class AddRecipeManuallyPage {
         this.zone = zone;
         this.platform = platform;
         this.image = null;
+
  }
 
 /*
@@ -203,12 +205,14 @@ parseTags(){
          "date" : new Date()
      };
      this.recipeService.add(recipe);
+     //pushes the new recipe and show its detail side
+     this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
      this.dismiss(recipe);
-
  }
 
  dismiss(recipe) {
        this.viewCtrl.dismiss(recipe);
+       this.navCtrl.parent.select(0);
  }
 
  trackByIndex(index: number, obj: any): any {
