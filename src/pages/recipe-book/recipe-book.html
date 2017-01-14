@@ -21,7 +21,7 @@
 
 <ion-content>
   <h1>Meine Rezepte</h1>
-  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+  <ion-searchbar placeholder="Suche" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
   <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button>
 
   <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
@@ -31,9 +31,9 @@
         <img class="recipeImage" src="{{ recipe.base64Image }}"/>
         <div id="blackOverlayWrapper"><img id="blackOverlay" src="assets/img/blackOverlay.jpg" /></div>
         <div id="recipeTitle">{{recipe.title}}</div>
-        <div class="deleteButton">
+        <!--   <div class="deleteButton">
           <button ion-button full (click)='delete(recipe)'>delete</button>
-        </div>
+        </div>-->
 
   </div>
 </ion-content>

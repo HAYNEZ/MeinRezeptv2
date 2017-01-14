@@ -30,6 +30,7 @@ export class AddRecipeManuallyPage {
     portions: any;
     description: any;
     time: any;
+    tagString : string ="";
     tags: any;
     rating: any;
     image: any;
@@ -179,7 +180,17 @@ removeStep(step){
   }
 }
 
+parseTags(){
+  console.log(this.tagString)
+  if(this.tagString != ""){
+    this.tags = this.tagString.split('#');
+  }
+
+  console.log(this.tags);
+}
+
  saveRecipe() {
+    this.parseTags();
      let recipe = {
          "title": this.title,
          "ingredients": this.ingredients,
@@ -193,7 +204,7 @@ removeStep(step){
      };
      this.recipeService.add(recipe);
      this.dismiss(recipe);
-  
+
  }
 
  dismiss(recipe) {

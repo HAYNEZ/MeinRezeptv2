@@ -35,7 +35,10 @@
       <img src={{recipe.base64Image}} alt="Default Bild">
       <div>Zeit: {{recipe.time}} Minuten</div>
       <div>Uhrzeit: {{recipe.date}}</div>
-      <div>Tags: {{recipe.tags}}</div>
+      <div>Tags: </div>
+      <div>
+        <span *ngFor="let tag of recipe.tags">#{{tag}} </span>
+      </div>
       <div>Bewertung:</div>
       <div>
         <span *ngFor="let star of range(1, recipe.rating)">☆</span>
@@ -57,5 +60,6 @@
       </div>
     </ion-list>
   </div>
-
+  <button ion-button side="left"(click)='delete(recipe)'>Löschen</button>
+  <button ion-button side="right"(click)='delete(recipe)'>Bearbeiten</button>
 </ion-content>
