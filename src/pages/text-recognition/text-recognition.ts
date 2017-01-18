@@ -179,7 +179,7 @@ export class TextRecognitionPage {
           }
         }
         //document.getElementById("preparation").innerHTML = result;
-        return result;
+        return result.split(".");
       }
 
 
