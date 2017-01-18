@@ -13,8 +13,11 @@ export class ShoppingListPage {
 
   public productList= [];
 
-  constructor(public navCtrl: NavController, private alertController: AlertController,
-    private zone: NgZone, private listService: ListService, public popoverCtrl: PopoverController ) {
+  constructor(  public navCtrl: NavController,
+                private alertController: AlertController,
+                private zone: NgZone,
+                private listService: ListService,
+                public popoverCtrl: PopoverController ) {
       // this.listService.initDB();
     // this.productList = [];
     this.listService.getAll().then(data => {

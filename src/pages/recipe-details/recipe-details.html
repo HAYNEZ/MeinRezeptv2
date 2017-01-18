@@ -2,8 +2,8 @@
 
   <ion-navbar>
     <ion-title>{{recipe.title}}</ion-title>
-    <ion-buttons end>
-      <button ion-button>
+    <ion-buttons  (click)="presentPopover($event)" end>
+      <button ion-button icon-only >
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,9 +13,6 @@
 
 <ion-content padding>
 
-  <ion-fab top right edge>
-     <button ion-fab mini (click)="addToList()" color="secondary"><ion-icon name="basket"></ion-icon></button>
-  </ion-fab>
   <div padding>
     <ion-segment [(ngModel)]="section">
       <ion-segment-button value="general">
@@ -60,6 +57,4 @@
       </div>
     </ion-list>
   </div>
-  <button ion-button side="left"(click)='delete(recipe)'>Löschen</button>
-  <button ion-button side="right"(click)='edit(recipe)'>Bearbeiten</button>
 </ion-content>
