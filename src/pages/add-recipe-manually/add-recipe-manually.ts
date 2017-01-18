@@ -232,7 +232,7 @@ parseTags(){
 
  dismiss(recipe) {
        this.viewCtrl.dismiss(recipe);
-       this.navCtrl.parent.select(0);
+      //  this.navCtrl.parent.select(0);
  }
 
  trackByIndex(index: number, obj: any): any {
