@@ -12,6 +12,11 @@ import { PopoverPagePage } from '../popover-page/popover-page';
 export class ShoppingListPage {
 
   public productList= [];
+  public input:any;
+  product: any;
+  unit: any;
+  value: any;
+
 
   constructor(  public navCtrl: NavController,
                 private alertController: AlertController,
@@ -27,12 +32,18 @@ export class ShoppingListPage {
     }).catch(console.error.bind(console));
   }
 
+  readinputs(){
+    this.value = this.input.value;
+    this.unit = this.input.unit;
+    this.product = this.input.product;
+  }
+
   presentPopover(event) {
       let popover = this.popoverCtrl.create(PopoverPagePage, {
         actions : [
           {
-            title: 'Hinzufügen',
-            callback: () => { this.add(); }
+            title: 'Alle löschen',
+            callback: () => { this.deleteAll(); }
           },
           {
             title: 'Online einkaufen',
@@ -44,42 +55,19 @@ export class ShoppingListPage {
   }
 
   public add() {
-        let alert = this.alertController.create({
-            title: "Artikel hinzufügen",
-            inputs: [
-                {
-                    name: "value",
-                    placeholder: "Anzahl"
-                },
-                {
-                    name: "unit",
-                    placeholder: "Einheit"
-                },
-                {
-                    name: "product",
-                    placeholder: "Artikel"
-                }
-            ],
-            buttons: [
-                {
-                    text: "Abbrechen"
-                },
-                {
-                    text: "Hinzufügen",
-                    handler: data => {
-                        this.listService.add({
-                            value: data.value,
-                            unit: data.unit,
-                            product: data.product,
-                        });
-                    }
-                }
-            ]
+    if(this.product){
+        this.listService.add({
+            value: this.value,
+            unit: this.unit,
+            product: this.product
         });
-        alert.present();
+        this.value = undefined;
+        this.unit = "";
+        this.product = "";
     }
+  }
 
-    shopOnline(){
+  shopOnline(){
       let alert = this.alertController.create({
           title: "Bald verfügbar",
           buttons: [
@@ -89,11 +77,17 @@ export class ShoppingListPage {
             ]
       })
       alert.present();
-    }
+  }
 
-    public delete(key){
+  public delete(key){
       this.listService.delete(key);
+  }
+
+  public deleteAll(){
+    for(var item of this.productList){
+      this.listService.delete(item);
     }
+  }
 
   ionViewDidLoad() {
     this.productList = this.listService.getItems();
