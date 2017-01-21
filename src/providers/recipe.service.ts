@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as Collections from 'typescript-collections';
 
 import PouchDB from 'pouchdb';
 
@@ -6,6 +7,7 @@ import PouchDB from 'pouchdb';
 export class RecipeService {
     private _db;
     private recipes;
+    private tags = new Collections.Set<string>();
 
     initDB() {
         this._db = new PouchDB('recipe');
@@ -46,6 +48,8 @@ export class RecipeService {
             // Return cached data as a promise
             return Promise.resolve(this.recipes);
         }
+
+
     }
 
 
@@ -65,6 +69,26 @@ export class RecipeService {
                 this.recipes.splice(index, 0, change.doc) // insert
             }
         }
+    }
+
+    initialiseTags(){
+      this.tags.add("Dessert");
+      this.tags.add("Vegetarisch");
+      this.tags.add("Einfach");
+      this.tags.add("Schnell");
+      this.tags.add("Soßen");
+      this.tags.add("Gebäck");
+    }
+
+    getTags(){
+      return new Promise(this.tags.toArray);
+    }
+
+    //Call on new recipe saving, or edit save, after save of manually
+    updateTags(tagArray){
+      for( let i = 0; i < tagArray.length; i++){
+        this.tags.add(tagArray[i]);
+      }
     }
 
     // Binary search, the array is by default sorted by _id.

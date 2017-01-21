@@ -207,8 +207,12 @@ removeStep(step){
 
 parseTags(){
   if(this.tagString != ""){
-    this.tags = this.tagString.split(',');
+    this.tags = this.replaceAll(this.tagString,"\\s+","").split(',');
   }
+}
+
+replaceAll(str, find, replace) {
+  return str.replace(new RegExp(find, 'g'), replace);
 }
 
  saveRecipe() {
@@ -225,6 +229,7 @@ parseTags(){
          "date" : new Date()
      };
      this.recipeService.add(recipe);
+     this.recipeService.updateTags(this.tags);
      //pushes the new recipe and show its detail side
      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
      this.dismiss(recipe);
