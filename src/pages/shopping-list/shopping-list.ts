@@ -84,9 +84,25 @@ export class ShoppingListPage {
   }
 
   public deleteAll(){
-    for(var item of this.productList){
-      this.listService.delete(item);
-    }
+      let alert = this.alertController.create({
+              title: "Bestätigung",
+              message: "Wirklich alles löschen?",
+              buttons: [
+                  {
+                      text: "Abbrechen"
+                  },
+                  {
+                      text: "Sicher!",
+                      handler: data => {
+                          for(var item of this.productList){
+                            this.listService.delete(item);
+                          }
+                      }
+                  }
+              ]
+          });
+          alert.present();
+
   }
 
   ionViewDidLoad() {
