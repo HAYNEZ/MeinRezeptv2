@@ -36,6 +36,8 @@ export class AddRecipeManuallyPage {
     rating: any;
     date: any;
 
+    callback: any;
+
  constructor(public navCtrl: NavController,
     public params: NavParams,
     private recipeService: RecipeService,
@@ -50,6 +52,7 @@ export class AddRecipeManuallyPage {
      this.photoTaken = false;
 
     this.input = params.get("recipe");
+    this.callback = params.get("callback");
 
     if(this.input){
       this.readInputs();
@@ -230,6 +233,9 @@ replaceAll(str, find, replace) {
      };
      this.recipeService.add(recipe);
      this.recipeService.updateTags(this.tags);
+     if(this.callback){
+       this.callback();
+     }
      //pushes the new recipe and show its detail side
      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
      this.dismiss(recipe);
