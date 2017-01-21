@@ -1,5 +1,5 @@
 import { Component, NgZone  } from '@angular/core';
-import { NavController,NavParams, ViewController, Platform } from 'ionic-angular';
+import { NavController,NavParams, AlertController, ViewController, Platform } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 // import { DomSanitizer } from '@angular/platform-browser';
@@ -41,6 +41,7 @@ export class AddRecipeManuallyPage {
  constructor(public navCtrl: NavController,
     public params: NavParams,
     private recipeService: RecipeService,
+    private alertController: AlertController,
      private viewCtrl: ViewController,
      private zone: NgZone,
      private platform: Platform
@@ -216,6 +217,13 @@ parseTags(){
 
  saveRecipe() {
     this.parseTags();
+    if(!this.rating){
+      this.rating =0;
+    }
+
+    if(!this.title){
+      this.noTitel();
+    }else{
      let recipe = {
          "title": this.title,
          "ingredients": this.ingredients,
@@ -234,6 +242,7 @@ parseTags(){
      //pushes the new recipe and show its detail side
      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
      this.dismiss(recipe);
+   }
  }
 
  dismiss(recipe) {
@@ -243,6 +252,18 @@ parseTags(){
 
  trackByIndex(index: number, obj: any): any {
    return index;
+ }
+
+ noTitel(){
+   let alert = this.alertController.create({
+       title: "Dein Rezept braucht noch einen Titel",
+       buttons: [
+           {
+               text: "OK"
+           }
+         ]
+   })
+   alert.present();
  }
 
 

@@ -117,7 +117,9 @@ export class RecipeBookPage {
 sortDate(){
 this.recipes.sort(function(a,b) {
     return new Date(a.date).getTime() - new Date(b.date).getTime()
-});
+})
+
+    this.recipes.reverse();
 
 }
 
