@@ -13,7 +13,13 @@ import { NavController } from 'ionic-angular';
 })
 export class InformationPage {
 
-  constructor(public navCtrl: NavController) {}
+  section:any;
+
+  constructor(public navCtrl: NavController) {
+
+    this.section = "idea";
+
+  }
 
   ionViewDidLoad() {
     console.log('Hello InformationPage Page');
