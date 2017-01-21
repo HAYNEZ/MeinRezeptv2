@@ -70,7 +70,7 @@ export class RecipeDetailsPage {
   }
 
   edit() {
-    this.navCtrl.push(AddRecipeManuallyPage, {recipe: this.recipe});
+    this.navCtrl.push(AddRecipeManuallyPage, {recipe: this.recipe, callback: () => { this.delete(); } });
   }
 
   future() {
