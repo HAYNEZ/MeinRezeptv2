@@ -15,15 +15,15 @@
 
 <ion-content padding>
   <ion-list no-lines>
-    <!-- Titel -->
-    <ion-item-divider>Titel</ion-item-divider>
+    <!-- Titel
+    <ion-item-divider>Titel</ion-item-divider>-->
     <ion-item>
       <ion-input placeholder="Titel eingeben" type="text" [(ngModel)]='title' name ='title' > </ion-input>
     </ion-item>
 
 
     <!-- Foto -->
-    <ion-item-divider>Foto</ion-item-divider>
+    <!--<ion-item-divider>Foto</ion-item-divider>-->
     <ion-item>
         <!--<img [src]="_DomSanitizationService.bypassSecurityTrustUrl(base64Image)" *ngIf="base64Image">-->
       <img [src]="base64Image" *ngIf="base64Image" />
@@ -37,7 +37,7 @@
     <!--TODO:Add ingredients -->
     <ion-list no-lines style="position:relative;">
 
-      <ion-list-header style="">Zutaten</ion-list-header>
+      <ion-list-header style="">Zutaten:</ion-list-header>
       <button ion-button (click)="addIngredient()" style ="position: absolute; top: 0; right: 0; ">Weitere Zutat</button>
 
       <!-- One Ingredient -->
@@ -62,19 +62,11 @@
       </ion-item-sliding>
 
     </ion-list>
-
-
-    <!-- Portionen -->
-    <ion-item-divider>
-      Portionen
-    </ion-item-divider>
-    <ion-item>
-      <ion-input placeholder="Anzahl eingeben" type="number" min="0" [(ngModel)]='portions' name ='portions'> </ion-input>
-    </ion-item>
+      <div></div>
 
     <!-- Beschreibung -->
     <ion-list no-lines style="position:relative;">
-      <ion-list-header style="">Zubereitung</ion-list-header>
+      <ion-list-header style="">Zubereitung:</ion-list-header>
       <button ion-button (click)="addStep()" style ="position: absolute; top: 0; right: 0; ">Weiterer Schritt</button>
       <ion-item-sliding  *ngFor="let step of steps; let index = index; trackBy:trackByIndex;" style="height: auto;">
         <ion-item>
@@ -91,9 +83,17 @@
     </ion-list>
 
 
+
+        <!-- Portionen -->
+        <ion-item-divider>Portionen:</ion-item-divider>
+        <ion-item>
+          <ion-input placeholder="Anzahl eingeben" type="number" min="0" [(ngModel)]='portions' name ='portions'> </ion-input>
+        </ion-item>
+
+
     <!-- Zeit -->
     <ion-item-divider>
-      Zeit
+      Zeit:
     </ion-item-divider>
     <ion-item>
       <ion-input placeholder="Zeit in Minuten" type="number" [(ngModel)]='time' name ='time'> </ion-input>
@@ -101,7 +101,7 @@
 
     <!-- Tags -->
     <ion-item-divider>
-      Tags
+      Tags:
     </ion-item-divider>
     <ion-item>
       <ion-input placeholder="Einzelne Tags durch '#' trennen" type="text" [(ngModel)]='tagString' name ='tagString'> </ion-input>
@@ -109,7 +109,7 @@
 
     <!-- Bewertung -->
     <ion-item-divider>
-      Bewertung
+      Bewertung:
     </ion-item-divider>
     <ion-item>
       <ion-input placeholder="Bewertung von 1 - 5" type="number" [(ngModel)]='rating' name ='rating'> </ion-input>
