@@ -174,11 +174,20 @@ export class RecipeService {
         return low;
     }
 
-     filterItems(searchTerm){
+     filterItems1(searchTerm){
         return this.recipes.filter((recipe) => {
             return recipe.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
         });
     }
+
+     filterItems(searchTerm){
+        return this.recipes.filter((recipe) => {
+       for (let i in recipe.ingredients)
+         if (recipe.ingredients[i][2].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1){
+             return recipe.ingredients[i][2].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+         }
+         });
+    }       
 
     filterTag(searchTag){
       if(this.recipes){
