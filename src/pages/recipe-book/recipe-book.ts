@@ -29,6 +29,7 @@ export class RecipeBookPage {
       private zone: NgZone,
       private listService : ListService
     ) {
+      console.log("construct");
         this.platform.ready().then(() => {
             this.recipeService.initDB();
             this.listService.initDB();
@@ -165,10 +166,11 @@ this.recipes.sort(function(a,b) {
 
     removeTagFilter() {
       this.tagString = null;
-      this.ionViewDidLoad();
+      this.ionViewDidEnter();
     }
 
-    ionViewDidLoad() {
+    ionViewDidEnter() {
+      console.log("did enter");
         // this.setFilteredItems();
         this.platform.ready().then(() => {
         this.recipeService.getAll().then((data) => {

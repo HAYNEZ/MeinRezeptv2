@@ -28,7 +28,7 @@ export class RecipeDetailsPage {
     this.recipe = params.get("recipe");
     this.section = "general";
     this.factor = 1;
-    this.servingsDefault = this.recipe.portions 
+    this.servingsDefault = this.recipe.portions
 
   }
 
@@ -58,10 +58,6 @@ export class RecipeDetailsPage {
             callback: () => { this.addToList(); }
           }
           // ,
-          // {
-          //   title: 'Portionen umrechnen',
-          //   callback: () => { this.future(); }
-          // },
           // {
           //   title: 'Kochmodus AN',
           //   callback: () => { this.future(); }
@@ -135,5 +131,3 @@ export class RecipeDetailsPage {
   }
 
 }
-
- 

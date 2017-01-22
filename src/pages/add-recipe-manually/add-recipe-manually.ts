@@ -246,6 +246,7 @@ replaceAll(str, find, replace) {
      }
      //pushes the new recipe and show its detail side
      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
+     
      this.dismiss(recipe);
    }
  }
