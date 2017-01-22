@@ -174,20 +174,32 @@ export class RecipeService {
         return low;
     }
 
-     filterItems1(searchTerm){
+    //Title search
+     filterItemsTitle(searchTerm){
         return this.recipes.filter((recipe) => {
             return recipe.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
         });
     }
 
-     filterItems(searchTerm){
-        return this.recipes.filter((recipe) => {
-       for (let i in recipe.ingredients)
-         if (recipe.ingredients[i][2].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1){
-             return recipe.ingredients[i][2].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-         }
-         });
-    }       
+    //Ingredient search
+     filterItemsIngredient(searchTerm){
+       if(this.recipes){
+         return this.recipes.filter((recipe) => {
+           if(recipe.ingredients){
+             for (let i = 0; i < recipe.ingredients.length; i++){
+               if(recipe.ingredients[i][2]){
+                 if (recipe.ingredients[i][2].toLowerCase().indexOf(searchTerm.toLowerCase()) > -1){
+                     return true;
+                 }
+               }
+              }
+              return false;
+           }
+
+          });
+       }
+
+    }
 
     filterTag(searchTag){
       if(this.recipes){
