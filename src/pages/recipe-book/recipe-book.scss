@@ -28,8 +28,10 @@ h1 {
        .recipe{
 
       position:relative;
-      width:50%;
-      float:left;
+      // width:50%;
+      width: 50%;
+      display: inline-block;
+      // float:left;
       padding:1%;
 }
 

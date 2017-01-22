@@ -19,6 +19,9 @@ export class RecipeBookPage {
     public recipes = [];
     tagString: string;
 
+    titleResults: any;
+    ingredientResults: any;
+
     constructor(
       public navCtrl: NavController,
       public actionSheetCtrl: ActionSheetController,
@@ -180,7 +183,15 @@ this.recipes.sort(function(a,b) {
     }
 
     setFilteredItems() {
-        this.recipes = this.recipeService.filterItems(this.searchTerm);
+        // this.recipes = this.recipeService.filterItemsIngredient(this.searchTerm);
+
+          this.titleResults = this.recipeService.filterItemsTitle(this.searchTerm);
+          this.ingredientResults = this.recipeService.filterItemsIngredient(this.searchTerm);
+          if(this.searchTerm.valueOf() == ''){
+            this.titleResults = null;
+            this.ingredientResults = null;
+        }
+
     }
 
 }

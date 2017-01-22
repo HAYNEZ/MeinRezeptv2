@@ -29,6 +29,7 @@
       <ion-icon name="close"></ion-icon>
     </button>
   </div>
+  <div *ngIf="!searchTerm">
   <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
         <!--   <div (click)="showDetails(recipe)"> -->
 
@@ -41,4 +42,26 @@
         </div>-->
 
   </div>
+</div>
+  <div *ngIf="searchTerm">
+      <!-- Title search results -->
+      <div style ="width:100%">
+      <h3>Titelsuche</h3>
+      <p *ngIf="titleResults.length == 0"> Keine Rezepte mit dem Titel '{{searchTerm}}' vorhanden.</p>
+      <div class="recipe" *ngFor="let recipe of titleResults" (click)="showDetails(recipe)">
+            <img class="recipeImage" src="{{ recipe.base64Image }}"/>
+            <div id="blackOverlayWrapper"><img id="blackOverlay" src="assets/img/blackOverlay.jpg" /></div>
+            <div id="recipeTitle">{{recipe.title}}</div>
+      </div>
+    </div>
+    <div style ="width:100%">
+      <h3>Zutatensuche</h3>
+      <p *ngIf="ingredientResults.length == 0"> Keine Rezepte mit der Zutat '{{searchTerm}}' vorhanden.</p>
+      <div class="recipe" *ngFor="let recipe of ingredientResults" (click)="showDetails(recipe)">
+            <img class="recipeImage" src="{{ recipe.base64Image }}"/>
+            <div id="blackOverlayWrapper"><img id="blackOverlay" src="assets/img/blackOverlay.jpg" /></div>
+            <div id="recipeTitle">{{recipe.title}}</div>
+      </div>
+</div>
+</div>
 </ion-content>
