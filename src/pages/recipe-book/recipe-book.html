@@ -23,7 +23,12 @@
   <h1>Meine Rezepte</h1>
   <ion-searchbar placeholder="Suche" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
   <!-- <button ion-button full (click)='presentActionSheet()'>Sortieren nach...</button> -->
-
+  <div padding-left *ngIf="tagString">
+    {{tagString}}
+    <button small ion-button icon-only (click)="removeTagFilter()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </div>
   <div class="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
         <!--   <div (click)="showDetails(recipe)"> -->
 

@@ -1,5 +1,5 @@
 import { Component, NgZone} from '@angular/core';
-import { NavController, Platform, ActionSheetController, PopoverController } from 'ionic-angular';
+import { NavController, Platform, ActionSheetController, PopoverController, AlertController } from 'ionic-angular';
 import { RecipeService } from '../../providers/recipe.service';
 import { ListService } from '../../providers/list.service';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
@@ -17,13 +17,14 @@ export class RecipeBookPage {
 
     searchTerm: string = '';
     public recipes = [];
+    tagString: string;
 
     constructor(
       public navCtrl: NavController,
       public actionSheetCtrl: ActionSheetController,
       public popoverCtrl: PopoverController,
+      private alertCtrl: AlertController,
       private recipeService: RecipeService,
-      private addRecipeManually: RecipeService,
       private platform: Platform,
       private zone: NgZone,
       private listService : ListService
@@ -32,6 +33,7 @@ export class RecipeBookPage {
             this.recipeService.initDB();
             this.listService.initDB();
 
+
             this.recipeService.getAll()
                 .then(data => {
                     this.zone.run(() => {
@@ -39,7 +41,9 @@ export class RecipeBookPage {
                     });
                 })
                 .catch(console.error.bind(console));
+            this.recipeService.initialiseTags();
         });
+
     }
 
     showInformation() {
@@ -52,6 +56,10 @@ export class RecipeBookPage {
             {
               title: 'Sortieren ...',
               callback: () => { this.presentSortOptions(); }
+            },
+            {
+              title: 'Tag-Filter',
+              callback: () => { this.presentTagFilter(); }
             }
           ]
         });
@@ -64,6 +72,34 @@ export class RecipeBookPage {
 
     delete(recipe) {
         this.recipeService.delete(recipe);
+    }
+
+    presentTagFilter() {
+      let tags = this.recipeService.getTags();
+      console.log(tags);
+      let alert = this.alertCtrl.create({
+        title: "Tag-Filter",
+        subTitle: "Wähle einen Tag"
+      });
+      // alert.setTitle('Tag-Filter');
+      for(let i = 0; i < tags.length; i++){
+        alert.addInput({
+          type: 'radio',
+          label: tags[i],
+          value: tags[i]
+        })
+      }
+      alert.addButton('Abbrechen');
+      alert.addButton({
+        text: 'Filtern',
+        handler: data => {
+          // console.log('Checkbox data:', data);
+          // this.testCheckboxOpen = false;
+          this.tagString = data;
+          this.recipes = this.recipeService.filterTag(data);
+        }
+      });
+      alert.present();
     }
 
     presentSortOptions() {
@@ -114,15 +150,25 @@ export class RecipeBookPage {
       this.recipes.reverse();
      }
 
-sortDate(){
-this.recipes.sort(function(a,b) {
-    return new Date(a.date).getTime() - new Date(b.date).getTime()
-});
+    sortDate(){
+      this.recipes.sort(function(a,b) {
+          return new Date(a.date).getTime() - new Date(b.date).getTime()
+      });
 
-}
+    }
+
+    removeTagFilter() {
+      this.tagString = null;
+      this.ionViewDidLoad();
+    }
 
     ionViewDidLoad() {
-        this.setFilteredItems();
+        // this.setFilteredItems();
+        this.platform.ready().then(() => {
+        this.recipeService.getAll().then((data) => {
+          this.recipes = data;
+        })
+      })
     }
 
     setFilteredItems() {
