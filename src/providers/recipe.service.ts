@@ -152,13 +152,15 @@ export class RecipeService {
     }
 
     getTags(){
-      return this.tags.toArray();
+      return this.tags.toArray().sort();
     }
 
     //Call on new recipe saving, or edit save, after save of manually
     updateTags(tagArray){
-      for( let i = 0; i < tagArray.length; i++){
-        this.tags.add(tagArray[i]);
+      if(tagArray){
+        for( let i = 0; i < tagArray.length; i++){
+          this.tags.add(tagArray[i]);
+        }
       }
     }
 

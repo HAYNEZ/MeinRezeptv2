@@ -150,10 +150,16 @@ export class RecipeBookPage {
       this.recipes.reverse();
      }
 
-    sortDate(){
-      this.recipes.sort(function(a,b) {
-          return new Date(a.date).getTime() - new Date(b.date).getTime()
-      });
+    // sortDate(){
+    //   this.recipes.sort(function(a,b) {
+    //       return new Date(a.date).getTime() - new Date(b.date).getTime()
+    //   });
+sortDate(){
+this.recipes.sort(function(a,b) {
+    return new Date(a.date).getTime() - new Date(b.date).getTime()
+})
+
+    this.recipes.reverse();
 
     }
 

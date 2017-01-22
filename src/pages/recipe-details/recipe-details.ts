@@ -15,6 +15,8 @@ export class RecipeDetailsPage {
 
   section:any;
   recipe: any;
+  factor: any;
+  servingsDefault: any;
 
   constructor(public navCtrl: NavController,
               public params: NavParams,
@@ -25,6 +27,15 @@ export class RecipeDetailsPage {
               private viewCtrl: ViewController) {
     this.recipe = params.get("recipe");
     this.section = "general";
+    this.factor = 1;
+    this.servingsDefault = this.recipe.portions 
+
+  }
+
+  calcPortion(){
+    var oldValue = this.recipe.portions
+    var newValue = this.servingsDefault;
+    this.factor = newValue/oldValue;
   }
 
   presentPopover(event) {
@@ -122,4 +133,7 @@ export class RecipeDetailsPage {
       });
     }
   }
+
 }
+
+ 

@@ -8,7 +8,7 @@ page-recipe-details {
     text-align: center;
   }
 
-  #switch button {
+/*  #switch button {
     display: inline-block;
     width: 49.5%;
     position: relative;
@@ -24,12 +24,34 @@ page-recipe-details {
     height: 50px;
     text-align: center;
 
-  }
+  }*/
 
   li {
     display: inline-block;
     width: 49.5%;
     list-style: none;
   }
+
+  #servings{
+    display: inline;
+    :first-child{
+      width: 40px;
+      height: 30px;
+      padding: 2px;
+      border: 2px solid color($colors, primary, light)
+    }
+    
+  }
+
+  #round-button-circle {
+  margin-top: -7px;  
+  margin-left: -8px;
+  padding: 6px;
+  width: 30px;
+  height:30px;
+  border-radius: 50%;
+  overflow:hidden;
+}
+  
   
 }

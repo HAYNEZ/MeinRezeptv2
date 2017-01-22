@@ -112,9 +112,15 @@
       Bewertung:
     </ion-item-divider>
     <ion-item>
-      <ion-input placeholder="Bewertung von 1 - 5" type="number" [(ngModel)]='rating' name ='rating'> </ion-input>
-    </ion-item>
-
+      <ion-item>
+          <ion-icon range-right name="star">{{rating}}</ion-icon>
+        <ion-item>
+          <ion-range style="margin=-5%" min="0" max="5" step="1" snaps="true" [(ngModel)]="rating">
+            <ion-icon></ion-icon>
+          </ion-range>
+        </ion-item>
+     </ion-item>
+</ion-item>
   </ion-list>
 
   <button ion-button full (click)='saveRecipe()'>Speichern</button>

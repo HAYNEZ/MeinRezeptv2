@@ -17,54 +17,44 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-list #product>
 
-    <ion-item class="header-row">
-    <ion-label>Erledigt</ion-label>
-      <ion-label>Artikel</ion-label>
-    </ion-item>
+  <span class="first" ion-item no-lines [(ngModel)]='value' style="display: inline-block; width: 27%;">
+    <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Menge</ion-label>
+    <ion-input type="number"></ion-input>
+  </span>
+  <span ion-item no-lines [(ngModel)]='unit' style="display: inline-block; width: 27%;">
+    <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Einheit</ion-label>
+    <ion-input type="text" ></ion-input>
+  </span>
+  <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 30%;">
+    <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Artikel</ion-label>
+    <ion-input type="text" ></ion-input>
+  </span>
+  <span class="add" ion-item no-lines style="display: inline-block; width: 12%;">
+    <button  ion-button (click)="add()" clear icon-only>
+      <ion-icon name='add' is-active="true"></ion-icon>
+    </button>
+  </span>
 
-    <ion-item *ngFor="let product of productList">
-      <ion-label>
-        {{product.value}}
-        {{product.unit}}
-        {{product.product}}
-        <button ion-button (click)="delete(product)" color="dark" clear icon-only>
-          <ion-icon name='trash' is-active="true"></ion-icon>
-        </button>
-      </ion-label>
-      <ion-checkbox></ion-checkbox>
-    </ion-item>
-  </ion-list>
+  <ion-list no-lines style="position:relative;">
 
-<!--
-<ion-list>
-
-  <ion-item class="header-row">
-    <ion-label>Menge</ion-label>
-    <ion-label>Artikel</ion-label>
-    <ion-label>Erledigt</ion-label>
-  </ion-item>
-
-  <ion-item class="item-row">
-    <ion-input type = "number" placeholder="Menge" floating> HMH</ion-input>
-    <ion-input type = "text"  placeholder="Artikel" floating> </ion-input>
-    <ion-checkbox></ion-checkbox>
-  </ion-item>
-
-  <ion-item>
-    <ion-checkbox></ion-checkbox>
-  </ion-item>
-
-  <ion-item>
-    <ion-buttons end>
-            <button (click)="  showAlert()"><ion-icon name="test"></ion-icon></button>
-    </ion-buttons>
-  </ion-item>
-
-</ion-list>
--->
+      <ion-item-sliding *ngFor="let product of productList" style="height: auto;">
+        <span ion-item style="display: width: 80%;">
+          <ion-label class="item">
+            {{product.value}}
+            {{product.unit}}
+            {{product.product}}
+          </ion-label>
+          <ion-checkbox></ion-checkbox>
+        </span>
+        <ion-item-options>
+          <button class="delete" ion-button (click)="delete(product)" clear icon-only>
+            <ion-icon name='trash' is-active="true"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 
 </ion-content>

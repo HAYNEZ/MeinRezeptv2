@@ -43,10 +43,22 @@
     </div>
 
     <div *ngSwitchCase="'ingredients'">
-      <p>{{recipe.portions}} Portionen</p>
+      <p>F&uuml;r 
+        <ion-input 
+          id="servings" 
+          value="recipe.portions" 
+          type="number" 
+          min="1" 
+          [(ngModel)]='servingsDefault' 
+          name ='portions'>  
+        </ion-input>
+        <ion-icon ion-button id="round-button-circle" (click)="calcPortion()" name="refresh"></ion-icon>
+        Portion(en):
+      </p>
+      
       <ion-list no-lines>
         <ion-item *ngFor="let ingredient of recipe.ingredients">
-          {{ingredient[0]}} {{ingredient[1]}} {{ingredient[2]}}
+          {{ingredient[0]*factor}} {{ingredient[1]}} {{ingredient[2]}}
         </ion-item>
       </ion-list>
     </div>
