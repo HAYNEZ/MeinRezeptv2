@@ -41,7 +41,7 @@ export class AddRecipeManuallyPage {
  constructor(public navCtrl: NavController,
     public params: NavParams,
     private recipeService: RecipeService,
-    private alertController: AlertController,
+    private alertCtrl: AlertController,
      private viewCtrl: ViewController,
      private zone: NgZone,
      private platform: Platform
@@ -108,6 +108,35 @@ export class AddRecipeManuallyPage {
      console.log(this.input.tags);
      this.tagString = this.input.tags.join();
    }
+ }
+
+ showTags() {
+   let tags = this.recipeService.getTags();
+   let alert = this.alertCtrl.create({
+     title: "Vorhandene Tags",
+     subTitle: "Wähle passende Tags aus."
+   });
+   for(let i = 0; i < tags.length; i++){
+     alert.addInput({
+       type: 'checkbox',
+       label: tags[i],
+       value: tags[i]
+     })
+   }
+   alert.addButton('Abbrechen');
+   alert.addButton({
+     text: 'Verwenden',
+     handler: data => {
+      for(var i =0; i <data.length; i++ ){
+        if(i == data.length -1){
+          this.tagString += data[i];
+        }else{
+          this.tagString += data[i] + ", ";
+        }
+      }
+     }
+   });
+   alert.present();
  }
 
 /*
@@ -246,7 +275,7 @@ replaceAll(str, find, replace) {
      }
      //pushes the new recipe and show its detail side
      this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
-     
+
      this.dismiss(recipe);
    }
  }
@@ -261,7 +290,7 @@ replaceAll(str, find, replace) {
  }
 
  noTitel(){
-   let alert = this.alertController.create({
+   let alert = this.alertCtrl.create({
        title: "Dein Rezept braucht noch einen Titel",
        buttons: [
            {
