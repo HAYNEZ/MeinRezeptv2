@@ -82,6 +82,7 @@ export class RecipeService {
         // }
     }
 
+
     handleChange(change) {
       let changedDoc = null;
       let changedIndex = null;
@@ -215,5 +216,16 @@ export class RecipeService {
         })
       }
     }
+
+    // checkTagsDuplicate(recipe){
+    //   let tags = recipe.tags;
+    //   if(tags){
+    //   var set =  new Collections.Set<string>();
+    //   for(var i = 0; i< tags.length; i++){
+    //     set.add(tags[i]);
+    //   }
+    //   recipe.tags = set.toArray();
+    // }
+    // }
 
 }

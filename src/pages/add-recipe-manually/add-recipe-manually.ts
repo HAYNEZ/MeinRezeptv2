@@ -33,7 +33,7 @@ export class AddRecipeManuallyPage {
     time: any;
     tagString : string ="";
     tags: any;
-    rating: any;
+    rating: number = 0;
     date: any;
 
     callback: any;
@@ -127,6 +127,13 @@ export class AddRecipeManuallyPage {
    alert.addButton({
      text: 'Verwenden',
      handler: data => {
+       if(data.length>0){
+         //"Nachspeise," + " " -> "Nachspeise, "
+         if(this.tagString.endsWith(",")) this.tagString += " ";
+         //"Nachspeise" + ", " -> "Nachspeise, "
+         else if(!this.tagString.endsWith(", ") && this.tagString.length != 0 ) this.tagString += ", ";
+       }
+       if(this.tagString.endsWith(""))
       for(var i =0; i <data.length; i++ ){
         if(i == data.length -1){
           this.tagString += data[i];
@@ -250,9 +257,9 @@ replaceAll(str, find, replace) {
 
  saveRecipe() {
     this.parseTags();
-    if(!this.rating){
-      this.rating =0;
-    }
+    // if(!this.rating){
+    //   this.rating =0;
+    // }
 
     if(!this.title){
       this.noTitel();
