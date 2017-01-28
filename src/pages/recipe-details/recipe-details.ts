@@ -16,6 +16,7 @@ export class RecipeDetailsPage {
   section:any;
   recipe: any;
   factor: any;
+  calculatedValues: any;
   servingsDefault: any;
 
   constructor(public navCtrl: NavController,
@@ -29,13 +30,19 @@ export class RecipeDetailsPage {
     this.section = "general";
     this.factor = 1;
     this.servingsDefault = this.recipe.portions
-
+    this.calculatedValues = new Array();
+    for(var i = 0; i < this.recipe.ingredients.length; i++){
+      this.calculatedValues[i]=this.recipe.ingredients[i][0];
+    }
   }
 
   calcPortion(){
     var oldValue = this.recipe.portions
     var newValue = this.servingsDefault;
     this.factor = newValue/oldValue;
+    for(var i = 0; i < this.recipe.ingredients.length; i++){
+      this.calculatedValues[i] = Math.round(this.factor*this.recipe.ingredients[i][0]*100)/100;
+    }  
   }
 
   presentPopover(event) {

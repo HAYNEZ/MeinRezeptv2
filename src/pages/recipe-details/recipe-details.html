@@ -56,8 +56,8 @@
       </p>
 
       <ion-list no-lines>
-        <ion-item *ngFor="let ingredient of recipe.ingredients">
-          {{ingredient[0]*factor}} {{ingredient[1]}} {{ingredient[2]}}
+        <ion-item *ngFor="let ingredient of recipe.ingredients; let i = index">
+          {{calculatedValues[i]}}{{ingredient[1]}} {{ingredient[2]}}
         </ion-item>
       </ion-list>
     </div>
