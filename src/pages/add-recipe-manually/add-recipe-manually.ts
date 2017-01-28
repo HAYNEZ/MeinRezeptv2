@@ -260,7 +260,7 @@ replaceAll(str, find, replace) {
     // if(!this.rating){
     //   this.rating =0;
     // }
-
+    this.tags = this.recipeService.removeDoubleTags(this.tags);
     if(!this.title){
       this.noTitel();
     }else{

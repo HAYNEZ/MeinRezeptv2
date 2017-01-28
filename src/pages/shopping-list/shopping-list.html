@@ -19,24 +19,24 @@
 
 <ion-content>
 
-
-  <span class="first" ion-item no-lines [(ngModel)]='value' style="display: inline-block; width: 27%;">
+  <div style="width: 100%;">
+  <span class="first" ion-item no-lines [(ngModel)]='value' style="display: inline-block; width: 32%;">
     <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Menge</ion-label>
     <ion-input type="number"></ion-input>
   </span>
-  <span ion-item no-lines [(ngModel)]='unit' style="display: inline-block; width: 27%;">
+  <span ion-item no-lines [(ngModel)]='unit' style="display: inline-block; width:32%;">
     <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Einheit</ion-label>
     <ion-input type="text" ></ion-input>
   </span>
-  <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 30%;">
+  <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 33%;">
     <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Artikel</ion-label>
     <ion-input type="text" ></ion-input>
   </span>
-  <span class="add" ion-item no-lines style="display: inline-block; width: 12%;">
-    <button  ion-button (click)="add()" clear icon-only>
+    </div>
+    <button ion-button (click)="add()" icon-only full >
       <ion-icon name='add' is-active="true"></ion-icon>
     </button>
-  </span>
+
 
   <ion-list no-lines style="position:relative;">
 
