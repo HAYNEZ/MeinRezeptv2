@@ -56,8 +56,8 @@
       </p>
 
       <ion-list no-lines>
-        <ion-label id="ingredians" *ngFor="let ingredient of recipe.ingredients">
-          <ion-checkbox id="ingredianCheck"></ion-checkbox> {{ingredient[0]*factor}} {{ingredient[1]}} {{ingredient[2]}}
+        <ion-label id="ingredians" *ngFor="let ingredient of recipe.ingredients; let i = index">
+          <ion-checkbox id="ingredianCheck"></ion-checkbox> {{calculatedValues[i]}} {{ingredient[1]}} {{ingredient[2]}}
         </ion-label>
       </ion-list>
     </div>
