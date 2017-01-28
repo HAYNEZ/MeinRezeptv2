@@ -217,6 +217,14 @@ export class RecipeService {
       }
     }
 
+    removeDoubleTags(tags){
+      var result = new Collections.Set<string>();
+      for(var tag of tags){
+        result.add(tag);
+      }
+      return result.toArray();
+    }
+
     // checkTagsDuplicate(recipe){
     //   let tags = recipe.tags;
     //   if(tags){
