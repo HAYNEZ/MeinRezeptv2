@@ -5,10 +5,10 @@ import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manuall
 import { TextRecognitionPage } from '../text-recognition/text-recognition';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-add-overview',
+  templateUrl: 'add-overview.html'
 })
-export class HomePage {
+export class AddOverviewPage {
   textrecognitionOption: Number = 0;
 
   constructor(
