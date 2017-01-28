@@ -3,8 +3,14 @@ page-add-recipe-manually {
   ion-range{
     width: 100%;
   }
+
   #preparation{
     height:50px;
+  }
+
+  ion-item-divider{
+    font-size: 12pt;
+    font-weight: bold;
   }
 
 }

@@ -57,16 +57,20 @@
       </p>
 
       <ion-list no-lines>
+
         <ion-label id="ingredians" *ngFor="let ingredient of recipe.ingredients; let i = index">
           <ion-checkbox id="ingredianCheck"></ion-checkbox> {{calculatedValues[i]}} {{ingredient[1]}} {{ingredient[2]}}
         </ion-label>
       </ion-list>
     </div>
 
-    <ion-list no-lines *ngSwitchCase="'steps'">
+    <div class="item item-text-wrap" *ngSwitchCase="'steps'">
+      {{recipe.preparation}}
+    </div>
+    <!-- <ion-list no-lines >
       <div class="item item-text-wrap" *ngFor="let step of recipe.preparation; let index = index;">
         {{index+1}}. {{step}}
       </div>
-    </ion-list>
+    </ion-list> -->
   </div>
 </ion-content>
