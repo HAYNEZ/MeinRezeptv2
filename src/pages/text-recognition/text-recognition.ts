@@ -188,8 +188,13 @@ export class TextRecognitionPage {
             result1.splice(j,1);
           }
         }
-        console.log(result1);
-        return result1;
+        result = "";
+        for(var j = 0; j<result1.length; j++){
+          result += result1[j];
+          result += " ";
+        }
+
+        return result;
       }
 
 
