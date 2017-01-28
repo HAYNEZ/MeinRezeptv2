@@ -38,6 +38,9 @@ export class AddRecipeManuallyPage {
 
     callback: any;
 
+    product: any;
+    unit: any;
+    value: any;
  constructor(public navCtrl: NavController,
     public params: NavParams,
     private recipeService: RecipeService,
@@ -59,12 +62,10 @@ export class AddRecipeManuallyPage {
       this.readInputs();
     }else{
       this.ingredients = new Array();
-      let ingredient = new Array(3);
-      this.ingredients.push(ingredient);
 
-      this.steps = new Array();
-      let step = "";
-      this.steps.push(step);
+      // this.steps = new Array();
+      // let step = "";
+      // this.steps.push(step);
     }
 
  // 	 this.ingredients = this.input[0];
@@ -83,7 +84,7 @@ export class AddRecipeManuallyPage {
    this.portions = this.input.portions;
    this.rating = this.input.rating;
    this.time = this.input.time;
-
+   this.preparation = this.input.preparation;
 
    if(this.input.ingredients) {
      this.ingredients = this.input.ingredients;
@@ -94,15 +95,9 @@ export class AddRecipeManuallyPage {
    }
 
 
-   if(this.input.preparation){
-    //  let step = "" + this.input.preparation;
-    //  this.steps.push(step);
-    this.steps = this.input.preparation;
-   }else{
-     this.steps = new Array();
-     let step = "";
-     this.steps.push(step);
-   }
+  //  if(this.input.preparation){
+
+  //  }
 
    if(this.input.tags){
      console.log(this.input.tags);
@@ -211,39 +206,44 @@ export class AddRecipeManuallyPage {
 }
 
 addIngredient(){
-  let ingredient = new Array(3);
-  this.ingredients.push(ingredient);
-  this.nIngredients ++;
-   // console.log(this.ingredients.length);
+  if(this.product){
+    let ingredient = [this.value, this.unit, this.product];
+    this.ingredients.push(ingredient);
+    //reset values
+    this.value = undefined;
+    this.unit = "";
+    this.product = "";
+  }
+
 }
 
 removeIngredient(ingredient){
   let index = this.ingredients.indexOf(ingredient);
-  console.log("Delete:"+ index + "of" + this.ingredients.length);
+  // console.log("Delete:"+ index + "of" + this.ingredients.length);
 
   if(index > -1){
     this.ingredients.splice(index, 1);
   }
-  this.nIngredients --;
+  // this.nIngredients --;
  //  console.log(this.ingredients.length);
 }
 
-setNIngredients(number:number){
-  this.nIngredients = number;
-}
+// setNIngredients(number:number){
+//   this.nIngredients = number;
+// }
 
-addStep(){
- let step = "";
- this.steps.push(step);
-}
-
-removeStep(step){
-  let index = this.steps.indexOf(step);
-  console.log("Delete:"+ index + "of" + this.steps.length);
-  if(index > -1){
-    this.steps.splice(index, 1);
-  }
-}
+// addStep(){
+//  let step = "";
+//  this.steps.push(step);
+// }
+//
+// removeStep(step){
+//   let index = this.steps.indexOf(step);
+//   console.log("Delete:"+ index + "of" + this.steps.length);
+//   if(index > -1){
+//     this.steps.splice(index, 1);
+//   }
+// }
 
 parseTags(){
   if(this.tagString != ""){
@@ -268,7 +268,7 @@ replaceAll(str, find, replace) {
          "title": this.title,
          "ingredients": this.ingredients,
          "portions": this.portions,
-         "preparation": this.steps,
+         "preparation": this.preparation,
          "time": this.time,
          "tags": this.tags,
          "rating": this.rating,
