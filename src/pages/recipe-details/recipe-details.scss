@@ -1,5 +1,32 @@
 page-recipe-details {
 
+ul {
+  border-radius: 5px;
+  margin-top: 10px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  color: white;
+  background-color: #9DCB7E;
+}
+
+li {
+  //border-style: dotted;
+  text-align: center;
+}
+
+#star{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#tags{
+  width:100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
   h1{
     display: block;
     position: relative;
@@ -40,11 +67,11 @@ page-recipe-details {
       padding: 2px;
       border: 2px solid color($colors, primary, light)
     }
-    
+
   }
 
   #round-button-circle {
-  margin-top: -7px;  
+  margin-top: -7px;
   margin-left: -8px;
   padding: 6px;
   width: 30px;
@@ -52,6 +79,6 @@ page-recipe-details {
   border-radius: 50%;
   overflow:hidden;
 }
-  
-  
+
+
 }

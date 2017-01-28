@@ -27,38 +27,37 @@
     </ion-segment>
   </div>
 
+  <!-- Allgemein Section -->
   <div [ngSwitch]="section">
     <div *ngSwitchCase="'general'">
       <img src={{recipe.base64Image}} alt="Default Bild">
-      <div>Zeit: {{recipe.time}} Minuten</div>
-      <div>Uhrzeit: {{recipe.date}}</div>
-      <div>Tags: </div>
-      <div>
-        <span *ngFor="let tag of recipe.tags">#{{tag}} </span>
-      </div>
-      <div>Bewertung:</div>
-      <div>
-        <span *ngFor="let star of range(1, recipe.rating)">☆</span>
-      </div>
+
+      <ul id="recipeInfo">
+          <li>{{recipe.time}} Minuten
+          <li id="star"><span *ngFor="let star of range(1, recipe.rating)">☆</span>
+          <li id="tags"><span *ngFor="let tag of recipe.tags">#{{tag}} </span>
+        </ul>
     </div>
 
+
+    <!-- Zutaten Section -->
     <div *ngSwitchCase="'ingredients'">
-      <p>F&uuml;r 
-        <ion-input 
-          id="servings" 
-          value="recipe.portions" 
-          type="number" 
-          min="1" 
-          [(ngModel)]='servingsDefault' 
-          name ='portions'>  
+      <p>F&uuml;r
+        <ion-input
+          id="servings"
+          value="recipe.portions"
+          type="number"
+          min="1"
+          [(ngModel)]='servingsDefault'
+          name ='portions'>
         </ion-input>
         <ion-icon ion-button id="round-button-circle" (click)="calcPortion()" name="refresh"></ion-icon>
         Portion(en):
       </p>
-      
+
       <ion-list no-lines>
-        <ion-item *ngFor="let ingredient of recipe.ingredients">
-          {{ingredient[0]*factor}} {{ingredient[1]}} {{ingredient[2]}}
+        <ion-item *ngFor="let ingredient of recipe.ingredients; let i = index">
+          {{calculatedValues[i]}}{{ingredient[1]}} {{ingredient[2]}}
         </ion-item>
       </ion-list>
     </div>
