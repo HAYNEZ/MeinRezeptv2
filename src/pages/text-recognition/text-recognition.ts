@@ -135,8 +135,9 @@ export class TextRecognitionPage {
         }
         var result = new Array;
         for(var j = 0; j<ingredients.length; j++){
-
-          result[j] = this.splitIngredient(ingredients[j]);
+          if(ingredients[j]!=""){
+            result[j] = this.splitIngredient(ingredients[j]);
+          }
         }
         return result;
       }
@@ -173,13 +174,22 @@ export class TextRecognitionPage {
         var result = "";
         for(var j = 0; j<array.length; j++){
           if(array[j].length == 0){
-            result += "\n";
+            //result += "\n";
           }else{
             result += array[j];
           }
         }
         //document.getElementById("preparation").innerHTML = result;
-        return result.split(".");
+
+        var result1 = result.split(".");
+        console.log(result1);
+        for(var j = 0; j<result1.length; j++){
+          if(result1[j]==""){
+            result1.splice(j,1);
+          }
+        }
+        console.log(result1);
+        return result1;
       }
 
 
