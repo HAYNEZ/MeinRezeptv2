@@ -12,8 +12,21 @@ ul {
 }
 
 li {
-  //border-style: dotted;
   text-align: center;
+}
+
+#ingredians{
+  height: 30px;
+  border-bottom: 1px solid #9DCB7E;
+}
+
+#ingredianCheck{
+  height: 13px;
+  width: 25px;
+}
+
+#ingredians:last-child {
+  border: none;
 }
 
 #star{
