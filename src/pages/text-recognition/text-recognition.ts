@@ -40,7 +40,7 @@ export class TextRecognitionPage {
         }
 
   demoPhoto() {
-          this.srcImage = 'assets/img/testRezept2.png';
+          this.srcImage = 'assets/img/demo.png';
         }
 
         getPicture(sourceType: number) {
@@ -67,7 +67,7 @@ export class TextRecognitionPage {
           loader.present();
           (<any>window).OCRAD(document.getElementById('image'), text => {
             loader.dismissAll();
-            //alert(text);
+            alert(text);
             this.formatText(text);
             console.log(text);
           });
