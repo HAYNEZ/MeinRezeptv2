@@ -23,12 +23,13 @@ export class RecipeService {
     }
 
     update(recipe) {
-      this._db.put(recipe).catch((error) => {
+      return this._db.put(recipe).catch((error) => {
         console.log(error);
-      })
+      });
     }
 
     delete(recipe) {
+        console.log("db delete " + recipe.title);
         return this._db.remove(recipe).catch((error) => {
           console.log(error);
         });
@@ -36,93 +37,181 @@ export class RecipeService {
 
     getAll() {
 
-        if(this.recipes) {
-          return Promise.resolve(this.recipes);
-        }
-        return new Promise(resolve => {
-          this._db.allDocs({
-            include_docs:true
-          }).then((result) => {
-            this.recipes = [];
-            let docs = result.rows.map((row) => {
-              this.recipes.push(row.doc);
-            });
-            resolve(this.recipes);
-            this._db.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
-              this.handleChange(change);
-            });
-          }).catch((error) => {
-            console.log(error);
-          })
-        })
-        // if (!this.recipes) {
-        //   // console.log("no data");
-        //     return this._db.allDocs({ include_docs: true })
-        //         .then(docs => {
-        //
-        //             // Each row has a .doc object and we just want to send an
-        //             // array of birthday objects back to the calling controller,
-        //             // so let's map the array to contain just the .doc objects.
-        //
-        //             this.recipes = docs.rows.map(row => {
-        //                 // Dates are not automatically converted from a string.
-        //
-        //                 return row.doc;
-        //             });
-        //
-        //             // Listen for changes on the database.
-        //             this._db.changes({ live: true, since: 'now', include_docs: true })
-        //                 .on('change', this.onDatabaseChange);
-        //             // console.log(this.recipes);
-        //             return this.recipes;
-        //         });
-        // } else {
-        //     // Return cached data as a promise
-        //     return Promise.resolve(this.recipes);
+        // if(this.recipes) {
+        //   return Promise.resolve(this.recipes);
         // }
+        // return new Promise(resolve => {
+        //   this._db.allDocs({
+        //     include_docs:true
+        //   }).then((result) => {
+        //     this.recipes = [];
+        //     let docs = result.rows.map((row) => {
+        //       this.recipes.push(row.doc);
+        //     });
+        //     resolve(this.recipes);
+        //     this._db.changes({ live: true, since: 'now', include_docs: true }).on('change', (change) => {
+        //       this.handleChange(change);
+        //     });
+        //   }).catch((error) => {
+        //     console.log(error);
+        //   })
+        // })
+        if (!this.recipes) {
+          // console.log("no data");
+            return this._db.allDocs({ include_docs: true })
+                .then(docs => {
+
+                    // Each row has a .doc object and we just want to send an
+                    // array of birthday objects back to the calling controller,
+                    // so let's map the array to contain just the .doc objects.
+
+                    this.recipes = docs.rows.map(row => {
+                        // Dates are not automatically converted from a string.
+
+                        return row.doc;
+                    });
+                    console.log(this.recipes);
+
+                    // Listen for changes on the database.
+                    this._db.changes({ live: true, since: 'now', include_docs: true })
+                        .on('change', (change) => {
+                          this.onDatabaseChange(change);
+                        });
+                    // console.log(this.recipes);
+                    return this.recipes;
+                });
+        } else {
+            // Return cached data as a promise
+            return Promise.resolve(this.recipes);
+        }
+
     }
 
 
-    handleChange(change) {
-      let changedDoc = null;
-      let changedIndex = null;
-      this.recipes.forEach((doc, index) => {
-        if(doc._id === change.id){
-          changedDoc = doc;
-          changedIndex = index;
-        }
-      });
-      if(change.deleted) {
-        console.log(this.recipes);
-        this.recipes.splice(changedIndex, 1);
-        console.log(this.recipes);
+    // handleChange(change) {
+    //   let changedDoc = null;
+    //   let changedIndex = null;
+    //   this.recipes.forEach((doc, index) => {
+    //     if(doc._id === change.id){
+    //       changedDoc = doc;
+    //       changedIndex = index;
+    //     }
+    //   });
+    //   if(change.deleted) {
+    //     console.log("Delete detected");
+    //     console.log(this.recipes);
+    //     this.recipes.splice(changedIndex, 1);
+    //     console.log(this.recipes);
+    //
+    //   }else{
+    //     if(changedDoc){
+    //       this.recipes[changedIndex] = change.doc;
+    //     }else{
+    //       this.recipes.push(change.doc);
+    //     }
+    //   }
+    // }
 
-      }else{
+      private onDatabaseChange = (change) => {
+
+        let changedDoc = null;
+  let changedIndex = null;
+
+  this.recipes.forEach((doc, index) => {
+
+    if(doc._id === change.id){
+      changedDoc = doc;
+      changedIndex = index;
+    }
+
+  });
+
+  //A document was deleted
+
+      if(change.deleted){
+        if(changedDoc){
+        this.recipes.splice(changedIndex, 1);
+      }
+      }
+      else {
+
+        //A document was updated
         if(changedDoc){
           this.recipes[changedIndex] = change.doc;
-        }else{
+        }
+
+        //A document was added
+        else {
           this.recipes.push(change.doc);
         }
+
+  }
+          ///// WORKS!!
+          // var index = this.findIndex(this.recipes, change.id);
+          // console.log("change detected");
+          // console.log("all recipes");
+          // console.log(this.recipes);
+          // console.log("length" + this.recipes.length);
+          // console.log("change");
+          // console.log(change);
+          // var recipe = this.recipes[index];
+          //
+          // if (change.deleted) {
+          //     if (recipe) {
+          //       if(recipe._id === change.id){
+          //         this.recipes.splice(index, 1); // delete
+          //       }
+          //     }
+          // } else {
+          //     // change.doc.Date = new Date(change.doc.Date);
+          //     if (recipe && recipe._id === change.id) {
+          //         this.recipes[index] = change.doc; // update
+          //     } else {
+          //         this.recipes.splice(index, 0, change.doc) // insert
+          //     }
+          // }
       }
-    }
+      // Binary search, the array is by default sorted by _id.
+      private findIndex(array, id) {
+          var low = 0, high = array.length, mid;
+          while (low < high) {
+              mid = (low + high) >>> 1;
+              array[mid]._id < id ? low = mid + 1 : high = mid
+          }
+          return low;
+      }
+    // private onDatabaseChange (change){
 
-
-    // private onDatabaseChange = (change) => {
-    //     var index = this.findIndex(this.recipes, change.id);
-    //     var recipe = this.recipes[index];
-    //
-    //     if (change.deleted) {
-    //         if (recipe) {
-    //             this.recipes.splice(index, 1); // delete
-    //         }
-    //     } else {
-    //
-    //         if (recipe && recipe._id === change.id) {
-    //             this.recipes[index] = change.doc; // update
-    //         } else {
-    //             this.recipes.splice(index, 0, change.doc) // insert
-    //         }
-    //     }
+      // if(change){
+      // console.log("db change is triggered");
+      // console.log(change.id);
+      //   var changedIndex = null;
+      //   var changedRecipe = null;
+      //   this.recipes.forEach((doc, index) => {
+      //     if(doc._id === change.id){
+      //       changedRecipe = doc;
+      //       changedIndex = index;
+      //     }
+      //   })
+      //   console.log("Changed recipe");
+      //   console.log(changedRecipe);
+      //
+      //   if (change.deleted) {
+      //       if (this.recipes) {
+      //         console.log("delete");
+      //           this.recipes.splice(changedIndex, 1); // delete
+      //       }
+      //   } else {
+      //
+      //       if (changedRecipe) { // && recipe._id === change.id
+      //         console.log("update");
+      //           this.recipes[changedIndex] = change.doc; // update
+      //       } else {
+      //         console.log("insert");
+      //           this.recipes.push(change.doc);//.splice(index, 0, change.doc) // insert
+      //       }
+      //   }
+      // }
     // }
 
     initialiseTags(){
@@ -165,15 +254,7 @@ export class RecipeService {
       }
     }
 
-    // Binary search, the array is by default sorted by _id.
-    private findIndex(array, id) {
-        var low = 0, high = array.length, mid;
-        while (low < high) {
-            mid = (low + high) >>> 1;
-            array[mid]._id < id ? low = mid + 1 : high = mid
-        }
-        return low;
-    }
+
 
     //Title search
      filterItemsTitle(searchTerm){

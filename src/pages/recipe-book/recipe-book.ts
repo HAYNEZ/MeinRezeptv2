@@ -33,20 +33,20 @@ export class RecipeBookPage {
       private listService : ListService
     ) {
       console.log("construct");
-        this.platform.ready().then(() => {
-            this.recipeService.initDB();
-            this.listService.initDB();
-
-
-            this.recipeService.getAll()
-                .then(data => {
-                    this.zone.run(() => {
-                        this.recipes = data;
-                    });
-                })
-                .catch(console.error.bind(console));
-            this.recipeService.initialiseTags();
-        });
+        // this.platform.ready().then(() => {
+        //     this.recipeService.initDB();
+        //     this.listService.initDB();
+        //
+        //
+        //     this.recipeService.getAll()
+        //         .then(data => {
+        //             this.zone.run(() => {
+        //                 this.recipes = data;
+        //             });
+        //         })
+        //         .catch(console.error.bind(console));
+        //     this.recipeService.initialiseTags();
+        // });
 
     }
 
@@ -80,7 +80,7 @@ export class RecipeBookPage {
 
     presentTagFilter() {
       let tags = this.recipeService.getTags();
-      console.log(tags);
+      // console.log(tags);
       let alert = this.alertCtrl.create({
         title: "Tag-Filter",
         subTitle: "Wähle einen Tag"
@@ -171,15 +171,48 @@ this.recipes.sort(function(a,b) {
       this.tagString = null;
       this.ionViewDidEnter();
     }
+    ionViewDidLoad(){
+      console.log("did load");
+      this.platform.ready().then(() => {
+      this.recipeService.initDB();
+      this.listService.initDB();
+
+
+      this.recipeService.getAll()
+          .then(data => {
+              this.zone.run(() => {
+                console.log(data);
+                  this.recipes = data;
+              });
+          })
+          .catch(console.error.bind(console));
+      this.recipeService.initialiseTags();
+    });
+    }
 
     ionViewDidEnter() {
       console.log("did enter");
-        // this.setFilteredItems();
-        this.platform.ready().then(() => {
-        this.recipeService.getAll().then((data) => {
-          this.recipes = data;
-        })
-      })
+      // console.log("did enter");
+      //   // this.setFilteredItems();
+      //   this.platform.ready().then(() => {
+      //   this.recipeService.getAll().then((data) => {
+      //     console.log(data);
+      //     this.recipes = data;
+      //   }).catch(console.error.bind(console));
+      // });
+      // console.log(this.recipes);
+
+
+          this.recipeService.getAll()
+              .then(data => {
+                console.log(data);
+                  // this.zone.run(() => {
+                      this.recipes = data;
+                  // });
+              })
+              .catch(console.error.bind(console));
+
+
     }
 
     setFilteredItems() {
