@@ -3,10 +3,12 @@ import { NavController, Platform, AlertController, PopoverController} from 'ioni
 import { ListService } from '../../providers/list.service';
 import { PopoverPagePage } from '../popover-page/popover-page';
 
+
 @Component({
   selector: 'page-shopping-list',
   templateUrl: 'shopping-list.html'
 })
+
 
 export class ShoppingListPage {
 
@@ -18,7 +20,6 @@ export class ShoppingListPage {
   unit: any;
   value: any;
   checked: any;
-
 
   constructor(  public navCtrl: NavController,
                 private alertController: AlertController,
@@ -36,7 +37,6 @@ export class ShoppingListPage {
                           });
                       })
                       .catch(console.error.bind(console));
-
 
   }
 
@@ -139,9 +139,8 @@ export class ShoppingListPage {
               ]
           });
           alert.present();
-
   }
-
+  
   public deleteAllChecked(){
     for(var item of this.listTrue){
       this.listService.delete(item);

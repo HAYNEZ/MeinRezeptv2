@@ -1,19 +1,21 @@
 <ion-header>
 
   <ion-navbar>
+
     <ion-title>{{recipe.title}}</ion-title>
     <ion-buttons  (click)="presentPopover($event)" end>
       <button ion-button icon-only >
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-  <div padding>
+  <div>
     <ion-segment [(ngModel)]="section">
       <ion-segment-button value="general">
         Allgemein
@@ -27,23 +29,22 @@
     </ion-segment>
   </div>
 
-  <!-- Allgemein Section -->
+
   <div [ngSwitch]="section">
+    <!-- Allgemein Section -->
     <div *ngSwitchCase="'general'">
       <img src={{recipe.base64Image}} alt="Default Bild">
-
       <ul id="recipeInfo">
           <li>{{recipe.time}} Minuten
           <li id="star"><span *ngFor="let star of range(1, recipe.rating)">☆</span>
           <li id="tags"><span *ngFor="let tag of recipe.tags">#{{tag}} </span>
-        </ul>
+      </ul>
     </div>
-
 
     <!-- Zutaten Section -->
     <div *ngSwitchCase="'ingredients'">
-    <!--  FÜR mit umlaut -->
-      <p>F&uuml;r
+
+      <p>F&uuml;r <!--  FÜR mit umlaut -->
         <ion-input
           id="servings"
           value="recipe.portions"
@@ -57,9 +58,9 @@
       </p>
 
       <ion-list no-lines>
-
         <ion-label id="ingredians" *ngFor="let ingredient of recipe.ingredients; let i = index">
-          <ion-checkbox id="ingredianCheck"></ion-checkbox> {{calculatedValues[i]}} {{ingredient[1]}} {{ingredient[2]}}
+          <ion-checkbox id="ingredianCheck"></ion-checkbox>
+          {{calculatedValues[i]}} {{ingredient[1]}} {{ingredient[2]}}
         </ion-label>
       </ion-list>
     </div>
@@ -67,10 +68,7 @@
     <div class="item item-text-wrap" *ngSwitchCase="'steps'">
       {{recipe.preparation}}
     </div>
-    <!-- <ion-list no-lines >
-      <div class="item item-text-wrap" *ngFor="let step of recipe.preparation; let index = index;">
-        {{index+1}}. {{step}}
-      </div>
-    </ion-list> -->
+
   </div>
+  
 </ion-content>

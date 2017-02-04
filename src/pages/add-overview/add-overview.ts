@@ -8,6 +8,7 @@ import { TextRecognitionPage } from '../text-recognition/text-recognition';
   selector: 'page-add-overview',
   templateUrl: 'add-overview.html'
 })
+
 export class AddOverviewPage {
   textrecognitionOption: Number = 0;
 

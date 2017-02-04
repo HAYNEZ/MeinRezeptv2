@@ -1,9 +1,4 @@
-<!--
-  Generated template for the Information page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -15,8 +10,7 @@
 
 <ion-content padding>
 
-  <div padding>
-
+  <div>
     <ion-segment [(ngModel)]="section">
       <ion-segment-button value="idea">Idee</ion-segment-button>
       <ion-segment-button value="team">Team</ion-segment-button>
@@ -25,47 +19,47 @@
   </div>
 
   <div [ngSwitch]="section">
-    <div *ngSwitchCase="'idea'">
-      <p>  Wenn man ein gutes Rezept kochen will, braucht man in der Regel keine riesige Rezeptauswahl, sondern lediglich das eine Rezept, das letztens so gut geschmeckt hat. Dieses hat man jedoch nicht mehr genau im Kopf, man weiß nicht mehr genau, wer es gepostet hat oder man hat keine Ahnung mehr, wo der Zettel ist, auf dem man es notiert hatte…
-            Die Arbeitshypothese lautet: Das persönliche Rezeptmanagement ist noch nicht ganz im 21. Jahrhundert angekommen.</p>
-      <p> Ziel des Projekts BOIL ist die Konzeption und Umsetzung eines individuellen Rezeptmanagements als App. Ein zentraler Aspekt ist dabei eine besondere Eingabeunterstützung, so dass mit wenigen Klicks ein Rezept sehr schnell und intuitiv eingegeben werden kann. Die Vision von BOIL umfasst:</p>
+      <div *ngSwitchCase="'idea'">
+        <p>  Wenn man ein gutes Rezept kochen will, braucht man in der Regel keine riesige Rezeptauswahl, sondern lediglich das eine Rezept, das letztens so gut geschmeckt hat. Dieses hat man jedoch nicht mehr genau im Kopf, man weiß nicht mehr genau, wer es gepostet hat oder man hat keine Ahnung mehr, wo der Zettel ist, auf dem man es notiert hatte…
+              Die Arbeitshypothese lautet: Das persönliche Rezeptmanagement ist noch nicht ganz im 21. Jahrhundert angekommen.</p>
+        <p> Ziel des Projekts BOIL ist die Konzeption und Umsetzung eines individuellen Rezeptmanagements als App. Ein zentraler Aspekt ist dabei eine besondere Eingabeunterstützung, so dass mit wenigen Klicks ein Rezept sehr schnell und intuitiv eingegeben werden kann. Die Vision von BOIL umfasst:</p>
 
-      <ul>
-        <li>das Scannen von Rezeptvorlagen und Auslesen von Zutaten, Arbeitsschritten und Bildern</li>
-        <li>eine intelligente Menuführung für eine schnelle Auswahl von Zutaten, üblichen Mengenangaben und Arbeitsschritten (in Planung)</li>
-        <li>eine praktische Einkaufslistenfunktion</li>
-        <li>Nutzung von individuellen Rezeptkategorien, eine umfangreiche Suchfunktion (auch nach Zutaten)</li>
-        <li>und vieles mehr!</li>
-      </ul>
-   </div>
+        <ul>
+          <li>das Scannen von Rezeptvorlagen und Auslesen von Zutaten, Arbeitsschritten und Bildern</li>
+          <li>eine intelligente Menuführung für eine schnelle Auswahl von Zutaten, üblichen Mengenangaben und Arbeitsschritten (in Planung)</li>
+          <li>eine praktische Einkaufslistenfunktion</li>
+          <li>Nutzung von individuellen Rezeptkategorien, eine umfangreiche Suchfunktion (auch nach Zutaten)</li>
+          <li>und vieles mehr!</li>
+        </ul>
+      </div>
 
-  <div *ngSwitchCase="'team'">
-    <p>Erstmalig implementiert wurde das Projekt BOIL mit einer Rezepteingabe über Scans im Rahmen der Veranstaltung „Showtime“ der Hochschule für Technik und Wirtschaft Berlin durch das kreative und einzigartige Team bestehend aus:</p>
-    <ul>
-      <li>Antonia Berger</li>
-      <li>Ben Tiden</li>
-      <li>Jennifer Lindner</li>
-      <li>Julia Clasen</li>
-      <li>Stefanie Otten</li>
-      <li>Veronika Bertels</li>
-      <li>Dr. Bastian Bösel 	(Projektinitiator)</li>
-    </ul>
+      <div *ngSwitchCase="'team'">
+        <p>Erstmalig implementiert wurde das Projekt BOIL mit einer Rezepteingabe über Scans im Rahmen des Bachelor Projekts des internationalen Studiengangs Medieninformatik der Hochschule für Technik und Wirtschaft Berlin durch das kreative und einzigartige Team bestehend aus:</p>
+        <ul>
+          <li>Antonia Berger</li>
+          <li>Ben Tiden</li>
+          <li>Jennifer Lindner</li>
+          <li>Julia Clasen</li>
+          <li>Stefanie Otten</li>
+          <li>Veronika Bertels</li>
+          <li>Dr. Bastian Bösel (Projektinitiator)</li>
+        </ul>
+      </div>
+
+      <ion-list no-lines *ngSwitchCase="'contact'">
+        <p>Angaben gem. § 5 TMG</p>
+        <h6>Betreiber und Kontakt:</h6>
+        <ul class="adress">
+          <li>Dr. Bastian Bösel</li>
+          <li>Claszeile 18</li>
+          <li>14165 Berlin</li>
+          <li>Telefonnummer: 030-20625145</li>
+          <li>E-Mail-Adresse: bastian.j.boesel@gmx.de</li>
+        </ul>
+        <h6>Bilder und Grafiken:</h6>
+        <p>tbd</p>
+      </ion-list>
+      
   </div>
-
-    <ion-list no-lines *ngSwitchCase="'contact'">
-      <p>Angaben gem. § 5 TMG</p>
-      <h6>Betreiber und Kontakt:</h6>
-      <ul class="adress">
-        <li>Dr. Bastian Bösel</li>
-        <li>Claszeile 18</li>
-        <li>14165 Berlin</li>
-        <li>Telefonnummer: 030-20625145</li>
-        <li>E-Mail-Adresse: bastian.j.boesel@gmx.de</li>
-      </ul>
-      <h6>Bilder und Grafiken:</h6>
-      <p>tbd</p>
-    </ion-list>
-  </div>
-
 
 </ion-content>

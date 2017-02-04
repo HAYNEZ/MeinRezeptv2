@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, PopoverController,AlertController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, PopoverController, AlertController } from 'ionic-angular';
 import { ListService } from '../../providers/list.service';
 import { RecipeService } from '../../providers/recipe.service';
 import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manually';
@@ -102,12 +102,9 @@ export class RecipeDetailsPage {
     alert.present();
   }
 
-
-
   dismiss(recipe) {
         this.viewCtrl.dismiss(recipe);
   }
-
 
   switchGeneral() {
     document.getElementById('demo').innerHTML = this.recipe.time;
@@ -126,7 +123,6 @@ export class RecipeDetailsPage {
     for( let i = min; i<=max; i++){
       input.push(i);
     }
-    // console.log(input);
     return input;
   }
 
