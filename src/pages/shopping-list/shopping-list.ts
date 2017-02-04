@@ -1,6 +1,5 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, AlertController, PopoverController} from 'ionic-angular';
-
 import { ListService } from '../../providers/list.service';
 import { PopoverPagePage } from '../popover-page/popover-page';
 
@@ -11,11 +10,14 @@ import { PopoverPagePage } from '../popover-page/popover-page';
 
 export class ShoppingListPage {
 
-  public productList= [];
+  public productList = [];
+  public listFalse = [];
+  public listTrue = [];
   public input:any;
   product: any;
   unit: any;
   value: any;
+  checked: any;
 
 
   constructor(  public navCtrl: NavController,
@@ -23,14 +25,23 @@ export class ShoppingListPage {
                 private zone: NgZone,
                 private listService: ListService,
                 public popoverCtrl: PopoverController ) {
-      // this.listService.initDB();
-    // this.productList = [];
+
     this.listService.getAll().then(data => {
             this.zone.run(() => {
-                this.productList = data;
+            this.productList = data;
+            for(var i = 0; i < data.length; i++){
+              if(data[i].checked){
+                this.listTrue.push(data[i]);
+                console.log("true");
+              }else{
+                this.listFalse.push(data[i]);
+                console.log("false");
+              }
+            }
             });
     }).catch(console.error.bind(console));
   }
+
 
   readinputs(){
     this.value = this.input.value;
@@ -46,6 +57,10 @@ export class ShoppingListPage {
             callback: () => { this.deleteAll(); }
           },
           {
+            title: 'Alle erledigten löschen',
+            callback: () => { this.deleteAllChecked(); }
+          },
+          {
             title: 'Online einkaufen',
             callback: () => { this.shopOnline();}
           }
@@ -59,11 +74,32 @@ export class ShoppingListPage {
         this.listService.add({
             value: this.value,
             unit: this.unit,
-            product: this.product
+            product: this.product,
+            checked: false
         });
         this.value = undefined;
         this.unit = "";
         this.product = "";
+    }
+  }
+
+  edit(key){
+    var item = key;
+    this.listService.delete(key);
+    if(item.checked){
+      this.listService.add({
+          value: item.value,
+          unit: item.unit,
+          product: item.product,
+          checked: false
+      });
+    }else{
+      this.listService.add({
+        value: item.value,
+        unit: item.unit,
+        product: item.product,
+        checked: true
+      });
     }
   }
 
@@ -94,7 +130,10 @@ export class ShoppingListPage {
                   {
                       text: "Sicher!",
                       handler: data => {
-                          for(var item of this.productList){
+                          for(var item of this.listTrue){
+                            this.listService.delete(item);
+                          }
+                          for(var item of this.listFalse){
                             this.listService.delete(item);
                           }
                       }
@@ -105,12 +144,21 @@ export class ShoppingListPage {
 
   }
 
+  public deleteAllChecked(){
+    for(var item of this.listTrue){
+      this.listService.delete(item);
+    }
+  }
+
   ionViewDidLoad() {
     this.productList = this.listService.getItems();
-    // this.listService.getAll().then(data => {
-    //       this.zone.run(() => {
-    //           this.productList = data;
-    //       });
-    // }).catch(console.error.bind(console));
+    console.log(this.productList.length);
+    for(var i = 0; i< this.productList.length; i++){
+      if(this.productList[i].checked){
+        this.listTrue.push(this.productList[i]);
+      }else{
+        this.listFalse.push(this.productList[i]);
+      }
+    }
   }
 }

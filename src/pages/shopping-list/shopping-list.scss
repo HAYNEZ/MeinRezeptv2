@@ -17,4 +17,11 @@ page-shopping-list {
   .first{
     padding-left:10px;
   }
+  .itemTrue{
+    text-decoration: line-through;
+    color: grey;
+  }
+  .erledigt{
+    color: #9DCB7E;
+  }
 }

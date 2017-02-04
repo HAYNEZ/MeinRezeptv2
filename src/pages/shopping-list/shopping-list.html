@@ -38,16 +38,15 @@
     </button>
 
 
-  <ion-list no-lines style="position:relative;">
-
-      <ion-item-sliding *ngFor="let product of productList" style="height: auto;">
+  <ion-list no-lines class="falseList" style="position:relative;">
+      <ion-item-sliding *ngFor="let product of listFalse" style="height: auto;">
         <span ion-item style="display: width: 80%;">
-          <ion-label class="item">
+          <ion-label class="itemFalse">
             {{product.value}}
             {{product.unit}}
             {{product.product}}
           </ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-checkbox checked="false" (click)="edit(product)"></ion-checkbox>
         </span>
         <ion-item-options>
           <button class="delete" ion-button (click)="delete(product)" clear icon-only>
@@ -55,6 +54,27 @@
           </button>
         </ion-item-options>
       </ion-item-sliding>
-    </ion-list>
+  </ion-list>
+
+  <ion-list no-lines class="trueList" style="position:relative;">
+    <ion-item  no-lines class="erledigt">
+      Bereits erledigt
+    </ion-item>
+    <ion-item-sliding *ngFor="let item of listTrue" style="height: auto;">
+      <span ion-item style="display: width: 80%;">
+        <ion-label class="itemTrue">
+          {{item.value}}
+          {{item.unit}}
+          {{item.product}}
+        </ion-label>
+        <ion-checkbox checked="true" (click)="edit(item)"></ion-checkbox>
+      </span>
+      <ion-item-options>
+        <button class="delete" ion-button (click)="delete(product)" clear icon-only>
+          <ion-icon name='trash' is-active="true"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
 </ion-content>
