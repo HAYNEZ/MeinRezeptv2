@@ -76,8 +76,11 @@
             {{ingredient[2]}}
           </span>
         </div>
-        <ion-item-options style="width:15%">
-        <button ion-button icon-only style="" (click)="removeIngredient(ingredient)">
+        <ion-item-options style="width:50%">
+        <button ion-button icon-only style="" (click)="editIngredient(ingredient, item)">
+          <ion-icon name="create"></ion-icon>
+        </button>
+        <button ion-button icon-only style="" (click)="removeIngredient(ingredient, item)">
           <ion-icon name="close"></ion-icon>
         </button>
       </ion-item-options>

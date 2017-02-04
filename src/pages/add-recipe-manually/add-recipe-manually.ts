@@ -1,5 +1,5 @@
 import { Component, NgZone  } from '@angular/core';
-import { NavController,NavParams, AlertController, ViewController, Platform } from 'ionic-angular';
+import { NavController,NavParams, AlertController, ViewController, Platform, ItemSliding  } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import {RecipeDetailsPage} from '../recipe-details/recipe-details';
 // import { DomSanitizer } from '@angular/platform-browser';
@@ -242,13 +242,30 @@ addIngredient(){
 
 }
 
-removeIngredient(ingredient){
+editIngredient(ingredient, item:ItemSliding ){
+  let index = this.ingredients.indexOf(ingredient);
+  // console.log("Delete:"+ index + "of" + this.ingredients.length);
+
+  if(index > -1){
+    let ingredient = this.ingredients[index];
+    this.ingredients.splice(index, 1);
+    this.product = ingredient[2];
+    this.unit = ingredient[1];
+    this.value = ingredient[0];
+  }
+  item.close();
+  // this.nIngredients --;
+ //  console.log(this.ingredients.length);
+}
+
+removeIngredient(ingredient, item:ItemSliding){
   let index = this.ingredients.indexOf(ingredient);
   // console.log("Delete:"+ index + "of" + this.ingredients.length);
 
   if(index > -1){
     this.ingredients.splice(index, 1);
   }
+  item.close();
   // this.nIngredients --;
  //  console.log(this.ingredients.length);
 }
