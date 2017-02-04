@@ -29,7 +29,7 @@ export class RecipeDetailsPage {
     this.recipe = params.get("recipe");
     this.section = "general";
     this.factor = 1;
-    this.servingsDefault = this.recipe.portions
+    this.servingsDefault = this.recipe.portions;
     this.calculatedValues = new Array();
     for(var i = 0; i < this.recipe.ingredients.length; i++){
       this.calculatedValues[i]=this.recipe.ingredients[i][0];
@@ -42,7 +42,7 @@ export class RecipeDetailsPage {
     this.factor = newValue/oldValue;
     for(var i = 0; i < this.recipe.ingredients.length; i++){
       this.calculatedValues[i] = Math.round(this.factor*this.recipe.ingredients[i][0]*100)/100;
-    }  
+    }
   }
 
   presentPopover(event) {
@@ -79,12 +79,15 @@ export class RecipeDetailsPage {
   }
 
   delete() {
+    console.log("Details - delete" + this.recipe.title);
       this.recipeService.delete(this.recipe);
-         this.dismiss(this.recipe);
+      this.navCtrl.pop();
   }
 
   edit() {
-    this.navCtrl.push(AddRecipeManuallyPage, {recipe: this.recipe, callback: () => { this.delete(); } });
+
+    this.navCtrl.push(AddRecipeManuallyPage, {recipe: this.recipe, edit : true, callback: () => { } });
+      this.viewCtrl.dismiss(this.recipe);
   }
 
   future() {
@@ -123,7 +126,7 @@ export class RecipeDetailsPage {
     for( let i = min; i<=max; i++){
       input.push(i);
     }
-    console.log(input);
+    // console.log(input);
     return input;
   }
 

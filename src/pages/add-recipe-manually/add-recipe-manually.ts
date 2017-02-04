@@ -17,12 +17,14 @@ import { RecipeService } from '../../providers/recipe.service';
   templateUrl: 'add-recipe-manually.html'
 })
 export class AddRecipeManuallyPage {
+  recipe: any ={};
+  edit : boolean = false;
   photoTaken: boolean;
    photoSelected: boolean;
    _zone: any;
    public base64Image: string;
   public preparation:any;
-  public input:any;
+  // public input:any;
     title: any;
     nIngredients: number = 0;
     ingredients: any;
@@ -41,6 +43,7 @@ export class AddRecipeManuallyPage {
     product: any;
     unit: any;
     value: any;
+
  constructor(public navCtrl: NavController,
     public params: NavParams,
     private recipeService: RecipeService,
@@ -52,56 +55,78 @@ export class AddRecipeManuallyPage {
     //  private _DomSanitizationService: DomSanitizer
    ) {
     //  this.platform = platform;
-    this.zone = zone;
-     this.photoTaken = false;
+    // this.zone = zone;
+    //  this.photoTaken = false;
 
-    this.input = params.get("recipe");
-    this.callback = params.get("callback");
+     //filled if edit, empty if new, partly filled if OCR
+    // this.recipe = params.get("recipe");
+    // this.callback = params.get("callback");
+    // if(params.get("edit")){
+    //   this.edit = params.get("edit");
+    // }
 
-    if(this.input){
-      this.readInputs();
-    }else{
-      this.ingredients = new Array();
+
+    // if(this.input){
+    //   this.readInputs();
+    // }else{
+    //   this.ingredients = new Array();
 
       // this.steps = new Array();
       // let step = "";
       // this.steps.push(step);
-    }
+    // }
 
  // 	 this.ingredients = this.input[0];
  //       // this.ingredient = [200, 'ml', 'Milch'];
  //        this.preparation = this.input[1];
-        if(!this.base64Image){
-          this.base64Image = "assets/img/demo.jpg";
-        }
+        // if(!this.base64Image){
+        //   this.base64Image = "assets/img/demo.jpg";
+        // }
 
         // this.platform = platform;
  }
 
- readInputs() {
-   this.title = this.input.title;
-   this.base64Image = this.input.base64Image;
-   this.portions = this.input.portions;
-   this.rating = this.input.rating;
-   this.time = this.input.time;
-   this.preparation = this.input.preparation;
+ ionViewDidLoad(){
+   this.zone = this.zone;
+    this.photoTaken = false;
 
-   if(this.input.ingredients) {
-     this.ingredients = this.input.ingredients;
+   //filled if edit, empty if new, partly filled if OCR
+  this.recipe = this.params.get("recipe");
+  this.callback = this.params.get("callback");
+  let edited = this.params.get("edit");
+  if(edited){
+    this.edit = true;
+  }
+
+  if(this.recipe){
+    this.readInputs();
+  }else{
+    this.ingredients = new Array();
+  }
+  if(!this.base64Image){
+    this.base64Image = "assets/img/demo.jpg";
+  }
+ }
+
+ readInputs() {
+   this.title = this.recipe.title;
+   this.base64Image = this.recipe.base64Image;
+   this.portions = this.recipe.portions;
+   this.rating = this.recipe.rating;
+   this.time = this.recipe.time;
+   this.preparation = this.recipe.preparation;
+
+   if(this.recipe.ingredients) {
+     this.ingredients = this.recipe.ingredients;
    }else{
      this.ingredients = new Array();
      let ingredient = new Array(3);
      this.ingredients.push(ingredient);
    }
 
-
-  //  if(this.input.preparation){
-
-  //  }
-
-   if(this.input.tags){
-     console.log(this.input.tags);
-     this.tagString = this.input.tags.join();
+   if(this.recipe.tags){
+    //  console.log(this.input.tags);
+     this.tagString = this.recipe.tags.join();
    }
  }
 
@@ -256,35 +281,63 @@ replaceAll(str, find, replace) {
 }
 
  saveRecipe() {
-    this.parseTags();
-    // if(!this.rating){
-    //   this.rating =0;
-    // }
-    this.tags = this.recipeService.removeDoubleTags(this.tags);
-    if(!this.title){
-      this.noTitel();
-    }else{
-     let recipe = {
-         "title": this.title,
-         "ingredients": this.ingredients,
-         "portions": this.portions,
-         "preparation": this.preparation,
-         "time": this.time,
-         "tags": this.tags,
-         "rating": this.rating,
-         "base64Image": this.base64Image,
-         "date" : new Date()
-     };
-     this.recipeService.add(recipe);
-     this.recipeService.updateTags(this.tags);
-     if(this.callback){
-       this.callback();
-     }
-     //pushes the new recipe and show its detail side
-     this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
 
-     this.dismiss(recipe);
+    if(this.title){
+      //tagString to tagArray
+      this.parseTags();
+      if(this.tags){
+        this.tags = this.recipeService.removeDoubleTags(this.tags);
+      }
+      if(this.recipe){
+        if(this.recipe.tags){
+          if(this.recipe.tags.join() != this.tagString){
+            this.recipeService.updateTags(this.tags);
+          }
+        }
+      }
+
+      if(!this.edit){
+        this.recipe = {
+         title: this.title,
+         ingredients: this.ingredients,
+         portions: this.portions,
+         preparation: this.preparation,
+         time: this.time,
+         tags: this.tags,
+         rating: this.rating,
+         base64Image: this.base64Image,
+         date: new Date()
+       };
+     this.recipeService.add(this.recipe);
+   }else{
+     console.log(this.recipe._id);
+    //  this.recipe = ;
+     console.log("UPDATE");
+     this.recipe = {
+       _id: this.recipe._id,
+       _rev: this.recipe._rev,
+      title: this.title,
+      ingredients: this.ingredients,
+      portions: this.portions,
+      preparation: this.preparation,
+      time: this.time,
+      tags: this.tags,
+      rating: this.rating,
+      base64Image: this.base64Image,
+      date: new Date()
+    };
+     this.recipeService.update(this.recipe).catch(console.error.bind(console));
+        console.log(this.recipe);
    }
+
+    this.navCtrl.push(RecipeDetailsPage, {recipe: this.recipe});
+    this.dismiss(this.recipe);
+  }else{
+    this.noTitel();
+  }
+
+
+
  }
 
  dismiss(recipe) {
