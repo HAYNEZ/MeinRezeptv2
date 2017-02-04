@@ -33,7 +33,7 @@
     <ion-input type="text" ></ion-input>
   </span>
     </div>
-    <button ion-button (click)="add()" icon-only full >
+    <button ion-button (click)="add() " icon-only full >
       <ion-icon name='add' is-active="true"></ion-icon>
     </button>
 
@@ -68,6 +68,27 @@
           {{item.product}}
         </ion-label>
         <ion-checkbox checked="true" (click)="edit(item)"></ion-checkbox>
+      </span>
+      <ion-item-options>
+        <button class="delete" ion-button (click)="delete(product)" clear icon-only>
+          <ion-icon name='trash' is-active="true"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-list no-lines class="trueList" style="position:relative;">
+    <ion-item  no-lines class="erledigt">
+      !!!!!TEST LISTE!!!!!
+    </ion-item>
+    <ion-item-sliding *ngFor="let item of productList">
+      <span ion-item style="display: width: 80%;">
+        <ion-label class="test">
+          {{item.value}}
+          {{item.unit}}
+          {{item.product}}
+        </ion-label>
+        <ion-checkbox class="checkbox" (click)="edit(item)"></ion-checkbox>
       </span>
       <ion-item-options>
         <button class="delete" ion-button (click)="delete(product)" clear icon-only>

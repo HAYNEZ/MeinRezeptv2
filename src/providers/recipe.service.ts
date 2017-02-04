@@ -17,7 +17,6 @@ export class RecipeService {
         this._db = new PouchDB('recipe');
     }
 
-
     add(recipe) {
         return this._db.post(recipe);
     }

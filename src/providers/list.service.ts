@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone} from '@angular/core';
 
 import PouchDB from 'pouchdb';
 
@@ -7,24 +7,39 @@ export class ListService {
     private _db;
     private items;
 
+    constructor(
+      private zone: NgZone
+    ){}
+
     initDB() {
         this._db = new PouchDB('list');
     }
-
 
     add(item) {
         return this._db.post(item);
     }
 
+    update(item) {
+      return this._db.put(item).catch((error) => {
+        console.log(error);
+      });
+    }
+
+    filterChecked(){
+      return this.items.filter((item)=>{
+        return item.checked;
+      });
+    }
+
+    filterUnchecked(){
+    return this.items.filter((item)=>{
+      return !item.checked;
+    });
+    }
+
     delete(item) {
       console.log("Delete list item");
         return this._db.remove(item);
-    }
-
-    deleteDB(){
-      this._db.destroy(function (err, response) {
-        if (err) {} else {}
-      });
     }
 
     getAll() {
@@ -45,8 +60,10 @@ export class ListService {
 
                     // Listen for changes on the database.
                     this._db.changes({ live: true, since: 'now', include_docs: true })
-                        .on('change', this.onDatabaseChange);
-
+                        .on('change', (change) => {
+                          this.onDatabaseChange(change);
+                        });
+                    // console.log(this.items);
                     return this.items;
                 });
         } else {
@@ -57,21 +74,38 @@ export class ListService {
 
 
     private onDatabaseChange = (change) => {
-        var index = this.findIndex(this.items, change.id);
-        var item = this.items[index];
 
-        if (change.deleted) {
-            if (item) {
-                this.items.splice(index, 1); // delete
-            }
-        } else {
+      let changedDoc = null;
+      let changedIndex = null;
 
-            if (item && item._id === change.id) {
-                this.items[index] = change.doc; // update
-            } else {
-                this.items.splice(index, 0, change.doc) // insert
-            }
+      this.items.forEach((doc, index) => {
+
+        if(doc._id === change.id){
+          changedDoc = doc;
+          changedIndex = index;
+          }
+
+      });
+
+      //A document was deleted
+
+      if(change.deleted){
+        if(changedDoc){
+        this.items.splice(changedIndex, 1);
         }
+      }else{
+
+        //A document was updated
+        if(changedDoc){
+          this.items[changedIndex] = change.doc;
+        }
+
+      //A document was added
+        else {
+          this.items.push(change.doc);
+        }
+
+      }
     }
 
     // Binary search, the array is by default sorted by _id.

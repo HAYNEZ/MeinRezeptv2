@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, AlertController, PopoverController} from 'ionic-angular';
+import { NavController, Platform, AlertController, PopoverController} from 'ionic-angular';
 import { ListService } from '../../providers/list.service';
 import { PopoverPagePage } from '../popover-page/popover-page';
 
@@ -24,22 +24,20 @@ export class ShoppingListPage {
                 private alertController: AlertController,
                 private zone: NgZone,
                 private listService: ListService,
-                public popoverCtrl: PopoverController ) {
+                public popoverCtrl: PopoverController,
+                private platform: Platform ) {
 
-    this.listService.getAll().then(data => {
-            this.zone.run(() => {
-            this.productList = data;
-            for(var i = 0; i < data.length; i++){
-              if(data[i].checked){
-                this.listTrue.push(data[i]);
-                console.log("true");
-              }else{
-                this.listFalse.push(data[i]);
-                console.log("false");
-              }
-            }
-            });
-    }).catch(console.error.bind(console));
+                  this.listService.getAll()
+                    .then(data => {
+                          this.zone.run(() => {
+                            this.productList = data;
+                            this.listTrue = this.listService.filterChecked();
+                            this.listFalse = this.listService.filterUnchecked();
+                          });
+                      })
+                      .catch(console.error.bind(console));
+
+
   }
 
 
@@ -147,18 +145,6 @@ export class ShoppingListPage {
   public deleteAllChecked(){
     for(var item of this.listTrue){
       this.listService.delete(item);
-    }
-  }
-
-  ionViewDidLoad() {
-    this.productList = this.listService.getItems();
-    console.log(this.productList.length);
-    for(var i = 0; i< this.productList.length; i++){
-      if(this.productList[i].checked){
-        this.listTrue.push(this.productList[i]);
-      }else{
-        this.listFalse.push(this.productList[i]);
-      }
     }
   }
 }
