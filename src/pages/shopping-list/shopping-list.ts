@@ -1,30 +1,29 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, AlertController, PopoverController} from 'ionic-angular';
-
+import { NavController, AlertController, PopoverController } from 'ionic-angular';
 import { ListService } from '../../providers/list.service';
 import { PopoverPagePage } from '../popover-page/popover-page';
+
 
 @Component({
   selector: 'page-shopping-list',
   templateUrl: 'shopping-list.html'
 })
 
+
 export class ShoppingListPage {
 
-  public productList= [];
-  public input:any;
+  public productList = [];
+  public input: any;
   product: any;
   unit: any;
   value: any;
-
 
   constructor(  public navCtrl: NavController,
                 private alertController: AlertController,
                 private zone: NgZone,
                 private listService: ListService,
-                public popoverCtrl: PopoverController ) {
-      // this.listService.initDB();
-    // this.productList = [];
+                public popoverCtrl: PopoverController )
+  {
     this.listService.getAll().then(data => {
             this.zone.run(() => {
                 this.productList = data;
@@ -102,15 +101,9 @@ export class ShoppingListPage {
               ]
           });
           alert.present();
-
   }
 
   ionViewDidLoad() {
     this.productList = this.listService.getItems();
-    // this.listService.getAll().then(data => {
-    //       this.zone.run(() => {
-    //           this.productList = data;
-    //       });
-    // }).catch(console.error.bind(console));
   }
 }

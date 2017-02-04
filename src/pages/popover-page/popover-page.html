@@ -1,6 +1,5 @@
 <ion-list no-lines>
-  <button ion-item *ngFor="let action of actions" (click)="performAction(action)">{{action.title}}</button>
-  <!-- <button ion-item (click)="add()">Hinzufügen</button>
-    <button ion-item (click)="deleteAll()">Alle Einträge löschen</button>
-    <button ion-item (click)="close()">Online einkaufen</button> -->
+  <button ion-item *ngFor="let action of actions" (click)="performAction(action)">
+    {{action.title}}
+  </button>
 </ion-list>
