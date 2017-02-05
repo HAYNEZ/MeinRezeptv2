@@ -212,6 +212,9 @@ saveRecipe() {
       if(this.tags){
         this.tags = this.recipeService.removeDoubleTags(this.tags);
       }
+      if(!this.portions){
+        this.portions = 4;
+      }
 
       if(this.recipe){
         if(this.recipe.tags){
