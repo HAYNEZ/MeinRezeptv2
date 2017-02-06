@@ -28,7 +28,7 @@ export class RecipeService {
     }
 
     delete(recipe) {
-        console.log("db delete " + recipe.title);
+        // console.log("db delete " + recipe.title);
         return this._db.remove(recipe).catch((error) => {
           console.log(error);
         });
@@ -46,7 +46,7 @@ export class RecipeService {
                     this.recipes = docs.rows.map(row => {
                         return row.doc;
                     });
-                    console.log(this.recipes);
+                    // console.log(this.recipes);
 
                     // Listen for changes on the database.
                     this._db.changes({ live: true, since: 'now', include_docs: true })

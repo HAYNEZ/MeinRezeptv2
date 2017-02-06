@@ -26,19 +26,7 @@ export class ShoppingListPage {
                 private zone: NgZone,
                 private listService: ListService,
                 public popoverCtrl: PopoverController,
-                private platform: Platform ) {
-
-                  this.listService.getAll()
-                    .then(data => {
-                          this.zone.run(() => {
-                            this.productList = data;
-                            this.listTrue = this.listService.filterChecked();
-                            this.listFalse = this.listService.filterUnchecked();
-                          });
-                      })
-                      .catch(console.error.bind(console));
-
-  }
+                private platform: Platform ) {}
 
 
   readinputs(){
@@ -75,30 +63,24 @@ export class ShoppingListPage {
             product: this.product,
             checked: false
         });
+        this.ionViewDidEnter();
         this.value = undefined;
         this.unit = "";
         this.product = "";
+
     }
   }
 
-  edit(key){
-    var item = key;
-    this.listService.delete(key);
-    if(item.checked){
-      this.listService.add({
-          value: item.value,
-          unit: item.unit,
-          product: item.product,
-          checked: false
-      });
-    }else{
-      this.listService.add({
-        value: item.value,
-        unit: item.unit,
-        product: item.product,
-        checked: true
-      });
-    }
+  edit(item){
+    this.listService.update({
+      _id: item._id,
+      _rev: item._rev,
+      value: item.value,
+      unit: item.unit,
+      product: item.product,
+      checked: !item.checked
+    });
+    this.ionViewDidEnter();
   }
 
   shopOnline(){
@@ -115,6 +97,7 @@ export class ShoppingListPage {
 
   public delete(key){
       this.listService.delete(key);
+      this.ionViewDidEnter();
   }
 
   public deleteAll(){
@@ -128,22 +111,64 @@ export class ShoppingListPage {
                   {
                       text: "Sicher!",
                       handler: data => {
-                          for(var item of this.listTrue){
+                          for(var item of this.productList){
                             this.listService.delete(item);
                           }
-                          for(var item of this.listFalse){
-                            this.listService.delete(item);
-                          }
+                          this.ionViewDidEnter();
                       }
                   }
               ]
           });
           alert.present();
   }
-  
+
   public deleteAllChecked(){
-    for(var item of this.listTrue){
-      this.listService.delete(item);
+    for(var item of this.productList){
+      if(item.checked)
+        this.listService.delete(item);
     }
+    this.ionViewDidEnter();
   }
+
+  ionViewDidLoad(){
+    console.log("did load");
+    this.platform.ready().then(() => {
+      this.listService.initDB();
+
+      this.listService.getAll()
+          .then(data => {
+              this.zone.run(() => {
+                  this.productList = data;
+              });
+          })
+          .catch(console.error.bind(console));
+        });
+  }
+
+  ionViewDidEnter() {
+    console.log("did enter");
+    this.platform.ready().then(() => {
+        this.listService.getAll()
+            .then(data => {
+                console.log(data);
+                    this.productList = data.reverse().sort(function(x, y) {
+                      return (x.checked === y.checked)? 0 : x.checked? -1 : 1;
+                    });
+                    this.productList = this.productList.reverse();
+                    console.log(this.productList);
+            })
+            .catch(console.error.bind(console));
+          });
+
+  }
+
+  // sort(data){
+  //   data.sort(function(x, y) {
+  //     // true values first
+  //     // return (x === y)? 0 : x? -1 : 1;
+  //     // false values first
+  //     return (x === y)? 0 : x? 1 : -1;
+  //   });
+  //   return data
+  // }
 }

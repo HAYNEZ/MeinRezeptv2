@@ -53,8 +53,6 @@ export class ListService {
                     // so let's map the array to contain just the .doc objects.
 
                     this.items = docs.rows.map(row => {
-                        // Dates are not automatically converted from a string.
-
                         return row.doc;
                     });
 
@@ -102,21 +100,21 @@ export class ListService {
 
       //A document was added
         else {
-          this.items.push(change.doc);
+          this.items.unshift(change.doc);
         }
 
       }
     }
 
     // Binary search, the array is by default sorted by _id.
-    private findIndex(array, id) {
-        var low = 0, high = array.length, mid;
-        while (low < high) {
-            mid = (low + high) >>> 1;
-            array[mid]._id < id ? low = mid + 1 : high = mid
-        }
-        return low;
-    }
+    // private findIndex(array, id) {
+    //     var low = 0, high = array.length, mid;
+    //     while (low < high) {
+    //         mid = (low + high) >>> 1;
+    //         array[mid]._id < id ? low = mid + 1 : high = mid
+    //     }
+    //     return low;
+    // }
 
     public getItems(){
       return this.items;

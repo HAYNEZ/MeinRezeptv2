@@ -46,7 +46,7 @@
             {{product.unit}}
             {{product.product}}
           </ion-label>
-          <ion-checkbox checked="false" (click)="edit(product)"></ion-checkbox>
+          <ion-checkbox checked="product.checked" (ionChange)="edit(product)"></ion-checkbox>
         </span>
         <ion-item-options>
           <button class="delete" ion-button (click)="delete(product)" clear icon-only>
@@ -67,7 +67,7 @@
           {{item.unit}}
           {{item.product}}
         </ion-label>
-        <ion-checkbox checked="true" (click)="edit(item)"></ion-checkbox>
+        <ion-checkbox checked="product.checked" (click)="edit(item)"></ion-checkbox>
       </span>
       <ion-item-options>
         <button class="delete" ion-button (click)="delete(product)" clear icon-only>
@@ -88,7 +88,7 @@
           {{item.unit}}
           {{item.product}}
         </ion-label>
-        <ion-checkbox class="checkbox" (click)="edit(item)"></ion-checkbox>
+        <ion-checkbox class="checkbox" [(ngModel)]="item.checked" (click)="edit(item)"></ion-checkbox>
       </span>
       <ion-item-options>
         <button class="delete" ion-button (click)="delete(product)" clear icon-only>
