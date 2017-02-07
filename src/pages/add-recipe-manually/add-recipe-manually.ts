@@ -47,15 +47,15 @@ export class AddRecipeManuallyPage {
      //filled if edit, empty if new, partly filled if OCR
     this.recipe = this.params.get("recipe");
     this.callback = this.params.get("callback");
-    let edited = this.params.get("edit");
-    if(edited){
-      this.edit = true;
-    }
+    // let edited = this.params.get("edit");
+    // if(edited){
+    //   this.edit = true;
+    // }
 
     if(this.recipe){
       this.readInputs();
     }else{
-      this.ingredients = new Array();
+      this.ingredients = [];
     }
     if(!this.base64Image){
       this.base64Image = "assets/img/demo.jpg";
@@ -73,9 +73,9 @@ export class AddRecipeManuallyPage {
    if(this.recipe.ingredients) {
      this.ingredients = this.recipe.ingredients;
    }else{
-     this.ingredients = new Array();
-     let ingredient = new Array(3);
-     this.ingredients.push(ingredient);
+     this.ingredients = [];
+    //  let ingredient = [];
+    //  this.ingredients.push(ingredient);
    }
 
    if(this.recipe.tags){
@@ -224,7 +224,7 @@ saveRecipe() {
         }
       }
 
-      if(!this.edit){
+      if(!this.params.get("edit")){
         this.recipe = {
          title: this.title,
          ingredients: this.ingredients,
