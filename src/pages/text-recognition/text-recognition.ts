@@ -85,7 +85,7 @@ export class TextRecognitionPage {
       k++;
     }while(lines[k] != "");
     //remove the empty line from array
-    ing_a.pop();
+    // ing_a.pop();
     //add remaining lines to preparation array (if line is not empty)
     while(k < lines.length){
       if(lines[k] != "")
