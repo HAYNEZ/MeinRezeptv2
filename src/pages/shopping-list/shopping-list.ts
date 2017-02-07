@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, Platform, AlertController, PopoverController} from 'ionic-angular';
+import { NavController, Platform, AlertController, PopoverController, ItemSliding} from 'ionic-angular';
 import { ListService } from '../../providers/list.service';
 import { PopoverPagePage } from '../popover-page/popover-page';
 
@@ -13,8 +13,6 @@ import { PopoverPagePage } from '../popover-page/popover-page';
 export class ShoppingListPage {
 
   public productList = [];
-  public listFalse = [];
-  public listTrue = [];
   public input:any;
   product: any;
   unit: any;
@@ -69,6 +67,14 @@ export class ShoppingListPage {
         this.product = "";
 
     }
+  }
+
+  editItem(key){
+    console.log(key[0]);
+        this.value = key.value;
+        this.unit = key.unit;
+        this.product = key.product;
+        this.listService.delete(key);
   }
 
   edit(item){
@@ -161,14 +167,4 @@ export class ShoppingListPage {
           });
 
   }
-
-  // sort(data){
-  //   data.sort(function(x, y) {
-  //     // true values first
-  //     // return (x === y)? 0 : x? -1 : 1;
-  //     // false values first
-  //     return (x === y)? 0 : x? 1 : -1;
-  //   });
-  //   return data
-  // }
 }
