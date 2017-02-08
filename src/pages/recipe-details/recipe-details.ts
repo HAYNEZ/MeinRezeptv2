@@ -29,7 +29,9 @@ export class RecipeDetailsPage {
     this.recipe = params.get("recipe");
     this.section = "general";
 
-    if(this.recipe.preparation){
+    console.log("preparation");
+    console.log(this.recipe.preparation);
+    if(this.recipe.preparation != null && typeof this.recipe.preparation === 'string'){
       let array = this.recipe.preparation.split(".");
       for(let i = 0; i < array.length; i++){
         array[i] = array[i] + ".\n";
