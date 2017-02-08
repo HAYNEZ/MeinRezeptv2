@@ -28,19 +28,30 @@ export class RecipeDetailsPage {
               private viewCtrl: ViewController) {
     this.recipe = params.get("recipe");
     this.section = "general";
+
+    if(this.recipe.preparation){
+      let array = this.recipe.preparation.split(".");
+      for(let i = 0; i < array.length; i++){
+        array[i] = array[i] + ".\n";
+      }
+      this.recipe.preparation = array;
+    }
+
     this.factor = 1;
     this.servingsDefault = this.recipe.portions;
-    this.calculatedValues = new Array();
-    for(var i = 0; i < this.recipe.ingredients.length; i++){
-      this.calculatedValues[i]=this.recipe.ingredients[i][0];
+    this.calculatedValues = [];
+    for(let i = 0; i < this.recipe.ingredients.length; i++){
+      this.calculatedValues[i] = this.recipe.ingredients[i][0];
     }
+
+
   }
 
   calcPortion(){
-    var oldValue = this.recipe.portions
-    var newValue = this.servingsDefault;
+    let oldValue = this.recipe.portions;
+    let newValue = this.servingsDefault;
     this.factor = newValue/oldValue;
-    for(var i = 0; i < this.recipe.ingredients.length; i++){
+    for(let i = 0; i < this.recipe.ingredients.length; i++){
       this.calculatedValues[i] = Math.round(this.factor*this.recipe.ingredients[i][0]*100)/100;
     }
   }
