@@ -18,6 +18,7 @@ export class ShoppingListPage {
   unit: any;
   value: any;
   checked: any;
+  containsChecked: boolean = false;
 
   constructor(  public navCtrl: NavController,
                 private alertController: AlertController,
@@ -75,6 +76,7 @@ export class ShoppingListPage {
         this.unit = key.unit;
         this.product = key.product;
         this.listService.delete(key);
+        this.ionViewDidEnter();
   }
 
   edit(item){
@@ -152,19 +154,19 @@ export class ShoppingListPage {
   }
 
   ionViewDidEnter() {
-    console.log("did enter");
+    this.containsChecked = false;
     this.platform.ready().then(() => {
         this.listService.getAll()
             .then(data => {
                 console.log(data);
-                    this.productList = data.reverse().sort(function(x, y) {
-                      return (x.checked === y.checked)? 0 : x.checked? -1 : 1;
-                    });
-                    this.productList = this.productList.reverse();
-                    console.log(this.productList);
+                    this.productList = data;
+                    for(let item of this.productList){
+                          if(item.checked){
+                              this.containsChecked = true;
+                          }
+                        }
             })
             .catch(console.error.bind(console));
           });
-
   }
 }
