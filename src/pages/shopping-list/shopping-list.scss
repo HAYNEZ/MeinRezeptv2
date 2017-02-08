@@ -3,25 +3,23 @@ page-shopping-list {
   .delete{
     color: #775069;
   }
-  .label-md{
-    margin-bottom: 0px;
-  }
-  .item-md{
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  .scroll-content{
-    padding-left: 5px;
-    padding-right: 5px;
-  }
-  .first{
-    padding-left:10px;
+  .add{
+    color: #775069;
   }
   .itemTrue{
     text-decoration: line-through;
     color: grey;
+    position: relative;
   }
-  .erledigt{
-    color: #9DCB7E;
+  .falseList{
+    position: relative;
   }
+  .trueList{
+      position: relative;
+  }
+  .input-field{
+    display: inline-block;
+    width: 31%;
+  }
+  
 }

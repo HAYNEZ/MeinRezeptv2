@@ -1,20 +1,17 @@
 <ion-header>
-
   <ion-navbar>
-
     <ion-title>{{recipe.title}}</ion-title>
     <ion-buttons  (click)="presentPopover($event)" end>
       <button ion-button icon-only >
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
 
+  <!-- Tabs Segment -->
   <div>
     <ion-segment [(ngModel)]="section">
       <ion-segment-button value="general">
@@ -29,9 +26,9 @@
     </ion-segment>
   </div>
 
-
   <div [ngSwitch]="section">
-    <!-- Allgemein Section -->
+
+    <!-- Common Section -->
     <div *ngSwitchCase="'general'">
       <img src={{recipe.base64Image}} alt="Default Bild">
       <ul id="recipe-info">
@@ -58,10 +55,10 @@
       </ul>
     </div>
 
-    <!-- Zutaten Section -->
-    <div *ngSwitchCase="'ingredients'" style="padding-top: 10px;">
+    <!-- Ingredients Section -->
+    <div id="ingredientsSection" *ngSwitchCase="'ingredients'">
       <div *ngIf="recipe.ingredients.length>0">
-        <p>F&uuml;r <!--  FÜR mit umlaut -->
+        <p>F&uuml;r
           <ion-input
             id="servings"
             value="recipe.portions"
@@ -73,7 +70,6 @@
           <ion-icon ion-button id="round-button-circle" (click)="calcPortion()" name="refresh"></ion-icon>
           Portion(en):
         </p>
-
         <ion-list>
           <ion-label id="ingredians" *ngFor="let ingredient of recipe.ingredients; let i = index">
             <ion-checkbox id="ingredianCheck" disabled="true" color="primary"></ion-checkbox>
@@ -91,10 +87,10 @@
     </div>
     </div>
 
-
-    <div *ngSwitchCase="'steps'" style="padding-top: 10px;">
-      <div *ngIf="recipe.preparation" style="padding: 5px;">
-        <p *ngFor="let prep of recipe.preparation" style="text-align:justify">
+    <!-- Preparation Section -->
+    <div id="switchCase" *ngSwitchCase="'steps'">
+      <div id="ifPreparation" *ngIf="recipe.preparation">
+        <p id="foreachStep" *ngFor="let prep of recipe.preparation">
           {{prep}}
         </p>
       </div>
@@ -109,5 +105,4 @@
     </div>
 
   </div>
-
 </ion-content>

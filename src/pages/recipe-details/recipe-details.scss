@@ -1,84 +1,47 @@
 page-recipe-details {
 
-#recipe-info {
-  border-radius: 5px;
-  margin-top: 10px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-  color: white;
-  background-color: #9DCB7E;
-}
-
-ul li {
-  text-align: center;
-  display: inline-block;
-  width: 48%;
-  list-style: none;
-
-  font-weight: bold;
-  font-size: 16px;
-}
-
-// #recipe-info:last-child{
-//   width: 100%;
-//   margin-top: 10px;
-//   margin-bottom: 10px;
-//   font-weight: normal;
-// }
-
-.missing{
-  font-style: italic;
-  text-align: center;
-}
-
-#ingredians{
-  height: 30px;
-  border-bottom: 1px solid #9DCB7E;
-
-}
-#ingredians:last-child{
-  border-bottom: none;
-}
-
-#ingredianCheck{
-  height: 13px;
-  width: 25px;
-}
-
-
-#star{
-  font-weight: bold;
-  font-size: 20px;
-}
-
-#tags{
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-
-/*  #switch button {
+  #recipe-info {
+    border-radius: 5px;
+    margin-top: 10px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    color: white;
+    background-color: #9DCB7E;
+  }
+  ul li {
+    text-align: center;
     display: inline-block;
-    width: 49.5%;
-    position: relative;
-    top: 5px;
-    margin-bottom: 15px;
-    background-color: #DCADCA;
+    width: 48%;
+    list-style: none;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .missing{
+    font-style: italic;
+    text-align: center;
+  }
+  #ingredians{
+    height: 30px;
+    border-bottom: 1px solid #9DCB7E;
+  }
+  #ingredians:last-child{
+    border-bottom: none;
+  }
+  #ingredianCheck{
+    height: 13px;
+    width: 25px;
+  }
+  #star{
+    font-weight: bold;
     font-size: 20px;
   }
-
-  #infos {
-    margin-top: 25px;
-    background-color: #9DCB7E;
-    height: 50px;
-    text-align: center;
-
-  }*/
-
-
+  #tags{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
   #servings{
     display: inline;
     :first-child{
@@ -87,18 +50,27 @@ ul li {
       padding: 2px;
       border: 2px solid color($colors, primary, light)
     }
-
   }
-
   #round-button-circle {
-  margin-top: -7px;
-  margin-left: -8px;
-  padding: 6px;
-  width: 30px;
-  height:30px;
-  border-radius: 50%;
-  overflow:hidden;
-}
-
-
+    margin-top: -7px;
+    margin-left: -8px;
+    padding: 6px;
+    width: 30px;
+    height:30px;
+    border-radius: 50%;
+    overflow:hidden;
+  }
+  #ingredientsSection{
+    padding-top: 10px;
+  }
+  #switchCase{
+    padding-top: 10px;
+  }
+  #ifPreparation{
+    padding: 5px;
+  }
+  #foreachStep{
+    text-align: justify;
+  }
+  
 }
