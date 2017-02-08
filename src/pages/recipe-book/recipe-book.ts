@@ -36,6 +36,7 @@ export class RecipeBookPage {
       this.navCtrl.push(InformationPage);
     }
 
+ //For Three line menu icon : Shows menu with two functions: Sort and Tag-Filter
     presentPopover(event) {
         let popover = this.popoverCtrl.create(PopoverPagePage, {
           actions : [
@@ -52,13 +53,17 @@ export class RecipeBookPage {
         popover.present({ev:event});
     }
 
+   //When clicking on a recipe, the details page of the recipe opens
     showDetails(recipe) {
       this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
     }
 
+  //deletes a recipe
     delete(recipe) {
         this.recipeService.delete(recipe);
     }
+
+
 
     presentTagFilter() {
       let tags = this.recipeService.getTags();
