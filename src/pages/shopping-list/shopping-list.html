@@ -21,16 +21,13 @@
 
   <div style="width: 100%;">
   <span class="first" ion-item no-lines [(ngModel)]='value' style="display: inline-block; width: 32%;">
-    <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Menge</ion-label>
-    <ion-input type="number"></ion-input>
+    <ion-input placeholder="Menge" type="number" class="label"></ion-input>
   </span>
   <span ion-item no-lines [(ngModel)]='unit' style="display: inline-block; width:32%;">
-    <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Einheit</ion-label>
-    <ion-input type="text" ></ion-input>
+    <ion-input placeholder="Einheit" type="text" class="label"></ion-input>
   </span>
   <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 33%;">
-    <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Artikel</ion-label>
-    <ion-input type="text" ></ion-input>
+    <ion-input placeholder="Artikel" type="text" class="label"></ion-input>
   </span>
     </div>
     <button ion-button (click)="add() " icon-only full >
