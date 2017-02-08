@@ -11,7 +11,9 @@ import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manuall
 
 export class TextRecognitionPage {
 
-  srcImage: string;
+  srcImageIng: string;
+  srcImagePrep: string;
+  sourceType: number;
   OCRAD: any;
 
   constructor(  public navCtrl: NavController,
@@ -28,19 +30,30 @@ export class TextRecognitionPage {
     }
   }
 
-  choosePhoto() {
-    this.getPicture(0); // 0 == Library
+  //choose the first photo with the ingredients
+  //source type is set to choosing photo for second image
+  choosePhoto() {!
+    alert("Choose a photo of the ingredients!");
+    this.sourceType = 0;
+    this.getPicture(this.sourceType, "ing"); // 0 == Library
   }
 
+  //take the first photo with the ingredients
+  //source type is set to taking photo for second image
   takePhoto() {
-    this.getPicture(1); // 1 == Camera
+    alert("Take a photo of the ingredients!")
+    this.sourceType = 1;
+    this.getPicture(this.sourceType, "ing"); // 1 == Camera
   }
 
+  //both demo photos are set to test ocr
   demoPhoto() {
-    this.srcImage = 'assets/img/demo.png';
+    this.srcImageIng = 'assets/img/demoIng.png';
+    this.srcImagePrep = 'assets/img/demoPrep.png';
   }
 
-  getPicture(sourceType: number) {
+  //Cordova camera organizes picture either from camera or existing photos
+  getPicture(sourceType: number, type: string) {
     // You can check the values here:
     // https://github.com/driftyco/ionic-native/blob/master/src/plugins/camera.ts
     Camera.getPicture({
@@ -51,53 +64,72 @@ export class TextRecognitionPage {
       saveToPhotoAlbum: false,
       correctOrientation: true
     }).then((imageData) => {
-      this.srcImage = `data:image/jpeg;base64,${imageData}`;
+      //picture is saved depending on whether it is ingredients or preparation
+      if(type == "ing"){
+        this.srcImageIng = `data:image/jpeg;base64,${imageData}`;
+      }else if(type == "prep"){
+        this.srcImagePrep = `data:image/jpeg;base64,${imageData}`;
+      }
+      
     }, (err) => {
       console.log(`ERROR -> ${JSON.stringify(err)}`);
     });
   }
 
+  //second photo is taken or choosen 
+  addTextPhoto(){
+    this.getPicture(this.sourceType, "prep");
+  }
+
+  //text of photos is analyzed
   analyze() {
+    //loader to show that the app is doing something
     let loader = this.loadingCtrl.create({
      content: 'Bitte warten...'
     });
+    //arrays for saving lines of ingredients and preparation
+    var arrayIng = [];
+    var arrayPrep = [];
+    //analyze first image
     loader.present();
-    (<any>window).OCRAD(document.getElementById('image'), text => {
+    (<any>window).OCRAD(document.getElementById('imageIng'), textIng => {
       loader.dismissAll();
-      alert(text);
-      this.formatText(text);
+      //text is separated into array of lines
+      arrayIng = this.toLines(textIng);
     });
+    //analyze second image
+    loader.present();
+    (<any>window).OCRAD(document.getElementById('imagePrep'), textPrep => {
+      loader.dismissAll();
+      //text is separated into array of lines
+      arrayPrep = this.toLines(textPrep);
+      //both texts are formatted
+      this.formatText(arrayIng, arrayPrep);
+    });    
+  }
+
+  //text is separated into array of lines
+  toLines(text){
+    let lines = text.split("\n");
+    let array = [];
+    let k = 0;
+    do{
+      array.push(lines[k]);
+      k++;
+    }while(lines[k] != "");
+    return array;
   }
 
 /*
   Formats the input text into ingredients and preparation sections
 */
-  formatText(input){
-    //divide input into single lines
-    let lines = input.split("\n");
-    //arrays for lines divided into ingredients and preparation
-    let ing_a = [];
-    let prep_a = [];
-    //search for ingredient lines until empty line
-    let k = 0;
-    do{
-      ing_a.push(lines[k]);
-      k++;
-    }while(lines[k] != "");
-    //remove the empty line from array
-    // ing_a.pop();
-    //add remaining lines to preparation array (if line is not empty)
-    while(k < lines.length){
-      if(lines[k] != "")
-        prep_a.push(lines[k]);
-      k++;
-    }
+  formatText(arrayIng, arrayPrep){
     //create recipe object
     let recipe = {
       "title" : null,
-      "ingredients" :  this.formatIngredients(ing_a),
+      "ingredients" :  this.formatIngredients(arrayIng),
       "portions": null,
-      "preparation" : this.formatPreparation(prep_a),
+      "preparation" : this.formatPreparation(arrayPrep),
       "time": null,
       "tags": null,
       "rating": 0,
@@ -145,131 +177,4 @@ export class TextRecognitionPage {
     }
     return preparation;
   }
-
-/*
-  Checks if a char code is in the range of numbers
-*/
-  isNumber(charCode): boolean {
-    return (charCode> 47 && charCode < 58);
-  }
-
-  // formatText(input){
-  //   var lines = input.split("\n");
-  //   var ing = "";
-  //   var prep = "";
-  //   var k = 0;
-  //   while(!isNaN(lines[k].charAt(0))){
-  //     ing += lines[k] + "\n";
-  //     k++;
-  //   }
-  //   for(var k = 0; k < lines.length; k++){
-  //     prep += lines[k] + "\n";
-  //   }
-  //   let recipe = {
-  //     "title" : null,
-  //     "ingredients" :  this.formatIngredientsBlock(ing),
-  //     "portions": null,
-  //     "preparation" : this.formatPreparation(prep),
-  //     "time": null,
-  //     "tags": null,
-  //     "rating": 0,
-  //     "base64Image": ""
-  //   }
-  //   this.navCtrl.push(AddRecipeManuallyPage, {recipe: recipe});
-  // }
-  //
-  // formatIngredientsBlock(text){
-  //   //textblock an allen whitespaces und newlines trennen
-  //   var array = text.split(/\n|\s/);
-  //
-  //   //neues Array in dem die einzelnen Zutaten als Datensatz eingetragen werden
-  //   var ingredients = new Array;
-  //   var arrayCount = 0;
-  //
-  //   //Schleife über alle Wörter
-  //   for (var i = 0; i < array.length; i++){
-  //     var first = array[i].charAt(0);
-  //     //Prüfen ob erster Char des Wortes eine Zahl ist
-  //     if(!isNaN(first)){
-  //       //Zahl in Array eintragen
-  //       ingredients[arrayCount] = array[i];
-  //       var nextIsNan;
-  //       if((i + 1) < array.length)
-  //         nextIsNan = isNaN(array[(i+1)].charAt(0));
-  //       else
-  //         nextIsNan = false;
-  //
-  //       while(nextIsNan){
-  //         i++;
-  //         ingredients[arrayCount] += " " + array[i];
-  //
-  //         if(i<array.length-1){
-  //           nextIsNan = isNaN(array[(i+1)].charAt(0));
-  //         }else{
-  //           nextIsNan = false;
-  //         }
-  //       }
-  //       arrayCount += 1;
-  //     }
-  //   }
-  //   var result = new Array;
-  //   for(var j = 0; j < ingredients.length; j++){
-  //     if(ingredients[j] != ""){
-  //       result[j] = this.splitIngredient(ingredients[j]);
-  //     }
-  //   }
-  //   return result;
-  // }
-  //
-  // splitIngredient(ingredient){
-  //   var pieces = ingredient.split(" ");
-  //   var amount = "";
-  //   var i = 0;
-  //   while((!(isNaN(pieces[i]))) && i < pieces.length){
-  //     amount += pieces[i];
-  //     i++;
-  //   }
-  //   var unit = "";
-  //   if(isNaN(pieces[i-1].charAt(pieces[i-1].length))){
-  //     //
-  //   }else{
-  //     unit = pieces[i];
-  //     i++;
-  //   }
-  //
-  //   var thing = "";
-  //   while(i < pieces.length){
-  //     thing += pieces[i];
-  //     i++;
-  //   }
-  //   var result = [amount, unit, thing];
-  //   return result;
-  // }
-  //
-  // formatPreparation(text){
-  // //ueberfluessige Zeilenumbrüche entfernen, nur Absätze als Zeilenumbruch interpretieren
-  //   var array = text.split("\n");
-  //
-  //   var result = "";
-  //   for(var j = 0; j < array.length; j++){
-  //     if(array[j].length == 0){
-  //       //result += "\n";
-  //     }else{
-  //       result += array[j];
-  //     }
-  //   }
-  //
-  //   var result1 = result.split(".");
-  //   for(var j = 0; j < result1.length; j++){
-  //     if(result1[j] == ""){
-  //       result1.splice(j,1);
-  //     }
-  //   }
-  //   result = "";
-  //   for(var j = 0; j < result1.length; j++){
-  //     result += result1[j];
-  //     result += " ";
-  //   }
-  //   return result;
-  // }
 }
