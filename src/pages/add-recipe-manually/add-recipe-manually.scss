@@ -1,13 +1,5 @@
 page-add-recipe-manually {
 
-  ion-range{
-    width: 100%;
-  }
-
-  #preparation{
-    height: auto;
-  }
-
   .divider{
     font-size: 12pt;
     font-weight: bold;
@@ -17,33 +9,8 @@ page-add-recipe-manually {
   }
 
   .area{
-    // // padding: 5px;
-    // padding-top: 5px;
     padding-bottom: 0px;
     margin-bottom: 5px;
     border: solid 1px #f4f4f4;
   }
-
-//   .md ion-list > .item-block:last-child,
-//   .md ion-list > .item-wrapper:last-child .item,
-//   .wp ion-list > .item-block:last-child,
-//   .wp ion-list > .item-wrapper:last-child .item,
-//   .ios ion-list > .item-block:last-child,
-//   .ios ion-list > .item-wrapper:last-child .item {
-//       border-bottom: none;
-//   }
-//   .md ion-list > .item-block:first-child,
-//   .md ion-list > .item-wrapper:first-child .item,
-//   .wp ion-list > .item-block:first-child,
-//   .wp ion-list > .item-wrapper:first-child .item,
-//   .ios ion-list > .item-block:first-child,
-//   .ios ion-list > .item-wrapper:first-child .item {
-//       border-top: none;
-//   }
-//   .list-ios>.item-block:first-child {
-//     border-top: none;
-// }
-// .list-ios>.item-block:last-child {
-//     border-bottom: none;
-// }
 }
