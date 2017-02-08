@@ -8,10 +8,9 @@ import { NavController } from 'ionic-angular';
 })
 
 export class InformationPage {
-
   section : any;
-
-  constructor(public navCtrl: NavController) {
-    this.section = "idea";
-  }
+    constructor(public navCtrl: NavController) {
+      //selected section
+      this.section = "idea";
+    }
 }
