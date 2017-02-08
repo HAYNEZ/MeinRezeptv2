@@ -238,6 +238,7 @@ saveRecipe() {
        };
      this.recipeService.add(this.recipe);
    }else{
+     console.log(this.recipe._id);
      this.recipe = {
        _id: this.recipe._id,
        _rev: this.recipe._rev,
@@ -253,7 +254,6 @@ saveRecipe() {
     };
      this.recipeService.update(this.recipe).catch(console.error.bind(console));
    }
-
     this.navCtrl.push(RecipeDetailsPage, {recipe: this.recipe});
     this.dismiss(this.recipe);
   }else{
