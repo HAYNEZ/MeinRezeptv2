@@ -159,6 +159,7 @@ export class RecipeBookPage {
     }
 
     ionViewDidEnter() {
+      this.tagString = null;
           this.recipeService.getAll()
               .then(data => {
                       this.recipes = data;
