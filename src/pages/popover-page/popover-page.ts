@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ViewController, AlertController, NavController, NavParams } from 'ionic-angular';
-import { ShoppingListPage } from '../shopping-list/shopping-list';
 import { ListService } from '../../providers/list.service';
 
 

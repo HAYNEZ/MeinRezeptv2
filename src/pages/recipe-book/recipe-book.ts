@@ -32,6 +32,7 @@ export class RecipeBookPage {
       private listService : ListService
     ) {}
 
+//Opens the Impressum page
     showInformation() {
       this.navCtrl.push(InformationPage);
     }
@@ -58,13 +59,13 @@ export class RecipeBookPage {
       this.navCtrl.push(RecipeDetailsPage, {recipe: recipe});
     }
 
-  //deletes a recipe
+  //Deletes a recipe
     delete(recipe) {
         this.recipeService.delete(recipe);
     }
 
 
-
+//Opens a popup window and let you sort recipes by tags
     presentTagFilter() {
       let tags = this.recipeService.getTags();
 
@@ -90,6 +91,7 @@ export class RecipeBookPage {
       alert.present();
     }
 
+//Opens a popup window and let you sort recipes by alphabet, rating and date
     presentSortOptions() {
        const actionSheet = this.actionSheetCtrl.create({
            buttons: [
@@ -117,6 +119,7 @@ export class RecipeBookPage {
        actionSheet.present();
    }
 
+//Sorting recipes alphabetically
    sortAlphabetically() {
     this.recipes.sort(function(a, b){
          var titleA=a.title.toLowerCase(), titleB=b.title.toLowerCase()
@@ -128,6 +131,7 @@ export class RecipeBookPage {
      });
     }
 
+//Sorting recipes by rating in descending order
     sortRating() {
       this.recipes.sort(function(a, b){
           return a.rating-b.rating
@@ -135,6 +139,7 @@ export class RecipeBookPage {
       this.recipes.reverse();
      }
 
+//Sorting recipes by date in descending order
     sortDate(){
         this.recipes.sort(function(a,b) {
             return new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -142,11 +147,16 @@ export class RecipeBookPage {
         this.recipes.reverse();
     }
 
+//Stops the filtering function
     removeTagFilter() {
       this.tagString = null;
       this.ionViewDidEnter();
     }
 
+    // Lifecycle event provided by the NavController
+    // "Runs when the page has loaded. This event only happens once per page being created."
+    // https://ionicframework.com/docs/v2/api/navigation/NavController/
+    // Receiving all items from devices storage, saving them as a array named "recipes"
     ionViewDidLoad(){
       this.platform.ready().then(() => {
         this.recipeService.initDB();
@@ -163,6 +173,10 @@ export class RecipeBookPage {
       });
     }
 
+    // Lifecycle event provided by the NavController
+    // "Runs when the page has fully entered and is now the active page."
+    // https://ionicframework.com/docs/v2/api/navigation/NavController/
+    // Receiving all items from devices storage, saving them as a global array named "recipes"
     ionViewDidEnter() {
       this.tagString = null;
           this.recipeService.getAll()
@@ -172,6 +186,7 @@ export class RecipeBookPage {
               .catch(console.error.bind(console));
     }
 
+//Function for filtering by title or ingredients
     setFilteredItems() {
           this.titleResults = this.recipeService.filterItemsTitle(this.searchTerm);
           this.ingredientResults = this.recipeService.filterItemsIngredient(this.searchTerm);

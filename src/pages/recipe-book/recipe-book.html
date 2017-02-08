@@ -2,6 +2,7 @@
 
   <ion-toolbar>
 
+    <!-- Impressum-->
     <ion-buttons left>
       <button ion-button icon-only (click)="showInformation()">
         <ion-icon name="information-circle"></ion-icon>
@@ -10,6 +11,7 @@
 
     <ion-title id="headerTitle">BOIL</ion-title>
 
+    <!-- Three line menu on the right top side-->
     <ion-buttons  (click)="presentPopover($event)" end>
       <button ion-button icon-only >
         <ion-icon name="menu"></ion-icon>
@@ -24,6 +26,7 @@
 
   <h1>Meine Rezepte</h1>
 
+  <!-- Search bar for filtering by title or ingredients -->
   <ion-searchbar placeholder="Suche" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
   <div padding-left *ngIf="tagString">
     {{tagString}}
@@ -31,6 +34,8 @@
       <ion-icon name="close"></ion-icon>
     </button>
   </div>
+
+  <!-- Recipe Image and Title-->
   <div *ngIf="!searchTerm">
     <div id="recipe" *ngFor="let recipe of recipes" (click)="showDetails(recipe)">
       <img class="recipeImage" src="{{ recipe.base64Image }}"/>
