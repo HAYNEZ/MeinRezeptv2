@@ -14,18 +14,15 @@ export class AddRecipeManuallyPage {
     edit : boolean = false;
     photoTaken: boolean;
     photoSelected: boolean;
-    _zone: any;
     public base64Image: string;
     public preparation:any;
     title: any;
     ingredients: any;
-    testText: any;
     portions: any;
     time: any;
-    tagString : string = "";
+    tagString: string = "";
     tags: any;
     rating: number = 0;
-    date: any;
     callback: any;
     product: any;
     unit: any;
@@ -40,17 +37,20 @@ export class AddRecipeManuallyPage {
               private platform: Platform
    ) {}
 
+  // Lifecycle event provided by the NavController
+  // "Runs when the page has loaded. This event only happens once per page being created."
+  // https://ionicframework.com/docs/v2/api/navigation/NavController/
+  // Receiving all details from a recipe if edit, empty if new, partly filled if OCR
  ionViewDidLoad(){
+    //for asynchronous task updating
     this.zone = this.zone;
+    //tomato picture per default
     this.photoTaken = false;
 
-     //filled if edit, empty if new, partly filled if OCR
+     //page is filled if edit, empty if new, partly filled if OCR
     this.recipe = this.params.get("recipe");
+    //updates page after editing
     this.callback = this.params.get("callback");
-    // let edited = this.params.get("edit");
-    // if(edited){
-    //   this.edit = true;
-    // }
 
     if(this.recipe){
       this.readInputs();
@@ -62,6 +62,7 @@ export class AddRecipeManuallyPage {
     }
  }
 
+ // When recipe is edited - reads selected recipe information
  readInputs() {
    this.title = this.recipe.title;
    this.base64Image = this.recipe.base64Image;
@@ -74,15 +75,13 @@ export class AddRecipeManuallyPage {
      this.ingredients = this.recipe.ingredients;
    }else{
      this.ingredients = [];
-    //  let ingredient = [];
-    //  this.ingredients.push(ingredient);
    }
-
    if(this.recipe.tags){
      this.tagString = this.recipe.tags.join();
    }
  }
 
+ // Opens a popup window and shows all the current default tags
  showTags() {
    let tags = this.recipeService.getTags();
    let alert = this.alertCtrl.create({
@@ -99,6 +98,7 @@ export class AddRecipeManuallyPage {
    alert.addButton('Abbrechen');
    alert.addButton({
      text: 'Verwenden',
+     //update tags
      handler: data => {
        if(data.length > 0){
          if(this.tagString.endsWith(",")){ //"Nachspeise," + " " -> "Nachspeise, "
@@ -120,6 +120,7 @@ export class AddRecipeManuallyPage {
     alert.present();
  }
 
+// Opens Users Camera
  takePicture(): void {
      let options = {
          sourceType: Camera.PictureSourceType.CAMERA,
@@ -141,7 +142,7 @@ export class AddRecipeManuallyPage {
      });
  }
 
-
+// Opens Users Gallery
  accessGallery(): void {
     let cameraOptions = {
         sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
@@ -151,74 +152,90 @@ export class AddRecipeManuallyPage {
         targetWidth: 500,
         targetHeight: 500,
         encodingType: Camera.EncodingType.JPEG,
-        correctOrientation: true
+        correctOrientation: true,
+        saveToPhotoAlbum: true
     }
-    Camera.getPicture(cameraOptions)
-        .then((file_uri) => {
+    Camera.getPicture(cameraOptions).then((file_uri) => {
           this.base64Image = file_uri;
+          this.photoTaken = true;
+          this.photoSelected = false;
         }, (error) => {
           console.log(SyntaxError);
         });
 }
 
+// Saves the ingredients - split into number value, unit and the product name
 addIngredient(){
   if(this.product){
     let ingredient = [this.value, this.unit, this.product];
     this.ingredients.push(ingredient);
-    //reset values
     this.value = undefined;
     this.unit = "";
     this.product = "";
   }
 }
 
+// Slider from right to left shows options
+// Params2: Editing
+// Allows to edit the current ingredients
 editIngredient(ingredient, item:ItemSliding ){
   let index = this.ingredients.indexOf(ingredient);
-
-  if(index > -1){
-    let ingredient = this.ingredients[index];
-    this.ingredients.splice(index, 1);
-    this.product = ingredient[2];
-    this.unit = ingredient[1];
-    this.value = ingredient[0];
-  }
-  item.close();
+    if(index > -1){
+      let ingredient = this.ingredients[index];
+      this.ingredients.splice(index, 1);
+      this.product = ingredient[2];
+      this.unit = ingredient[1];
+      this.value = ingredient[0];
+    }
+    item.close();
 }
 
+// Slider from right to left shows options
+// Params2: Deleting
+// Allows to delete the current ingredients
 removeIngredient(ingredient, item:ItemSliding){
   let index = this.ingredients.indexOf(ingredient);
-
-  if(index > -1){
-    this.ingredients.splice(index, 1);
-  }
-  item.close();
+    if(index > -1){
+      this.ingredients.splice(index, 1);
+    }
+    item.close();
 }
 
+// Method to split the input tags
 parseTags(){
   if(this.tagString != ""){
+    //displaces the white space and spilts at the
     this.tags = this.replaceAll(this.tagString,"\\s+","").split(',');
   }
 }
 
+// Our case: Replaces every white space in str
+//params: str - string to be used for replacements
+        //find - substring/char to be replaced,
+        //replace - substring/char to be replaced through
+        // g - Global search does not return only the first hit but an array of all hits
 replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
 
+// Save the entered recipe and updates the recipe book
 saveRecipe() {
-
     if(this.title){
-      //tagString to tagArray
+      //pars tagString to tagArray
       this.parseTags();
       if(this.tags){
+        //if tag is given in twice - remove it
         this.tags = this.recipeService.removeDoubleTags(this.tags);
       }
       if(!this.portions){
+        //default value for correct portions calculator
         this.portions = 4;
       }
 
       if(this.recipe){
         if(this.recipe.tags){
           if(this.recipe.tags.join() != this.tagString){
+            //update default tag list
             this.recipeService.updateTags(this.tags);
           }
         }
@@ -233,12 +250,10 @@ saveRecipe() {
          time: this.time,
          tags: this.tags,
          rating: this.rating,
-         base64Image: this.base64Image,
-         date: new Date()
+         base64Image: this.base64Image
        };
      this.recipeService.add(this.recipe);
    }else{
-     console.log(this.recipe._id);
      this.recipe = {
        _id: this.recipe._id,
        _rev: this.recipe._rev,
@@ -250,10 +265,11 @@ saveRecipe() {
       tags: this.tags,
       rating: this.rating,
       base64Image: this.base64Image,
-      date: new Date()
     };
+      //saves and updates recipe database
      this.recipeService.update(this.recipe).catch(console.error.bind(console));
    }
+    //pushes recipe to the book stack
     this.navCtrl.push(RecipeDetailsPage, {recipe: this.recipe});
     this.dismiss(this.recipe);
   }else{
@@ -261,36 +277,18 @@ saveRecipe() {
   }
  }
 
+ // Closes edit page and shows current recipe detail page to check the input
  dismiss(recipe) {
        this.viewCtrl.dismiss(recipe);
  }
 
- trackByIndex(index: number, obj: any): any {
-   return index;
- }
-
+ // Reminder for empty recipe titel
+ // Opens a popup window
  noTitel(){
    let alert = this.alertCtrl.create({
        title: "Dein Rezept braucht noch einen Titel",
-       buttons: [
-           {
-               text: "OK"
-           }
-         ]
+       buttons: [{ text: "OK" }]
    })
    alert.present();
  }
-
-
-//Funktioniert nicht, später hilfreich?
-//TODO: delete ??
-  checkif(){
-    var title = document.getElementById("recipeTitle");
-    var titlelength = this.title.length;
-
-    if(titlelength>11){
-      alert(titlelength);
-     title.style.fontSize="20px";
-    }
-  }
 }

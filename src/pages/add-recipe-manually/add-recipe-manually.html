@@ -8,12 +8,13 @@
 
 
 <ion-content padding>
+
   <ion-list no-lines>
 
     <!-- Title -->
     <div class="area">
       <ion-item>
-        <ion-input placeholder="Titel eingeben" type="text" [(ngModel)]='title' name ='title' > </ion-input>
+        <ion-input placeholder="Titel eingeben" type="text" maxlength="25" [(ngModel)]='title' name ='title' > </ion-input>
       </ion-item>
     </div>
 
@@ -29,112 +30,112 @@
 
     <!-- Ingredients -->
     <div class="area" *ngIf="ingredients">
-    <ion-item-divider class="divider">
-      Zutaten:
-    </ion-item-divider>
+      <ion-item-divider class="divider">
+        Zutaten:
+      </ion-item-divider>
 
       <!-- Ingredients add -->
-    <div style="width: 100%;">
-      <span ion-item no-lines [(ngModel)]='value' style="display: inline-block; width: 32%;">
-        <ion-input placeholder="Menge" type="number" style="width:100%"></ion-input>
-      </span>
-      <span ion-item no-lines [(ngModel)]='unit' style="display: inline-block; width: 32%;">
-        <ion-input placeholder="Einheit" type="text" style="width:100%"></ion-input>
-      </span>
-      <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 33%;">
-        <ion-input placeholder="Artikel" type="text"  style="width:100%"></ion-input>
-      </span>
-    </div>
-    <button ion-button (click)="addIngredient()" icon-only block>
-      <ion-icon name='add' is-active="true"></ion-icon>
-    </button>
+      <div style="width: 100%;">
+        <span ion-item no-lines [(ngModel)]='value' style="display: inline-block; width: 32%;">
+          <ion-input placeholder="Menge" type="number" style="width:100%"></ion-input>
+        </span>
+        <span ion-item no-lines [(ngModel)]='unit' style="display: inline-block; width: 32%;">
+          <ion-input placeholder="Einheit" type="text" style="width:100%"></ion-input>
+        </span>
+        <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 33%;">
+          <ion-input placeholder="Artikel" type="text"  style="width:100%"></ion-input>
+        </span>
+      </div>
+      <button ion-button (click)="replace()" icon-only block>
+        <ion-icon name='add' is-active="true"></ion-icon>
+      </button>
 
       <!-- Ingredients display -->
-    <ion-list *ngIf="ingredients.length != 0" style="margin-bottom: 0; margin-top: 0;"  >
-      <!-- style="border-style: none; margin-bottom: 0; margin-top: 0;" -->
-      <ion-item-sliding #item class="list-item" *ngFor="let ingredient of ingredients; let index = index; trackBy:trackByIndex;" style="height: auto; border-style: none;">
-        <div  ion-item style="width: 100%">
-          <span  style="display: inline-block; width: 30%;">
-            {{ingredient[0]}}
-          </span>
-          <span style="display: inline-block; width: 30%;">
-            {{ingredient[1]}}
-          </span>
-          <span style="display: inline-block; width: 35%;">
-            {{ingredient[2]}}
-          </span>
-        </div>
-        <ion-item-options style="width:50%">
-          <button ion-button icon-only style="" (click)="editIngredient(ingredient, item)">
-            <ion-icon name="create"></ion-icon>
-          </button>
-          <button ion-button icon-only style="" (click)="removeIngredient(ingredient, item)">
-            <ion-icon name="close"></ion-icon>
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-  </div>
+      <ion-list *ngIf="ingredients.length != 0" style="margin-bottom: 0; margin-top: 0;">
+        <ion-item-sliding #item class="list-item" *ngFor="let ingredient of ingredients; let index = index; trackBy:trackByIndex;" style="height: auto; border-style: none;">
+          <div ion-item style="width: 100%">
+            <span  style="display: inline-block; width: 30%;">
+              {{ingredient[0]}}
+            </span>
+            <span style="display: inline-block; width: 30%;">
+              {{ingredient[1]}}
+            </span>
+            <span style="display: inline-block; width: 35%;">
+              {{ingredient[2]}}
+            </span>
+          </div>
 
+          <ion-item-options style="width:50%">
+            <button ion-button icon-only style="" (click)="editIngredient(ingredient, item)">
+              <ion-icon name="create"></ion-icon>
+            </button>
+            <button ion-button icon-only style="" (click)="removeIngredient(ingredient, item)">
+              <ion-icon name="close"></ion-icon>
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
 
-<div class="area">
+    </div>
+
     <!-- Preparation -->
-    <ion-item-divider class="divider">
-      Zubereitung:
-    </ion-item-divider>
-    <ion-item style="height: auto;">
+    <div class="area">
+      <ion-item-divider class="divider">
+        Zubereitung:
+      </ion-item-divider>
+      <ion-item style="height: auto;">
         <ion-label floating> </ion-label>
         <ion-textarea id="preparation" placeholder="Bitte hier eintragen"  rows="6" [(ngModel)]="preparation" type="text" value="" name='preparation'></ion-textarea>
-    </ion-item>
-  </div>
-<div class="area">
+      </ion-item>
+    </div>
+
     <!-- Portions -->
-    <ion-item-divider class="divider">
-      Portionen:
-    </ion-item-divider>
-    <ion-item>
-      <ion-input placeholder="Anzahl eingeben" type="number" min="0" [(ngModel)]='portions' name ='portions'> </ion-input>
-    </ion-item>
+    <div class="area">
+      <ion-item-divider class="divider">
+        Portionen:
+      </ion-item-divider>
+      <ion-item>
+        <ion-input placeholder="Anzahl eingeben" type="number" min="0" [(ngModel)]='portions' name ='portions'> </ion-input>
+      </ion-item>
     </div>
 
-<div class="area">
     <!-- Time -->
-    <ion-item-divider class="divider">
-      Zeit:
-    </ion-item-divider>
-    <ion-item>
-      <ion-input placeholder="Zeit in Minuten" type="number" [(ngModel)]='time' name ='time'> </ion-input>
-    </ion-item>
+    <div class="area">
+      <ion-item-divider class="divider">
+        Zeit:
+      </ion-item-divider>
+      <ion-item>
+        <ion-input placeholder="Zeit in Minuten" type="number" [(ngModel)]='time' name ='time'> </ion-input>
+      </ion-item>
     </div>
 
-<div class="area">
     <!-- Tags -->
-    <ion-item-divider class="divider">
-      Tags:
-    </ion-item-divider>
-    <ion-item>
-      <ion-input placeholder="Tags durch Komma trennen" type="text" [(ngModel)]='tagString' name ='tagString'> </ion-input>
-    </ion-item>
-    <button ion-button block (click)="showTags()">Wähle aus vorhandenen Tags</button>
+    <div class="area">
+      <ion-item-divider class="divider">
+        Tags:
+      </ion-item-divider>
+      <ion-item>
+        <ion-input placeholder="Tags durch Komma trennen" type="text" [(ngModel)]='tagString' name ='tagString'> </ion-input>
+      </ion-item>
+      <button ion-button block (click)="showTags()">Wähle aus vorhandenen Tags</button>
     </div>
 
-<div class="area">
     <!-- Rating -->
-    <ion-item-divider class="divider">
-      Bewertung:
-      <span style ="float: right;">
-        <ion-icon range-right name="star">
-          {{rating}}
-        </ion-icon>
-      </span>
-    </ion-item-divider>
-    <ion-item>
-      <ion-range style="margin=-5%" min="0" max="5" step="1" snaps="true" [(ngModel)]="rating"></ion-range>
-    </ion-item>
-</div>
+    <div class="area">
+      <ion-item-divider class="divider">
+          Bewertung:
+          <span style ="float: right;">
+            <ion-icon range-right name="star">
+              {{rating}}
+            </ion-icon>
+          </span>
+      </ion-item-divider>
+        <ion-item>
+          <ion-range style="margin=-5%" min="0" max="5" step="1" snaps="true" [(ngModel)]="rating"></ion-range>
+        </ion-item>
+    </div>
 
   </ion-list>
-
 
   <!-- Save -->
   <button ion-button block (click)='saveRecipe()'>

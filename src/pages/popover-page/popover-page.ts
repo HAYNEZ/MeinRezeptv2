@@ -21,11 +21,13 @@ export class PopoverPagePage {
                 this.actions = this.params.get('actions');
               }
 
+  // Performs the particular task (function to call) and close the page
   performAction(action){
     action.callback();
     this.close();
   }
 
+  // Closes the popover window
   close() {
     this.viewCtrl.dismiss();
   }
