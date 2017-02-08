@@ -147,7 +147,11 @@ export class RecipeDetailsPage {
       if(this.recipe.preparation != null && typeof this.recipe.preparation === 'string'){
         let array = this.recipe.preparation.split(".");
         for(let i = 0; i < array.length; i++){
-          array[i] = array[i] + ".\n";
+          console.log("String:");
+          console.log(array[i]);
+          if(array[i] != ""){
+            array[i] = array[i] + ".\n";
+          }
         }
         this.recipe.preparation = array;
       }
