@@ -8,14 +8,17 @@
 
 
 <ion-content padding>
+  <button *ngIf="!srcImageIng" ion-button icon-left block (click)="addIngPhoto()" color="light">
+   <ion-icon name="search"></ion-icon>
+   Zutaten hinzufügen
+  </button>
   <div *ngIf="srcImageIng" class="image-wrapper">
-    <img id="imageIng" [src]="srcImageIng" />
-
-    <img *ngIf="srcImagePrep" id="imagePrep" [src]="srcImagePrep" />
+      <img id="imageIng" [src]="srcImageIng" />
      <button *ngIf="!srcImagePrep" ion-button icon-left block (click)="addTextPhoto()" color="light">
       <ion-icon name="search"></ion-icon>
       Zubereitung hinzufügen
     </button>
+    <img *ngIf="srcImagePrep" id="imagePrep" [src]="srcImagePrep" />
     <button *ngIf="srcImagePrep" ion-button icon-left block (click)="analyze()" color="light">
       <ion-icon name="search"></ion-icon>
       Text auslesen

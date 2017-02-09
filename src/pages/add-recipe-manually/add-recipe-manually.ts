@@ -38,10 +38,12 @@ export class AddRecipeManuallyPage {
               private viewCtrl: ViewController,
               private zone: NgZone,
               private platform: Platform
-   ) {}
+   ) {
+     console.log("constructor");
+   }
 
  ionViewDidLoad(){
-    this.zone = this.zone;
+   console.log("did load");
     this.photoTaken = false;
 
      //filled if edit, empty if new, partly filled if OCR
