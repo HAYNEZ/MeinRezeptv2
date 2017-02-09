@@ -1,124 +1,111 @@
-import { Injectable, NgZone} from '@angular/core';
+  import { Injectable, NgZone} from '@angular/core';
 
-import PouchDB from 'pouchdb';
+  import PouchDB from 'pouchdb';
 
-@Injectable()
-export class ListService {
-    private _db;
-    private items;
+  //PouchDB References/Tutorials:
+  //http://gonehybrid.com/how-to-use-pouchdb-sqlite-for-local-storage-in-ionic-2/
+  //https://www.joshmorony.com/part-2-creating-a-multiple-user-app-with-ionic-2-pouchdb-couchdb/
 
-    constructor(
-      private zone: NgZone
-    ){}
+  @Injectable()
+  export class ListService {
+      private _db;
+      private items;
 
-    initDB() {
-        this._db = new PouchDB('list');
-    }
+      constructor(
+        private zone: NgZone
+      ){}
 
-    add(item) {
-        return this._db.post(item);
-    }
-
-    update(item) {
-      return this._db.put(item).catch((error) => {
-        console.log(error);
-      });
-    }
-
-    filterChecked(){
-      return this.items.filter((item)=>{
-        return item.checked;
-      });
-    }
-
-    filterUnchecked(){
-    return this.items.filter((item)=>{
-      return !item.checked;
-    });
-    }
-
-    delete(item) {
-      console.log("Delete list item");
-        return this._db.remove(item);
-    }
-
-    getAll() {
-
-        if (!this.items) {
-            return this._db.allDocs({ include_docs: true })
-                .then(docs => {
-
-                    // Each row has a .doc object and we just want to send an
-                    // array of birthday objects back to the calling controller,
-                    // so let's map the array to contain just the .doc objects.
-
-                    this.items = docs.rows.map(row => {
-                        return row.doc;
-                    });
-
-                    // Listen for changes on the database.
-                    this._db.changes({ live: true, since: 'now', include_docs: true })
-                        .on('change', (change) => {
-                          this.onDatabaseChange(change);
-                        });
-                    // console.log(this.items);
-                    return this.items;
-                });
-        } else {
-            // Return cached data as a promise
-            return Promise.resolve(this.items);
-        }
-    }
-
-
-    private onDatabaseChange = (change) => {
-
-      let changedDoc = null;
-      let changedIndex = null;
-
-      this.items.forEach((doc, index) => {
-
-        if(doc._id === change.id){
-          changedDoc = doc;
-          changedIndex = index;
-          }
-
-      });
-
-      //A document was deleted
-
-      if(change.deleted){
-        if(changedDoc){
-        this.items.splice(changedIndex, 1);
-        }
-      }else{
-
-        //A document was updated
-        if(changedDoc){
-          this.items[changedIndex] = change.doc;
-        }
-
-      //A document was added
-        else {
-          this.items.unshift(change.doc);
-        }
-
+  //Initializes the database for the shopping-list
+      initDB() {
+          this._db = new PouchDB('list');
       }
-    }
-
-    // Binary search, the array is by default sorted by _id.
-    // private findIndex(array, id) {
-    //     var low = 0, high = array.length, mid;
-    //     while (low < high) {
-    //         mid = (low + high) >>> 1;
-    //         array[mid]._id < id ? low = mid + 1 : high = mid
-    //     }
-    //     return low;
-    // }
-
-    public getItems(){
-      return this.items;
-    }
 
 
-}
+  //Adds an item to the shopping-list database
+      add(item) {
+          return this._db.post(item);
+      }
+
+  //Updates an item in the shopping-list database
+      update(item) {
+        return this._db.put(item).catch((error) => {
+          console.log(error);
+        });
+      }
+
+
+  //Deletes an item from the shopping-list
+      delete(item) {
+        console.log("Delete list item");
+          return this._db.remove(item);
+      }
+
+  //Gets all the items saved in the database.
+      getAll() {
+
+          if (!this.items) {
+              //allDocs function to get an array back of all the item objects in the database.
+              return this._db.allDocs({ include_docs: true })
+                  .then(docs => {
+
+                      // Each row has a .doc object and we just want to send an
+                      // array of item objects back to the calling controller,
+                      // so we map the array to contain just the .doc objects.
+
+                      this.items = docs.rows.map(row => {
+                          return row.doc;
+                      });
+
+                      // Listen for changes on the database.
+                      this._db.changes({ live: true, since: 'now', include_docs: true })
+                          .on('change', (change) => {
+                            this.onDatabaseChange(change);
+                          });
+                      // console.log(this.items);
+                      return this.items;
+                  });
+          } else {
+              // Return cached data as a promise
+              return Promise.resolve(this.items);
+          }
+      }
+
+  //Keeps the cached data in sync with the database when there is data added or changed
+      private onDatabaseChange = (change) => {
+
+        let changedDoc = null;
+        let changedIndex = null;
+
+        this.items.forEach((doc, index) => {
+
+          if(doc._id === change.id){
+            changedDoc = doc;
+            changedIndex = index;
+            }
+
+        });
+
+
+        if(change.deleted){  //A document was deleted
+          if(changedDoc){  //Solved multi removements
+          this.items.splice(changedIndex, 1);
+          }
+        }else{
+
+          if(changedDoc){  //A document was updated
+            this.items[changedIndex] = change.doc;
+          }
+          else {   //A document was added
+            this.items.unshift(change.doc);
+          }
+        }
+      }
+
+
+  //Returns an item
+      public getItems(){
+        return this.items;
+      }
+
+
+  }

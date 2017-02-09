@@ -42,27 +42,24 @@
         <span ion-item no-lines [(ngModel)]='unit' style="display: inline-block; width: 32%;">
           <ion-input placeholder="Einheit" type="text" style="width:100%"></ion-input>
         </span>
-        <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 33%;">
+        <span ion-item no-lines [(ngModel)]='product' style="display: inline-block; width: 33%; ">
           <ion-input placeholder="Artikel" type="text"  style="width:100%"></ion-input>
         </span>
       </div>
-      <button ion-button (click)="replace()" icon-only block>
+      <button ion-button (click)="addIngredient()" icon-only block>
         <ion-icon name='add' is-active="true"></ion-icon>
       </button>
 
       <!-- Ingredients display -->
-      <ion-list *ngIf="ingredients.length != 0" style="margin-bottom: 0; margin-top: 0;">
-        <ion-item-sliding #item class="list-item" *ngFor="let ingredient of ingredients; let index = index; trackBy:trackByIndex;" style="height: auto; border-style: none;">
-          <div ion-item style="width: 100%">
-            <span  style="display: inline-block; width: 30%;">
+      <ion-list *ngIf="ingredients.length != 0" style="margin-bottom: 0; margin-top: 0;" no-lines>
+        <ion-item-sliding #item class="list-item" *ngFor="let ingredient of ingredients; let index = index; trackBy:trackByIndex;" style="height: auto; border-style: none">
+          <div ion-item style="position: relative;width:100%">
+            <span style=" width: 50%;margin: 0 auto; ">
               {{ingredient[0]}}
-            </span>
-            <span style="display: inline-block; width: 30%;">
               {{ingredient[1]}}
-            </span>
-            <span style="display: inline-block; width: 35%;">
               {{ingredient[2]}}
             </span>
+
           </div>
 
           <ion-item-options style="width:50%">

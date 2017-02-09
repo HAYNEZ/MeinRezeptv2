@@ -3,6 +3,10 @@ import * as Collections from 'typescript-collections';
 
 import PouchDB from 'pouchdb';
 
+//PouchDB References/Tutorials:
+//http://gonehybrid.com/how-to-use-pouchdb-sqlite-for-local-storage-in-ionic-2/
+//https://www.joshmorony.com/part-2-creating-a-multiple-user-app-with-ionic-2-pouchdb-couchdb/
+
 @Injectable()
 export class RecipeService {
     private _db;
@@ -13,20 +17,24 @@ export class RecipeService {
       private zone: NgZone
     ){}
 
+//Initializes the database for the recipes
     initDB() {
         this._db = new PouchDB('recipe');
     }
 
+//Adds a recipe to the recipe database
     add(recipe) {
         return this._db.post(recipe);
     }
 
+//Updates a recipe in the recipe database
     update(recipe) {
       return this._db.put(recipe).catch((error) => {
         console.log(error);
       });
     }
 
+//Deletes a recipe
     delete(recipe) {
         // console.log("db delete " + recipe.title);
         return this._db.remove(recipe).catch((error) => {
@@ -34,13 +42,15 @@ export class RecipeService {
         });
     }
 
+//Gets all the recipes saved in the database.
     getAll() {
         if (!this.recipes) {
+            //allDocs function to get an array back of all the item objects in the database.
             return this._db.allDocs({ include_docs: true })
                 .then(docs => {
 
                     // Each row has a .doc object and we just want to send an
-                    // array of birthday objects back to the calling controller,
+                    // array of recipe objects back to the calling controller,
                     // so let's map the array to contain just the .doc objects.
 
                     this.recipes = docs.rows.map(row => {
@@ -62,6 +72,7 @@ export class RecipeService {
 
     }
 
+//Keeps the cached data in sync with the database when there is data added or changed
     private onDatabaseChange = (change) => {
 
         let changedDoc = null;
@@ -87,6 +98,7 @@ export class RecipeService {
         }
     }
 
+//Adds Tags to the tags collection and initializes them
     initialiseTags(){
 
       this.tags.add("Dessert");
@@ -112,11 +124,13 @@ export class RecipeService {
       });
     }
 
+
+  //Returns a tag
     getTags(){
       return this.tags.toArray().sort();
     }
 
-    //Call on new recipe saving, or edit save, after save of manually
+    //Calls on new recipe saving, or edit save, after save of manually
     updateTags(tagArray){
       if(tagArray){
         for( let i = 0; i < tagArray.length; i++){
@@ -151,6 +165,7 @@ export class RecipeService {
 
     }
 
+//Tag search
     filterTag(searchTag){
       if(this.recipes){
         return this.recipes.filter((recipe) => {
@@ -166,6 +181,7 @@ export class RecipeService {
       }
     }
 
+//Prevents showing double tags
     removeDoubleTags(tags){
       var result = new Collections.Set<string>();
       for(var tag of tags){
