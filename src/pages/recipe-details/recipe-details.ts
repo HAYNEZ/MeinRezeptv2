@@ -36,7 +36,9 @@ export class RecipeDetailsPage {
       let newValue = this.servingsDefault;
       this.factor = newValue/oldValue;
       for(let i = 0; i < this.recipe.ingredients.length; i++){
-        this.calculatedValues[i] = Math.round(this.factor*this.recipe.ingredients[i][0]*100)/100;
+        if(this.recipe.ingredients[i][0]){
+          this.calculatedValues[i] = Math.round(this.factor*this.recipe.ingredients[i][0]*100)/100;
+        }
       }
     }
 
