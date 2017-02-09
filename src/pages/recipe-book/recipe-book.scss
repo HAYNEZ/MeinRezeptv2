@@ -4,6 +4,7 @@ page-recipe-book {
     text-align: center;
     font-size: 25px;
   }
+
   #recipe{
     position:relative;
     width: 50%;
@@ -18,10 +19,14 @@ page-recipe-book {
     opacity:0.4;
   }
 
+  #title-search-container{
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
   h3 {
     margin-bottom: 2px;
   }
-
 
   #recipeTitle {
     position:absolute;
@@ -37,6 +42,10 @@ page-recipe-book {
   #recipe .recipeImage {
     width: 100%;
     height: auto;
+  }
+
+  .nothing-to-show{
+    padding: 1%;
   }
 
 

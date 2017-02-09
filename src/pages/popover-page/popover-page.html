@@ -1,5 +1,7 @@
 <ion-list no-lines>
+
   <button ion-item *ngFor="let action of actions" (click)="performAction(action)">
     {{action.title}}
   </button>
+
 </ion-list>

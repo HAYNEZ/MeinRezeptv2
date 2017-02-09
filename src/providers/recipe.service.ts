@@ -17,24 +17,24 @@ export class RecipeService {
       private zone: NgZone
     ){}
 
-//Initializes the database for the recipes
+    //Initializes the database for the recipes
     initDB() {
         this._db = new PouchDB('recipe');
     }
 
-//Adds a recipe to the recipe database
+    //Adds a recipe to the recipe database
     add(recipe) {
         return this._db.post(recipe);
     }
 
-//Updates a recipe in the recipe database
+    //Updates a recipe in the recipe database
     update(recipe) {
       return this._db.put(recipe).catch((error) => {
         console.log(error);
       });
     }
 
-//Deletes a recipe
+    //Deletes a recipe
     delete(recipe) {
         // console.log("db delete " + recipe.title);
         return this._db.remove(recipe).catch((error) => {
@@ -42,7 +42,7 @@ export class RecipeService {
         });
     }
 
-//Gets all the recipes saved in the database.
+    //Gets all the recipes saved in the database.
     getAll() {
         if (!this.recipes) {
             //allDocs function to get an array back of all the item objects in the database.
@@ -56,13 +56,13 @@ export class RecipeService {
                     this.recipes = docs.rows.map(row => {
                         return row.doc;
                     });
-                    // console.log(this.recipes);
 
                     // Listen for changes on the database.
                     this._db.changes({ live: true, since: 'now', include_docs: true })
                         .on('change', (change) => {
                           this.onDatabaseChange(change);
                         });
+
                     return this.recipes;
                 });
         } else {
@@ -86,7 +86,7 @@ export class RecipeService {
         });
 
         if(change.deleted){     //A document was deleted
-          if(changedDoc){ //Solved multi removements
+          if(changedDoc){       //Avoid multi removements
             this.recipes.splice(changedIndex, 1);
           }
         } else {
@@ -98,7 +98,7 @@ export class RecipeService {
         }
     }
 
-//Adds Tags to the tags collection and initializes them
+    //Adds Tags to the tags collection and initializes them
     initialiseTags(){
 
       this.tags.add("Dessert");
@@ -125,12 +125,12 @@ export class RecipeService {
     }
 
 
-  //Returns a tag
+    //Returns all tags of the tags collection
     getTags(){
       return this.tags.toArray().sort();
     }
 
-    //Calls on new recipe saving, or edit save, after save of manually
+    //Called on new recipe savings, or edit save, to update the tags collection
     updateTags(tagArray){
       if(tagArray){
         for( let i = 0; i < tagArray.length; i++){
@@ -162,10 +162,9 @@ export class RecipeService {
            }
           });
        }
-
     }
 
-//Tag search
+    //Tag search
     filterTag(searchTag){
       if(this.recipes){
         return this.recipes.filter((recipe) => {
@@ -181,7 +180,7 @@ export class RecipeService {
       }
     }
 
-//Prevents showing double tags
+    //Prevents saving doubled tags
     removeDoubleTags(tags){
       var result = new Collections.Set<string>();
       for(var tag of tags){
@@ -189,4 +188,5 @@ export class RecipeService {
       }
       return result.toArray();
     }
+    
 }

@@ -1,42 +1,58 @@
-
-
 <ion-header>
+
   <ion-navbar>
+
     <ion-title>Einkaufsliste</ion-title>
-    <ion-buttons (click)="presentPopover($event)" end>
+
+    <ion-buttons end (click)="presentPopover($event)">
       <button ion-button icon-only>
         <ion-icon name="menu" ></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-navbar>
+
 </ion-header>
 
 <ion-content>
+
   <!-- Input Fields -->
   <div>
     <span class="input-field" ion-item no-lines [(ngModel)]='value'>
-      <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Menge</ion-label>
+      <ion-label class="label" floating>
+        <ion-icon name="create" small></ion-icon>
+        Menge
+      </ion-label>
       <ion-input type="number"></ion-input>
     </span>
+
     <span class="input-field" ion-item no-lines [(ngModel)]='unit'>
-      <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Einheit</ion-label>
-      <ion-input type="text" ></ion-input>
+      <ion-label class="label" floating>
+        <ion-icon name="create" small></ion-icon>
+        Einheit
+      </ion-label>
+      <ion-input type="text"></ion-input>
     </span>
+
     <span class="input-field" ion-item no-lines [(ngModel)]='product'>
-      <ion-label class="label" floating><ion-icon name="create" small></ion-icon> Artikel</ion-label>
-      <ion-input type="text" ></ion-input>
+      <ion-label class="label" floating>
+        <ion-icon name="create" small></ion-icon>
+        Artikel
+      </ion-label>
+      <ion-input type="text"></ion-input>
     </span>
   </div>
 
   <!-- Add Item Button -->
-  <button ion-button (click)="add() " icon-only full>
+  <button ion-button icon-only block (click)="add()">
     <ion-icon name='add' is-active="true"></ion-icon>
   </button>
 
   <!-- List with unchecked Items -->
   <ion-list no-lines class="falseList">
     <div *ngFor="let item of productList">
-      <ion-item-sliding *ngIf = "!item.checked">
+      <ion-item-sliding *ngIf="!item.checked">
+
         <span ion-item>
           <ion-label class="itemFalse">
             {{item.value}}
@@ -45,14 +61,16 @@
           </ion-label>
           <ion-checkbox class="checkbox" [(ngModel)]="item.checked" (click)="editChecked(item)"></ion-checkbox>
         </span>
+
         <ion-item-options>
-          <button class="delete" ion-button (click)="delete(item)" clear icon-only>
+          <button class="delete" ion-button clear icon-only (click)="delete(item)">
             <ion-icon name='trash' is-active="true"></ion-icon>
           </button>
           <button class="add" ion-button (click)="editItem(item)" clear icon-only>
             <ion-icon name='create' is-active="true"></ion-icon>
           </button>
         </ion-item-options>
+
       </ion-item-sliding>
     </div>
   </ion-list>
@@ -65,7 +83,8 @@
   <!-- List with checked Items -->
   <ion-list no-lines class="trueList">
     <div *ngFor="let item of productList">
-      <ion-item-sliding *ngIf = "item.checked">
+      <ion-item-sliding *ngIf="item.checked">
+
         <span ion-item>
           <ion-label class="itemTrue">
             {{item.value}}
@@ -74,14 +93,16 @@
           </ion-label>
           <ion-checkbox [(ngModel)]="item.checked" (click)="editChecked(item)"></ion-checkbox>
         </span>
+
         <ion-item-options>
-          <button class="delete" ion-button (click)="delete(item)" clear icon-only>
+          <button class="delete" ion-button clear icon-only (click)="delete(item)">
             <ion-icon name='trash' is-active="true"></ion-icon>
           </button>
-          <button class="add" ion-button (click)="editItem(item)" clear icon-only>
+          <button class="add" ion-button clear icon-only (click)="editItem(item)">
             <ion-icon name='create' is-active="true"></ion-icon>
           </button>
         </ion-item-options>
+
       </ion-item-sliding>
     </div>
   </ion-list>

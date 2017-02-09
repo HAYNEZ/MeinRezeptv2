@@ -1,7 +1,11 @@
 import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams, AlertController, ViewController, Platform, ItemSliding } from 'ionic-angular';
 import { Camera } from 'ionic-native';
+
+//Page import
 import { RecipeDetailsPage } from '../recipe-details/recipe-details';
+
+//Service import
 import { RecipeService } from '../../providers/recipe.service';
 
 
@@ -10,20 +14,23 @@ import { RecipeService } from '../../providers/recipe.service';
   templateUrl: 'add-recipe-manually.html'
 })
 export class AddRecipeManuallyPage {
+
     recipe: any = {};
     edit : boolean = false;
+
     photoTaken: boolean;
     photoSelected: boolean;
-    public base64Image: string;
-    public preparation:any;
+    base64Image: string;
+
     title: any;
     ingredients: any;
+    preparation:any;
     portions: any;
     time: any;
     tagString: string = "";
     tags: any;
     rating: number = 0;
-    callback: any;
+
     product: any;
     unit: any;
     value: any;
@@ -47,10 +54,8 @@ export class AddRecipeManuallyPage {
     //tomato picture per default
     this.photoTaken = false;
 
-     //page is filled if edit, empty if new, partly filled if OCR
+    //page is filled if edit, empty if new, partly filled if OCR
     this.recipe = this.params.get("recipe");
-    //updates page after editing
-    this.callback = this.params.get("callback");
 
     if(this.recipe){
       this.readInputs();
@@ -62,7 +67,7 @@ export class AddRecipeManuallyPage {
     }
  }
 
- // When recipe is edited - reads selected recipe information
+ // When recipe is edited or OCR was used - reads selected recipe information
  readInputs() {
    this.title = this.recipe.title;
    this.base64Image = this.recipe.base64Image;
@@ -164,7 +169,7 @@ export class AddRecipeManuallyPage {
         });
 }
 
-// Saves the ingredients - split into number value, unit and the product name
+// Saves an ingredient as an array into the ingredients array - split into number value, unit and the product name
 addIngredient(){
   if(this.product){
     let ingredient = [this.value, this.unit, this.product];
@@ -175,36 +180,32 @@ addIngredient(){
   }
 }
 
-// Slider from right to left shows options
-// Params2: Editing
-// Allows to edit the current ingredients
-editIngredient(ingredient, item:ItemSliding ){
+// Slider shows options (slide right to left)
+// Allows to edit an ingredient
+editIngredient(ingredient, item:ItemSliding){
   let index = this.ingredients.indexOf(ingredient);
-    if(index > -1){
-      let ingredient = this.ingredients[index];
-      this.ingredients.splice(index, 1);
-      this.product = ingredient[2];
-      this.unit = ingredient[1];
-      this.value = ingredient[0];
-    }
-    item.close();
+  if(index > -1){
+    let ingredient = this.ingredients[index];
+    this.ingredients.splice(index, 1);
+    this.product = ingredient[2];
+    this.unit = ingredient[1];
+    this.value = ingredient[0];
+  }
 }
 
-// Slider from right to left shows options
-// Params2: Deleting
-// Allows to delete the current ingredients
+// Slider shows options (slide right to left)
+// Allows to delete an ingredient
 removeIngredient(ingredient, item:ItemSliding){
   let index = this.ingredients.indexOf(ingredient);
-    if(index > -1){
-      this.ingredients.splice(index, 1);
-    }
-    item.close();
+  if(index > -1){
+    this.ingredients.splice(index, 1);
+  }
 }
 
-// Method to split the input tags
+//Transforms tag string into a tag array
 parseTags(){
   if(this.tagString != ""){
-    //displaces the white space and spilts at the
+    //displaces the white space and spilts at the ','
     this.tags = this.replaceAll(this.tagString,"\\s+","").split(',');
   }
 }
@@ -218,29 +219,31 @@ replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
 
-// Save the entered recipe and updates the recipe book
+//Saves the entered recipe and updates the recipe book
 saveRecipe() {
     if(this.title){
-      //pars tagString to tagArray
+      //transforms tagString to tagArray
       this.parseTags();
       if(this.tags){
-        //if tag is given in twice - remove it
+        //if tag is given in doublicate just store one
         this.tags = this.recipeService.removeDoubleTags(this.tags);
       }
+
+      //set default portions value if none was input
       if(!this.portions){
-        //default value for correct portions calculator
         this.portions = 4;
       }
 
+      //update list of stored tags
       if(this.recipe){
         if(this.recipe.tags){
           if(this.recipe.tags.join() != this.tagString){
-            //update default tag list
             this.recipeService.updateTags(this.tags);
           }
         }
       }
 
+      //New
       if(!this.params.get("edit")){
         this.recipe = {
          title: this.title,
@@ -254,6 +257,7 @@ saveRecipe() {
        };
      this.recipeService.add(this.recipe);
    }else{
+     //Edit
      this.recipe = {
        _id: this.recipe._id,
        _rev: this.recipe._rev,
@@ -269,26 +273,28 @@ saveRecipe() {
       //saves and updates recipe database
      this.recipeService.update(this.recipe).catch(console.error.bind(console));
    }
-    //pushes recipe to the book stack
+    //opens recipe's details view
     this.navCtrl.push(RecipeDetailsPage, {recipe: this.recipe});
     this.dismiss(this.recipe);
   }else{
-    this.noTitel();
+    //Show warning if no title
+    this.noTitle();
   }
  }
 
- // Closes edit page and shows current recipe detail page to check the input
- dismiss(recipe) {
-       this.viewCtrl.dismiss(recipe);
- }
-
  // Reminder for empty recipe titel
- // Opens a popup window
- noTitel(){
+ // Opens an alert
+ noTitle(){
    let alert = this.alertCtrl.create({
        title: "Dein Rezept braucht noch einen Titel",
        buttons: [{ text: "OK" }]
    })
    alert.present();
  }
+
+ // Closes page and shows current recipe detail page to check the input
+ dismiss(recipe) {
+   this.viewCtrl.dismiss(recipe);
+ }
+
 }

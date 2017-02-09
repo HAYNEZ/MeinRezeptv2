@@ -1,4 +1,4 @@
-  import { Injectable, NgZone} from '@angular/core';
+  import { Injectable, NgZone } from '@angular/core';
 
   import PouchDB from 'pouchdb';
 
@@ -15,18 +15,18 @@
         private zone: NgZone
       ){}
 
-  //Initializes the database for the shopping-list
+      //Initializes the database for the shopping-list
       initDB() {
           this._db = new PouchDB('list');
       }
 
 
-  //Adds an item to the shopping-list database
+      //Adds an item to the shopping-list database
       add(item) {
           return this._db.post(item);
       }
 
-  //Updates an item in the shopping-list database
+      //Updates an item in the shopping-list database
       update(item) {
         return this._db.put(item).catch((error) => {
           console.log(error);
@@ -34,13 +34,14 @@
       }
 
 
-  //Deletes an item from the shopping-list
+      //Deletes an item from the shopping-list
       delete(item) {
-        console.log("Delete list item");
-          return this._db.remove(item);
+          return this._db.remove(item).catch((error) => {
+            console.log(error);
+          });
       }
 
-  //Gets all the items saved in the database.
+      //Gets all the items saved in the database.
       getAll() {
 
           if (!this.items) {
@@ -61,7 +62,7 @@
                           .on('change', (change) => {
                             this.onDatabaseChange(change);
                           });
-                      // console.log(this.items);
+
                       return this.items;
                   });
           } else {
@@ -70,28 +71,24 @@
           }
       }
 
-  //Keeps the cached data in sync with the database when there is data added or changed
+      //Keeps the cached data in sync with the database when there is data added, changed or deleted
       private onDatabaseChange = (change) => {
 
         let changedDoc = null;
         let changedIndex = null;
 
         this.items.forEach((doc, index) => {
-
           if(doc._id === change.id){
             changedDoc = doc;
             changedIndex = index;
             }
-
         });
 
-
         if(change.deleted){  //A document was deleted
-          if(changedDoc){  //Solved multi removements
-          this.items.splice(changedIndex, 1);
+          if(changedDoc){  //Avoid multi removements
+            this.items.splice(changedIndex, 1);
           }
         }else{
-
           if(changedDoc){  //A document was updated
             this.items[changedIndex] = change.doc;
           }
@@ -101,11 +98,9 @@
         }
       }
 
-
-  //Returns an item
+      //Returns an item
       public getItems(){
         return this.items;
       }
-
 
   }

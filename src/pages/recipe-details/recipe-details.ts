@@ -82,7 +82,7 @@ export class RecipeDetailsPage {
 
     // Pushes the current recipe into the AddRecipeManuallyPage where it can be edited
     edit() {
-      this.navCtrl.push(AddRecipeManuallyPage, {recipe: this.recipe, edit : true, callback: () => { } });
+      this.navCtrl.push(AddRecipeManuallyPage, {recipe: this.recipe, edit : true});
       this.viewCtrl.dismiss(this.recipe);
     }
 

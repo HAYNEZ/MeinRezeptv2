@@ -2,7 +2,7 @@
 <widget id="com.ionicframework.ocrtest954258" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Boil</name>
     <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <author email="thebjb1978@gmail.com">Bastian Boesel</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

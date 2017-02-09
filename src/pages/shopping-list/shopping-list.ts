@@ -1,15 +1,17 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, Platform, AlertController, PopoverController} from 'ionic-angular';
-import { ListService } from '../../providers/list.service';
+import { NavController, Platform, AlertController, PopoverController } from 'ionic-angular';
+
+//Page import
 import { PopoverPagePage } from '../popover-page/popover-page';
+
+//Service import
+import { ListService } from '../../providers/list.service';
 
 
 @Component({
   selector: 'page-shopping-list',
   templateUrl: 'shopping-list.html'
 })
-
-
 export class ShoppingListPage {
 
   public productList = [];
@@ -20,7 +22,8 @@ export class ShoppingListPage {
   checked: any;
   containsChecked: boolean = false;
 
-  constructor(  public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     private alertController: AlertController,
     private zone: NgZone,
     private listService: ListService,
@@ -95,7 +98,7 @@ export class ShoppingListPage {
       this.ionViewDidEnter();
     }
 
-    // Placeholder method for a future features
+    // Placeholder method for future features
     future(){
       let alert = this.alertController.create({
         title: "Bald verfügbar",
@@ -179,4 +182,5 @@ export class ShoppingListPage {
         }).catch(console.error.bind(console));
       });
     }
-  }
+
+}

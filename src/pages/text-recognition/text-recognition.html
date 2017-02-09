@@ -8,6 +8,7 @@
 
 
 <ion-content padding>
+
   <div *ngIf="srcImage" class="image-wrapper">
     <img id="image" [src]="srcImage" />
     <button ion-button icon-left block (click)="analyze()" color="light">
@@ -15,4 +16,5 @@
       Text auslesen
     </button>
   </div>
+  
 </ion-content>

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-
 import { StatusBar, Splashscreen } from 'ionic-native';
 
+//import rootPage
 import { TabsPage } from '../pages/tabs/tabs';
 
 
@@ -13,9 +13,9 @@ export class MyApp {
   rootPage = TabsPage;
 
   constructor(platform: Platform) {
+    // Check if platform is ready and plugins are available.
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      // Doing higher level native things
       StatusBar.styleDefault();
       Splashscreen.hide();
     });

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Camera } from 'ionic-native';
+
+//Page import
 import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manually';
 
 
@@ -8,15 +10,15 @@ import { AddRecipeManuallyPage } from '../add-recipe-manually/add-recipe-manuall
   selector: 'page-text-recognition',
   templateUrl: 'text-recognition.html'
 })
-
 export class TextRecognitionPage {
 
   srcImage: string;
   OCRAD: any;
 
-  constructor(  public navCtrl: NavController,
-                public params: NavParams,
-                public loadingCtrl: LoadingController)
+  constructor(
+    public navCtrl: NavController,
+    public params: NavParams,
+    public loadingCtrl: LoadingController)
   {
     switch(params.get("option")){
       case 0: this.choosePhoto();
@@ -57,6 +59,9 @@ export class TextRecognitionPage {
     });
   }
 
+  /*
+    Uses OCRAD to read text from given image
+  */
   analyze() {
     let loader = this.loadingCtrl.create({
      content: 'Bitte warten...'
@@ -64,14 +69,13 @@ export class TextRecognitionPage {
     loader.present();
     (<any>window).OCRAD(document.getElementById('image'), text => {
       loader.dismissAll();
-      alert(text);
       this.formatText(text);
     });
   }
 
-/*
-  Formats the input text into ingredients and preparation sections
-*/
+  /*
+    Formats the input text into ingredients and preparation sections
+  */
   formatText(input){
     //divide input into single lines
     let lines = input.split("\n");
@@ -84,8 +88,7 @@ export class TextRecognitionPage {
       ing_a.push(lines[k]);
       k++;
     }while(lines[k] != "");
-    //remove the empty line from array
-    // ing_a.pop();
+
     //add remaining lines to preparation array (if line is not empty)
     while(k < lines.length){
       if(lines[k] != "")
@@ -107,9 +110,9 @@ export class TextRecognitionPage {
     this.navCtrl.push(AddRecipeManuallyPage, {recipe: recipe});
   }
 
-/*
-  Formats ingredient lines array into an 2-dimensional-array of ingredients
-*/
+  /*
+    Formats ingredient lines array into an 2-dimensional-array of ingredients
+  */
   formatIngredients(lines){
     let ingredients = [];
     //iterate over ingredient lines
@@ -132,9 +135,9 @@ export class TextRecognitionPage {
     return ingredients;
   }
 
-/*
-  Formats preparation lines array into a preparation string
-*/
+  /*
+    Formats preparation lines array into a preparation string
+  */
   formatPreparation(array){
     let preparation = "";
     for(let i = 0; i < array.length; i++){
@@ -145,6 +148,5 @@ export class TextRecognitionPage {
     }
     return preparation;
   }
-
 
 }

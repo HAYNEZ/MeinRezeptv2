@@ -1,5 +1,24 @@
 page-add-recipe-manually {
 
+
+  #second-part-ingredient{
+    display: inline-block;
+    width: 33%;
+  }
+
+  #ingredient-list{
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  #rating-wrapper{
+    float: right;
+  }
+
+  #rating-range{
+    margin: -5%;
+  }
+
   .divider{
     font-size: 12pt;
     font-weight: bold;
@@ -12,5 +31,34 @@ page-add-recipe-manually {
     padding-bottom: 0px;
     margin-bottom: 5px;
     border: solid 1px #f4f4f4;
+  }
+
+  .pic-button{
+    width: 49%;
+  }
+
+  .ingredient-input{
+    width:100%;
+  }
+
+  .first-part-ingredient{
+    display: inline-block; width: 32%;
+  }
+
+  .list-item{
+    border-style: none;
+  }
+
+  .ingredient-item{
+    width:100%;
+  }
+
+  .ingredient-wrapper{
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  .item-options{
+    width:50%;
   }
 }

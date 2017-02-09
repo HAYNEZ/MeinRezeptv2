@@ -15,9 +15,9 @@
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 159,
+                        "startOffset": 156,
                         "endColumn": 63,
-                        "endOffset": 218
+                        "endOffset": 215
                     }
                 }
             },
@@ -26,8 +26,8 @@
                     "startLine": 3,
                     "startColumn": 4,
                     "startOffset": 119,
-                    "endColumn": 44,
-                    "endOffset": 159
+                    "endColumn": 41,
+                    "endOffset": 156
                 },
                 "from": {
                     "file": "C:\\Users\\Veronika\\Desktop\\Studium\\Projekt\\MeinRezeptv2\\platforms\\android\\res\\values\\strings.xml",
@@ -35,8 +35,8 @@
                         "startLine": 2,
                         "startColumn": 4,
                         "startOffset": 55,
-                        "endColumn": 44,
-                        "endOffset": 95
+                        "endColumn": 41,
+                        "endOffset": 92
                     }
                 }
             },
@@ -44,18 +44,18 @@
                 "to": {
                     "startLine": 4,
                     "startColumn": 4,
-                    "startOffset": 164,
+                    "startOffset": 161,
                     "endColumn": 58,
-                    "endOffset": 218
+                    "endOffset": 215
                 },
                 "from": {
                     "file": "C:\\Users\\Veronika\\Desktop\\Studium\\Projekt\\MeinRezeptv2\\platforms\\android\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
-                        "startOffset": 100,
+                        "startOffset": 97,
                         "endColumn": 58,
-                        "endOffset": 154
+                        "endOffset": 151
                     }
                 }
             }

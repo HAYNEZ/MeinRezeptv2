@@ -10,6 +10,7 @@ page-recipe-details {
     color: white;
     background-color: #9DCB7E;
   }
+
   ul li {
     text-align: center;
     display: inline-block;
@@ -18,30 +19,37 @@ page-recipe-details {
     font-weight: bold;
     font-size: 16px;
   }
+
   .missing{
     font-style: italic;
     text-align: center;
   }
+
   #ingredians{
     height: 30px;
     border-bottom: 1px solid #9DCB7E;
   }
+
   #ingredians:last-child{
     border-bottom: none;
   }
+
   #ingredianCheck{
     height: 13px;
     width: 25px;
   }
+
   #star{
     font-weight: bold;
     font-size: 20px;
   }
+
   #tags{
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
   }
+
   #servings{
     display: inline;
     :first-child{
@@ -51,6 +59,7 @@ page-recipe-details {
       border: 2px solid color($colors, primary, light)
     }
   }
+
   #round-button-circle {
     margin-top: -7px;
     margin-left: -8px;
@@ -60,17 +69,21 @@ page-recipe-details {
     border-radius: 50%;
     overflow:hidden;
   }
+
   #ingredientsSection{
     padding-top: 10px;
   }
+
   #switchCase{
     padding-top: 10px;
   }
+
   #ifPreparation{
     padding: 5px;
   }
+  
   #foreachStep{
     text-align: justify;
   }
-  
+
 }

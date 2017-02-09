@@ -3,23 +3,28 @@ page-shopping-list {
   .delete{
     color: #775069;
   }
+
   .add{
     color: #775069;
   }
+
   .itemTrue{
     text-decoration: line-through;
     color: grey;
     position: relative;
   }
+
   .falseList{
     position: relative;
   }
+
   .trueList{
       position: relative;
   }
+  
   .input-field{
     display: inline-block;
     width: 31%;
   }
-  
+
 }

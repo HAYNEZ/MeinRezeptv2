@@ -21,11 +21,11 @@ npm-debug.log*
 .sass-cache/
 .versions/
 coverage/
+build/
 dist/
 node_modules/
 tmp/
 temp/
-platforms/
 plugins/
 $RECYCLE.BIN/
 

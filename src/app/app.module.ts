@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 
+//Service imports
 import { RecipeService } from '../providers/recipe.service';
 import { ListService } from '../providers/list.service';
 
+//Page imports
 import { TabsPage } from '../pages/tabs/tabs';
 import { RecipeBookPage } from '../pages/recipe-book/recipe-book';
 import { AddOverviewPage } from '../pages/add-overview/add-overview';

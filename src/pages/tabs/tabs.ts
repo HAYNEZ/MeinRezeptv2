@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+//Page imports
 import { RecipeBookPage } from '../recipe-book/recipe-book';
 import { ShoppingListPage } from '../shopping-list/shopping-list';
 import { AddOverviewPage } from '../add-overview/add-overview';
@@ -8,6 +10,7 @@ import { AddOverviewPage } from '../add-overview/add-overview';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
+
   tabRecipeBook: any;
   tabAddOverview: any;
   tabShoppingList: any;
@@ -17,4 +20,5 @@ export class TabsPage {
     this.tabAddOverview = AddOverviewPage;
     this.tabShoppingList = ShoppingListPage;
   }
+  
 }

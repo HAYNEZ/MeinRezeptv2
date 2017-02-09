@@ -1,5 +1,5 @@
 {
-  "name": "ocrtest",
+  "name": "Boil",
   "author": "Ionic Framework",
   "homepage": "http://ionicframework.com/",
   "private": true,
@@ -45,5 +45,5 @@
       "locator": "ios"
     }
   ],
-  "description": "OCRtest: An Ionic project"
+  "description": "Boil: An Ionic project"
 }

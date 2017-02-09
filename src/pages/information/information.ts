@@ -6,11 +6,13 @@ import { NavController } from 'ionic-angular';
   selector: 'page-information',
   templateUrl: 'information.html'
 })
-
 export class InformationPage {
-  section : any;
+
+    section : any;
+
     constructor(public navCtrl: NavController) {
-      //selected section
+      //preselected section
       this.section = "idea";
     }
+    
 }

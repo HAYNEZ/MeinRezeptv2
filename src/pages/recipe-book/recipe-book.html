@@ -12,7 +12,7 @@
     <ion-title id="headerTitle">BOIL</ion-title>
 
     <!-- Three line menu on the right top side-->
-    <ion-buttons  (click)="presentPopover($event)" end>
+    <ion-buttons end (click)="presentPopover($event)">
       <button ion-button icon-only >
         <ion-icon name="menu"></ion-icon>
       </button>
@@ -28,6 +28,7 @@
 
   <!-- Search bar for filtering by title or ingredients -->
   <ion-searchbar placeholder="Suche" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+  <!-- Shows tag string while tag filter is enabled -->
   <div padding-left *ngIf="tagString">
     {{tagString}}
     <button small ion-button icon-only (click)="removeTagFilter()">
@@ -49,13 +50,13 @@
   </div>
 
   <!-- Title search results -->
-  <div *ngIf="searchTerm" padding>
-    <div style ="width:100%; margin-bottom: 10px;" >
+  <div *ngIf="searchTerm">
+    <div id="title-search-container">
       <h3>Titelsuche</h3>
-      <p *ngIf="titleResults.length == 0" style="padding: 1%;">
+      <p *ngIf="titleResults.length == 0" class="nothing-to-show">
         Keine Rezepte mit dem Titel '{{searchTerm}}' vorhanden.
       </p>
-      <div class="recipe" *ngFor="let recipe of titleResults" (click)="showDetails(recipe)">
+      <div id="recipe" *ngFor="let recipe of titleResults" (click)="showDetails(recipe)">
         <img class="recipeImage" src="{{ recipe.base64Image }}"/>
         <div id="blackOverlayWrapper">
           <img id="blackOverlay" src="assets/img/blackOverlay.jpg" />
@@ -68,11 +69,12 @@
 
     <!-- Ingredient search results -->
     <div style ="width:100% ">
+      <!--TODO: style ="width:100% " -->
       <h3>Zutatensuche</h3>
-      <p *ngIf="ingredientResults.length == 0"  style="padding: 1%;">
+      <p *ngIf="ingredientResults.length == 0" class="nothing-to-show">
         Keine Rezepte mit der Zutat '{{searchTerm}}' vorhanden.
       </p>
-      <div class="recipe" *ngFor="let recipe of ingredientResults" (click)="showDetails(recipe)">
+      <div id="recipe" *ngFor="let recipe of ingredientResults" (click)="showDetails(recipe)">
         <img class="recipeImage" src="{{ recipe.base64Image }}"/>
         <div id="blackOverlayWrapper">
           <img id="blackOverlay" src="assets/img/blackOverlay.jpg" />

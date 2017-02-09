@@ -1,4 +1,4 @@
-#Thu Jan 05 15:14:17 CET 2017
+#Thu Feb 09 23:42:23 CET 2017
 base.0=C\:\\Users\\Veronika\\Desktop\\Studium\\Projekt\\MeinRezeptv2\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
 file.0=C\:\\Users\\Veronika\\Desktop\\Studium\\Projekt\\MeinRezeptv2\\platforms\\android\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
