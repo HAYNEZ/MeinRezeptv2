@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Tablet Horizontal Scroll</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <div class="page-wrap" ng-app="myApp">
+  <div ng-controller="mainCtrl" style="width: 100%;">
+    <div class="horizontal-slide">
+      <div ng-repeat="item in items" class="item" ng-class="{selected: item.selected}" ng-click="click(item.id)">
+      </div>
+    </div>
+  </div>
+</div>
+  <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js'></script>
+
+    <script src="js/index.js"></script>
+
+</body>
+</html>
